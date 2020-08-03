@@ -10,6 +10,9 @@
     },{
       "title": "Step 2 - Install first cluster",
       "text": "step2.md"
+    },{
+      "title": "Step 2 - Install second cluster",
+      "text": "step3.md"
     }],
     "intro": {
       "text": "intro.md",
