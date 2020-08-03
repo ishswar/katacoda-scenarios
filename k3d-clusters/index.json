@@ -1,8 +1,8 @@
 {
   "title": "Multi Cluster kubernetes",
-  "description": "Create multiplue k3s clusters",
+  "description": "Create multiple k3s clusters",
   "difficulty": "intermediate",
-  "time": "2 minutes",
+  "time": "10 minutes",
   "details": {
     "steps": [{
       "title": "Step 1 - Install k3d",
