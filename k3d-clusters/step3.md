@@ -10,7 +10,7 @@ k3d will also set _kubectl_ context with name _k8s_ for you
 
 `k3d cluster create dk8s -a 1`{{execute}}
 
-__**AT THE END K3D WILL SWITCH YOUR KUB CONTEXT TO dk8s**__
+__**AT THE END K3D WILL SWITCH KUB (kubectl) CONTEXT TO dk8s**__
 
 ## Check if we have second k3s cluster now
 
