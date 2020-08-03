@@ -1,9 +1,9 @@
 First lets **install** k3d
 
-## Install k3d
+## Install k3d CLI
 
 This is an _example_ of creating a scenario and running a **command**
-We will install _[k3d](https://k3d.io/)_ using bash script provided on k3d site 
+We will install _[k3d](https://k3d.io/)_ CLI tools using bash script provided on k3d site 
 
 `wget -q -O - https://raw.githubusercontent.com/rancher/k3d/main/install.sh | bash -`{{execute}}
 

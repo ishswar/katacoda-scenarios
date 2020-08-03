@@ -44,7 +44,7 @@ You can also checkout the config file for Kubectl that has above info
 `kubectl config view`{{execute}} or you can use *cat* to see it `cat ~/.kube/config`{{execute}}
 
 <details>
-  <summary>Click to see sample kubec config</summary>
+  <summary>Click to see sample kube config</summary>
   
 ```
 master $ kubectl config view
