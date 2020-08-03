@@ -2,7 +2,7 @@ Time to practice context switching that will be required during CKAD certificati
 
 ## Experiment with switching kube context 
 
-As we now have two kube context we can try switching around 
+As now we have two kube contexts we can try switching around 
 
 ### Get all contexts
 
@@ -13,6 +13,8 @@ CURRENT   NAME       CLUSTER    AUTHINFO         NAMESPACE
 *         k3d-dk8s   k3d-dk8s   admin@k3d-dk8s
           k3d-k8s    k3d-k8s    admin@k3d-k8s
 ```
+
+**__*__** means which context is selected (in use) by kubectl 
 
 ### Current context 
 
