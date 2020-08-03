@@ -21,7 +21,7 @@ Run 'k3d --help' to see what you can do with it.
 `k3d help`{{execute}}
 
 ```bash
-master $ k3d help
+k3d help
 https://k3d.io/
 k3d is a wrapper CLI that helps you to easily create k3s clusters inside docker.
 Nodes of a k3d cluster are docker containers running a k3s image.
