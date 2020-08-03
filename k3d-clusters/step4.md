@@ -47,3 +47,4 @@ k3d-k8s-server-0   Ready    master   11m   v1.18.6+k3s1   172.19.0.2    <none>  
 k3d-k8s-agent-1    Ready    <none>   10m   v1.18.6+k3s1   172.19.0.4    <none>        Unknown    4.15.0-109-generic   containerd://1.3.3-k3s2
 k3d-k8s-agent-0    Ready    <none>   11m   v1.18.6+k3s1   172.19.0.3    <none>        Unknown    4.15.0-109-generic   containerd://1.3.3-k3s2
 ```
+
