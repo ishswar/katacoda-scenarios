@@ -18,7 +18,7 @@ CURRENT   NAME       CLUSTER    AUTHINFO         NAMESPACE
 
 ### Current context 
 
-Get current context 
+Get current context `kubectl config current-context`{{execute}}
 
 ```bash
 master $ kubectl config current-context
@@ -27,7 +27,7 @@ k3d-dk8s
 
 ### Switch context 
 
-Switch to _k8s_ context 
+Switch to _k8s_ context `kubectl config use-context k3d-k8s`{{execute}}
 
 ```bash
 master $ kubectl config use-context k3d-k8s
