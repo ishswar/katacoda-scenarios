@@ -11,7 +11,7 @@ k3d will also set _kubectl_ context with name _k8s_ for you
 
 ## Get nodes
 
-Once above command finishes successfully if you run `master $ kubectl get nodes`{{execute}}
+Once above command finishes successfully if you run `kubectl get nodes`{{execute}}
 You should see one master and 2 nodes running in cluster
 
 ### Sample output: 
@@ -43,8 +43,12 @@ You can also checkout the config file for Kubectl that has above info
 
 `kubectl config view`{{execute}} or you can use *cat* to see it `cat ~/.kube/config`{{execute}}
 
+<details>
+  <summary>Click to see sample kubec config</summary>
+  
 ```bash
 master $ kubectl config view
+
 apiVersion: v1
 clusters:
 - cluster:
@@ -65,3 +69,5 @@ users:
     password: 65af72f5c1257e08d4c78bc70da7a30a
     username: admin
 ```
+</details>
+
