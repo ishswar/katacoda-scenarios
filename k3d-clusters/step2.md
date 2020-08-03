@@ -9,10 +9,10 @@ k3d will also set _kubectl_ context with name _k8s_ for you
 
 `k3d cluster create k8s -a 2`{{execute}}
 
-## Get nodes
+## Check if we have k3s cluster now
 
 Once above command finishes successfully if you run `kubectl get nodes`{{execute}}
-You should see one master and 2 nodes running in cluster
+You should see one master and 2 nodes running in _k8s_ cluster
 
 ### Sample output: 
 ```bash
@@ -27,7 +27,7 @@ k3d-k8s-agent-0    Ready    <none>   11m   v1.18.6+k3s1
 
 Lets check the kubectl context see what do we have so far now 
 
-`kubectl config get-contexts`{{execute}} - it should show only one context 'k8s' available and selected 
+`kubectl config get-contexts`{{execute}} - it should show only **one** context 'k8s' available and __selected__ 
 
 ### Sample output:
 
@@ -46,7 +46,7 @@ You can also checkout the config file for Kubectl that has above info
 <details>
   <summary>Click to see sample kubec config</summary>
   
-```bash
+```
 master $ kubectl config view
 
 apiVersion: v1
