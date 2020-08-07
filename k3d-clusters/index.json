@@ -22,7 +22,8 @@
     }],
     "intro": {
       "text": "intro.md",
-      "credits": ""
+      "credits": "pranayshah",
+      "courseData": "env-init.sh"
     },
     "finish": {
       "text": "finish.md"
