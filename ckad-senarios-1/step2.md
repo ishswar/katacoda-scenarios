@@ -8,3 +8,6 @@ Out admin would like to be listed when they run this command
 
 `kubectl get pods -n scenario1 -l myfirst=pod`{{copy}} 
 
+### Use Context 
+
+`kubectl config use-context k3d-k8s`{{copy}}
