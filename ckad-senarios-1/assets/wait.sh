@@ -2,7 +2,7 @@
 
 show_progress()
 {
-  RED='\033[0;31m'
+  RED='\033[0;32m'
   NC='\033[0m' # No Color
   echo -e  -n "Starting to install k3d CLI"
   local -r pid="${1}"
