@@ -1,4 +1,4 @@
-There are bunch of scenarios that you need to solve/perform during CKAD (based on 1.18)
+There are bunch of scenarios that you need to solve/perform during CKAD (based on 1.18+)
 
 This practice exam is based around the publicly available CKAD exam
 curriculum. I cannot and won't share specific questions from the real
