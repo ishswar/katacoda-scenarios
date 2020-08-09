@@ -56,7 +56,9 @@ show_progress()
   done
   printf "    \b\b\b\b"
   echo ""
-  echo -e  "${GREEN}Done${NC} - ${CYAN}ALL${NC} clusters are installed and configuGREEN"
+  echo -e  "${GREEN}Done${NC} - ${CYAN}ALL${NC} clusters are installed and configured"
+  sleep 1
+  clear
 }
 
 show_progress
