@@ -24,7 +24,7 @@ show_progress()
   echo "Done installing k3d CLI"
   echo -n "Installing k3s cluster 1"
   while true; do
-    kubectl get pods --context=k3d-k8s
+    kubectl get pods --context=k3d-k8s  > /dev/null 2>&1
     if [[ "$?" -ne 0 ]]; then
       temp="${spinstr#?}"
       printf " [%c]  " "${spinstr}"
@@ -41,7 +41,7 @@ show_progress()
   echo ""
   echo -n "Installing k3s cluster 2"
   while true; do
-    kubectl get pods --context=k3d-dk8s
+    kubectl get pods --context=k3d-dk8s  > /dev/null 2>&1
     if [[ "$?" -ne 0 ]]; then
       temp="${spinstr#?}"
       printf " [%c]  " "${spinstr}"
