@@ -2,7 +2,8 @@
 
 show_progress()
 {
-  RED='\033[0;32m'
+  GREEN='\033[0;32m'
+  CYAN='\033[0;36m'
   NC='\033[0m' # No Color
   echo -e  -n "Starting to install k3d CLI"
   local -r pid="${1}"
@@ -23,7 +24,7 @@ show_progress()
   done
   printf "    \b\b\b\b"
   echo ""
-  echo -e  "${RED}Done${NC} installing k3d CLI"
+  echo -e  "${GREEN}Done${NC} installing ${CYAN}k3d${NC} CLI"
   echo -e  -n "Installing k3s cluster 1"
   while true; do
     kubectl get pods --context=k3d-k8s  > /dev/null 2>&1
@@ -39,7 +40,7 @@ show_progress()
   done
   printf "    \b\b\b\b"
   echo ""
-  echo -e  "${RED}Done${NC} installing k3s cluster 1"
+  echo -e  "${GREEN}Done${NC} installing ${CYAN}k3s cluster 1${NC}"
   echo -e  -n "Installing k3s cluster 2"
   while true; do
     kubectl get pods --context=k3d-dk8s  > /dev/null 2>&1
@@ -55,7 +56,7 @@ show_progress()
   done
   printf "    \b\b\b\b"
   echo ""
-  echo -e  "${RED}Done${NC} - all clusters are installed and configured"
+  echo -e  "${GREEN}Done${NC} - ${CYAN}ALL${NC} clusters are installed and configuGREEN"
 }
 
 show_progress
