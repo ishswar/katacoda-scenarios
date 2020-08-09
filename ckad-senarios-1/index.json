@@ -6,7 +6,8 @@
   "details": {
     "steps": [{
       "title": "Step 1 - Setup",
-      "text": "step1.md"
+      "text": "step1.md",
+      "courseData": "env-init.sh"
     },{
       "title": "Step 2 - Scenario 1",
       "text": "step2.md"
