@@ -7,8 +7,7 @@
     "steps": [{
       "title": "Step 1 - Setup",
       "text": "step1.md",
-      "background": "env-init.sh",
-      "courseData": "background.sh",
+      "courseData": "env-init.sh",
       "code": "foreground.sh"
     },{
       "title": "Step 2 - Scenario 1",
