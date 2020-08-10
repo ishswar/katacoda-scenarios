@@ -1,50 +1,14 @@
-Time to practice context switching that will be required during CKAD certification 
+Scenario 3
 
-## Experiment with switching kube context 
+## Chronic pain 
 
-As now we have two kube contexts we can try switching around 
+Our intern wrote a `CronJob` to send some Marketing/Auditing data periodically to our Sales team. Last few E-mails have not 
+gone out . Your job is find out what is going on with this cron jobs . Find a issue and fix it (no need to recreate it - just 
+modify them in-place . Once you are able to fix it make sure you are able to see that (new) Jobs are getting created and they are geting 
+completing in timely manner. We don't know in what namespace they belong.  
 
-### Get all contexts
+Write a reason for this disruption in `/root/chronicpain/reason.txt`{{copy}}
 
-`kubectl config get-contexts`{{execute}} 
+### Use Context 
 
-```bash
-CURRENT   NAME       CLUSTER    AUTHINFO         NAMESPACE
-*         k3d-dk8s   k3d-dk8s   admin@k3d-dk8s
-          k3d-k8s    k3d-k8s    admin@k3d-k8s
-```
-
-**__*__** means which context is selected (in use) by kubectl 
-
-### Current context 
-
-Get current context `kubectl config current-context`{{execute}}
-
-```bash
-master $ kubectl config current-context
-k3d-dk8s
-``` 
-
-### Switch context 
-
-Switch to _k8s_ context `kubectl config use-context k3d-k8s`{{execute}}
-
-```bash
-master $ kubectl config use-context k3d-k8s
-Switched to context "k3d-k8s".
-
-master $ kubectl config current-context
-k3d-k8s
-```
-
-Now if you list nodes we should see 3 nodes (1 master & 2 workers) - `kubectl get nodes -o wide`{{execute}}
-
-
-```bash
-master $ kubectl get nodes -o wide
-NAME               STATUS   ROLES    AGE   VERSION        INTERNAL-IP   EXTERNAL-IP   OS-IMAGE   KERNEL-VERSION       CONTAINER-RUNTIME
-k3d-k8s-server-0   Ready    master   11m   v1.18.6+k3s1   172.19.0.2    <none>        Unknown    4.15.0-109-generic   containerd://1.3.3-k3s2
-k3d-k8s-agent-1    Ready    <none>   10m   v1.18.6+k3s1   172.19.0.4    <none>        Unknown    4.15.0-109-generic   containerd://1.3.3-k3s2
-k3d-k8s-agent-0    Ready    <none>   11m   v1.18.6+k3s1   172.19.0.3    <none>        Unknown    4.15.0-109-generic   containerd://1.3.3-k3s2
-```
-
+`kubectl config use-context k3d-k8s`{{copy}}

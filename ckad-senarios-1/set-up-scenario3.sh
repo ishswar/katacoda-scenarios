@@ -6,3 +6,5 @@ kubectl create cronjob -n marketing sendinfo --image=busybox --schedule="*/1 * *
 sleep 2m
 kubectl -n marketing patch cronjobs.batch sendinfo -p '{"spec":{"suspend":true}}'
 
+# Senario 4
+kubectl create deployment deploy-charts --image=nginx:stable-alpine -n auditing
