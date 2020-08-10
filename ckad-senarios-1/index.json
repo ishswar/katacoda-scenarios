@@ -11,6 +11,7 @@
       "code": "foreground.sh"
     },{
       "title": "Step 2 - Scenario 1",
+      "background": "set-up-scenario3.sh",
       "text": "step2.md"
     },{
       "title": "Step 3 - Scenario 2",
