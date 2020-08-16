@@ -4,3 +4,7 @@ This practice exam is based around the publicly available CKAD exam
 curriculum. I cannot and won't share specific questions from the real
 exam, it's simply a set of questions I've put together based on talking to
 people who are taking the exam. I cannot and will not help you cheat.
+
+1. fasdf
+1. afasfd
+1. asdfas
