@@ -8,8 +8,8 @@ We will use this tool to back and restore etcd data
 
 `
 ETCD_CTCL_VERSION=3.4.3
-wget https://github.com/etcd-io/etcd/releases/download/v${ETCD_CTCL_VERSION}/etcd-v${ETCD_CTCL_VERSION}-linux-amd64.tar.gz
-tar -zxvf etcd-v${ETCD_CTCL_VERSION}-linux-amd64.tar.gz
+wget -q https://github.com/etcd-io/etcd/releases/download/v${ETCD_CTCL_VERSION}/etcd-v${ETCD_CTCL_VERSION}-linux-amd64.tar.gz
+tar -zxf etcd-v${ETCD_CTCL_VERSION}-linux-amd64.tar.gz
 cd etcd-v${ETCD_CTCL_VERSION}-linux-amd64
 sudo cp etcdctl /usr/local/bin
 `{{execute}}
