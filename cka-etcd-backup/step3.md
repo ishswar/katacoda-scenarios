@@ -41,7 +41,7 @@ Verify we're connecting to the right cluster...define your endpoints and keys
 CACERT=$(cat /etc/kubernetes/manifests/etcd.yaml | grep peer-trusted-ca-file | cut -d= -f2)
 CLIENT_KEY=$(cat /etc/kubernetes/manifests/etcd.yaml | grep peer-key-file | cut -d= -f2)
 CLIENT_CERT=$(cat /etc/kubernetes/manifests/etcd.yaml | grep peer-cert-file | cut -d= -f2)
-ENDPOINTS=$(cat /etc/kubernetes/manifests/etcd.yaml | grep listen-client-urls | cut -d= -f2)
+ENDPOINTS=$(cat /etc/kubernetes/manifests/etcd.yaml | grep advertise-client-urls | cut -d= -f2)
 ETCDCTL_API=3 etcdctl --endpoints $ENDPOINTS --cacert $CACERT --cert $CLIENT_CERT --key $CLIENT_KEY \
    member list
 `{{execute}}
@@ -54,7 +54,7 @@ Lets take a backup - we are saving backup named 'snapshot.db' in current directo
 CACERT=$(cat /etc/kubernetes/manifests/etcd.yaml | grep peer-trusted-ca-file | cut -d= -f2)
 CLIENT_KEY=$(cat /etc/kubernetes/manifests/etcd.yaml | grep peer-key-file | cut -d= -f2)
 CLIENT_CERT=$(cat /etc/kubernetes/manifests/etcd.yaml | grep peer-cert-file | cut -d= -f2)
-ENDPOINTS=$(cat /etc/kubernetes/manifests/etcd.yaml | grep listen-client-urls | cut -d= -f2)
+ENDPOINTS=$(cat /etc/kubernetes/manifests/etcd.yaml | grep advertise-client-urls | cut -d= -f2)
 ETCDCTL_API=3 etcdctl --endpoints $ENDPOINTS snapshot save snapshot.db --cacert $CACERT --cert $CLIENT_CERT --key $CLIENT_KEY
 `{{execute}}
 
