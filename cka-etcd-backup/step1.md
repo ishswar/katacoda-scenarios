@@ -41,19 +41,3 @@ while true;
    fi;
    sleep 5;
 done`{{execute}}
-
-## Install etcdctl tool 
-
-`etcdctl` is command line tool to manage etcd server and it’s date.
-We will use this tool to back and restore etcd data
-
-`apt-get install -y etcd-client`{{execute}}
-
-`
-RELEASE=$(kubectl exec -it etcd-$(hostname) -n kube-system -- /bin/sh -c 'ETCDCTL_API=3 /usr/local/bin/etcd --version' | head -1 | cut -d":" -f2)
-RELEASE=$(echo "$RELEASE" | xargs)
-wget https://github.com/etcd-io/etcd/releases/download/v${RELEASE}/etcd-v${RELEASE}-linux-amd64.tar.gz
-tar -zxvf etcd-v${RELEASE}-linux-amd64.tar.gz
-cd etcd-v${RELEASE}-linux-amd64
-sudo cp etcdctl /usr/local/bin
-`{{execute}}
