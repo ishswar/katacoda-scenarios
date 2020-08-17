@@ -22,3 +22,8 @@ mkdir -p $DATA_DIR
 cp -rf ./default.etcd/* $DATA_DIR
 `{{execute}}
 
+## Check new Pod (after backup was created) is gone 
+
+`kubectl get pods`{{execute}} 
+
+Above command should only show one pod running in cluster - if you see that then restore is ***SUCCESS***
