@@ -16,7 +16,7 @@ Stop the etcd container and move the back quickly
 
 `
 DATA_DIR=$(cat /etc/kubernetes/manifests/etcd.yaml | grep data-dir | cut -d= -f2)
-echo "etcd data directory is $DATA_DIR
+echo "etcd data directory is $DATA_DIR"
 docker stop $(docker ps | grep etcd | cut -d" " -f1) ;
 mkdir -p $DATA_DIR 
 cp -rf ./default.etcd/* $DATA_DIR
