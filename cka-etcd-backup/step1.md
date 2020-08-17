@@ -36,7 +36,7 @@ while true;
           break;
      else 
           echo "All PODs are yet up";
-          echo "Expected 9 Pods in kube-system namespace to be running found [$CHECK] running
+          echo "Expected 9 Pods in kube-system namespace to be running found [$CHECK] running"
    fi;
    sleep 5;
 done`{{execute}}
