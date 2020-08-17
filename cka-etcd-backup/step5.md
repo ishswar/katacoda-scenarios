@@ -1,11 +1,24 @@
-Scenario 4
+Restore from backup 
 
-## Missed deployment 
+## Restore etcd data back from backup 
 
-The operator needed to deploy Deployment named `deploy-charts`{{copy}} in `marketing`{{copy}} namespace, but it looks like he deployed it in the wrong namespace;
-as it is not there in `marketing` namespace. He has marked TASK as Resolved and gone for a long weekend - we need your help in finding that Deployment
-(it must be there in a cluster) and move it to `marketing` namespace. You can delete old Deployment.
+First we back up existing data (we never know we might need this)
 
-### Use Context 
+`
+DATA_DIR=$(cat /etc/kubernetes/manifests/etcd.yaml | grep data-dir | cut -d= -f2)
+mv $DATA_DIR $DATA_DIR.old`{{execute}}
 
-`kubectl config use-context k3d-k8s`{{copy}} 
+Restore data locally 
+
+`ETCDCTL_API=3 etcdctl snapshot restore snapshot.db`{{execute}}
+
+Stop the etcd container and move the back quickly 
+
+`
+DATA_DIR=$(cat /etc/kubernetes/manifests/etcd.yaml | grep data-dir | cut -d= -f2)
+echo "etcd data directory is $DATA_DIR
+docker stop $(docker ps | grep etcd | cut -d" " -f1) ;
+mkdir -p $DATA_DIR 
+cp -rf ./default.etcd/* $DATA_DIR
+`{{execute}}
+

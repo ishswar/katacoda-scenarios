@@ -1,13 +1,14 @@
-Scenario 1 
+Populate the cluster
 
-## Create a Namespace and pod 
+## Create pod 
 
-Create a namespace called `scenario1`{{copy}} and create a pod of your choice 
-Make sure pod stays running during period of this test 
-Out admin would like to be listed when they run this command 
+As of now our kubernetes cluster is empty - lets quickly create a simple `nginx` pod 
 
-`kubectl get pods -n scenario1 -l myfirst=pod`{{copy}} 
+`kubectl run tester --image=nginx`{{execute}} 
 
-### Use Context 
+Idea here is we need to back up this data and whenever we restore this backup we need to make sure above pod
+`tester` is always there.
 
-`kubectl config use-context k3d-k8s`{{copy}}
+Kubernetes disaster recovery plan is usually consist of backing up etcd cluster and having infrastructure as a code to provision new set of servers in the cloud.  
+
+

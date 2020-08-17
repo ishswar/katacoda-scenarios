@@ -1,14 +1,9 @@
-Scenario 3
+Extra pod 
 
-## Chronic pain 
+## Create one extra pod 
 
-Our intern wrote a `CronJob` to send some Marketing/Auditing data periodically to our Sales team. Last few E-mails have not 
-gone out . Your job is find out what is going on with this cron jobs . Find a issue and fix it (no need to recreate it - just 
-modify them in-place . Once you are able to fix it make sure you are able to see that (new) Jobs are getting created and they are geting 
-completing in timely manner. We don't know in what namespace they belong.  
+We will create one extra pod in cluster - as we are creating this pod after taking backup when we restore the backup 
+cluster will forget about this pod as all source of truth is etcd DB.
 
-Write a reason for this disruption in `/root/chronicpain/reason.txt`{{copy}}
+`kubectl run forgetme --image=nginx`{{execute}}
 
-### Use Context 
-
-`kubectl config use-context k3d-k8s`{{copy}}

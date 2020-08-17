@@ -30,11 +30,20 @@ kubectl apply -f canal.yaml
 while true;
   do CHECK=$(kubectl get pods -n kube-system --field-selector status.phase=Running --no-headers | wc -l);
    if [ $CHECK -eq 7 ];
-     then echo "ALL PODs are up";
+     then 
+          echo "ALL PODs are up";
+          kubectl get pods -n kube-system --field-selector status.phase=Running
           break;
      else 
-          echo "All PODs are not up yet";
+          echo "All PODs are yet up";
+          echo "Expected 9 Pods in kube-system namespace to be running found [$CHECK] running
    fi;
    sleep 5;
-   date;
 done`{{execute}}
+
+## Install etcdctl tool 
+
+`etcdctl` is command line tool to manage etcd server and it’s date.
+We will use this tool to back and restore etcd data
+
+`apt-get install -y etcd-client`{{execute}}
