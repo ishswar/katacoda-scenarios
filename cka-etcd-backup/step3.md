@@ -28,7 +28,6 @@ CACERT=$(cat /etc/kubernetes/manifests/etcd.yaml | grep peer-trusted-ca-file | c
 CLIENT_KEY=$(cat /etc/kubernetes/manifests/etcd.yaml | grep peer-key-file | cut -d= -f2)
 CLIENT_CERT=$(cat /etc/kubernetes/manifests/etcd.yaml | grep peer-cert-file | cut -d= -f2)
 ENDPOINTS=$(cat /etc/kubernetes/manifests/etcd.yaml | grep listen-client-urls | cut -d= -f2)
-
 ETCDCTL_API=3 etcdctl --endpoints $ENDPOINTS --cacert $CACERT --cert $CLIENT_CERT --key $CLIENT_KEY \
    member list
 `{{execute}}
@@ -42,7 +41,6 @@ CACERT=$(cat /etc/kubernetes/manifests/etcd.yaml | grep peer-trusted-ca-file | c
 CLIENT_KEY=$(cat /etc/kubernetes/manifests/etcd.yaml | grep peer-key-file | cut -d= -f2)
 CLIENT_CERT=$(cat /etc/kubernetes/manifests/etcd.yaml | grep peer-cert-file | cut -d= -f2)
 ENDPOINTS=$(cat /etc/kubernetes/manifests/etcd.yaml | grep listen-client-urls | cut -d= -f2)
-
 ETCDCTL_API=3 etcdctl --endpoints $ENDPOINTS snapshot save snapshot.db --cacert $CACERT --cert $CLIENT_CERT --key $CLIENT_KEY
 `{{execute}}
 

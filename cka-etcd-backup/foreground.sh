@@ -1,1 +1,1 @@
-sleep 4; wait.sh
+sleep 1; wait.sh
