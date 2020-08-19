@@ -30,8 +30,8 @@ From above file we need 4 things :
 
 1. etcd endpoint(s)
 1. CA Certs file 
-1. Client certificate 
-1. Client certificate key
+1. Server certificate 
+1. Server certificate key
 
 ## Check connectivity 
 
@@ -39,10 +39,10 @@ Verify we're connecting to the right cluster...define your endpoints and keys
 
 `
 CACERT=$(cat /etc/kubernetes/manifests/etcd.yaml | grep peer-trusted-ca-file | cut -d= -f2)
-CLIENT_KEY=$(cat /etc/kubernetes/manifests/etcd.yaml | grep peer-key-file | cut -d= -f2)
-CLIENT_CERT=$(cat /etc/kubernetes/manifests/etcd.yaml | grep peer-cert-file | cut -d= -f2)
+SERVER_KEY=$(cat /etc/kubernetes/manifests/etcd.yaml | grep peer-key-file | cut -d= -f2)
+SERVER_CERT=$(cat /etc/kubernetes/manifests/etcd.yaml | grep peer-cert-file | cut -d= -f2)
 ENDPOINTS=$(cat /etc/kubernetes/manifests/etcd.yaml | grep advertise-client-urls= | cut -d= -f2)
-ETCDCTL_API=3 etcdctl --endpoints $ENDPOINTS --cacert $CACERT --cert $CLIENT_CERT --key $CLIENT_KEY \
+ETCDCTL_API=3 etcdctl --endpoints $ENDPOINTS --write-out=table --cacert $CACERT --cert $SERVER_CERT --key $SERVER_KEY \
    member list
 `{{execute}}
 
@@ -52,10 +52,10 @@ Lets take a backup - we are saving backup named 'snapshot.db' in current directo
 
 `
 CACERT=$(cat /etc/kubernetes/manifests/etcd.yaml | grep peer-trusted-ca-file | cut -d= -f2)
-CLIENT_KEY=$(cat /etc/kubernetes/manifests/etcd.yaml | grep peer-key-file | cut -d= -f2)
-CLIENT_CERT=$(cat /etc/kubernetes/manifests/etcd.yaml | grep peer-cert-file | cut -d= -f2)
+SERVER_KEY=$(cat /etc/kubernetes/manifests/etcd.yaml | grep "\-\-key-file" | cut -d= -f2)
+SERVER_CERT=$(cat /etc/kubernetes/manifests/etcd.yaml | grep "\-\-cert-file" | cut -d= -f2)
 ENDPOINTS=$(cat /etc/kubernetes/manifests/etcd.yaml | grep advertise-client-urls= | cut -d= -f2)
-ETCDCTL_API=3 etcdctl --endpoints $ENDPOINTS snapshot save snapshot.db --cacert $CACERT --cert $CLIENT_CERT --key $CLIENT_KEY
+ETCDCTL_API=3 etcdctl --endpoints $ENDPOINTS snapshot save snapshot.db --cacert $CACERT --cert $SERVER_CERT --key $SERVER_KEY
 `{{execute}}
 
 ## Check a backup (We need to make sure backup is good)

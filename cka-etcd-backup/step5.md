@@ -22,7 +22,23 @@ mkdir -p $DATA_DIR
 cp -rf ./default.etcd/* $DATA_DIR
 `{{execute}}
 
-## Check new Pod (after backup was created) is gone 
+
+## etcd pod must has been restarted 
+
+In above stop we stop the etcd container - `kubelet` would have detected that and must have restarted etcd pod 
+We can check this by looking at RESTART count on pod 
+
+`kubectl get pod -n kube-system etcd-$(hostname)`{{execute}}
+
+Sample output should show like this 
+
+```bash
+master $ 
+NAME                READY   STATUS    RESTARTS   AGE
+etcd-controlplane   1/1     Running   2          12m
+``` 
+
+## Check new Pod (that was created backup was taken) is gone 
 
 `kubectl get pods`{{execute}} 
 
