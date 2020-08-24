@@ -9,12 +9,14 @@ wget https://github.com/vmware-tanzu/octant/releases/download/v0.13.1/octant_0.1
 tar -xf octant_0.13.1_Linux-64bit.tar.gz
 `{{execute}}
 
-## Start Octant on port 80 
+## Start Octant on port 8080 
 
 `
 cd octant_0.13.1_Linux-64bit
 OCTANT_LISTENER_ADDR=0.0.0.0:8080 ./octant &
 `{{execute}}
+
+Octant uses ~/.kube/config file to get/fetch data from cluster 
 
 ## Open Octant dashboard 
 
