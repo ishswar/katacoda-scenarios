@@ -4,10 +4,13 @@ Create cluster
 
 `curl -sfL https://get.k3s.io | sh -`{{execute}}
 
-Above script will download and install k3s kubernetes under /etc/rancher/k3s 
+Above script will download and install k3s kubernetes cluster under /etc/rancher/k3s 
 
 ## Sample output 
 
+<details>
+  <summary>Click to see sample output</summary>
+  
 ```bash
 master $ curl -sfL https://get.k3s.io | sh -
 [INFO]  Finding release for channel stable
@@ -27,3 +30,4 @@ master $ curl -sfL https://get.k3s.io | sh -
 Created symlink /etc/systemd/system/multi-user.target.wants/k3s.service → /etc/systemd/system/k3s.service.
 [INFO]  systemd: Starting k3s
 ```
+</details>
