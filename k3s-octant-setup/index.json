@@ -1,0 +1,40 @@
+{
+  "title": "Kubernetes cluster in 5 minutes with k3s and Octant dashboard",
+  "description": "In this scenario we will setup K3S kubernetes cluster (that supports Ingress and Network policy) with Octant dashboard under 5 minutes",
+  "difficulty": "intermediate",
+  "time": "5 minutes",
+  "details": {
+    "steps": [{
+      "title": "Step 1 - Create cluster",
+      "text": "step1.md",
+      "courseData": "env-init.sh",
+      "code": "foreground.sh"
+    },{
+      "title": "Step 2 - Setup kubectl",
+      "background": "set-up-scenario3.sh",
+      "text": "step2.md"
+    },{
+      "title": "Step 3 - Install Octant dashboard",
+      "text": "step3.md"
+    }],
+    "intro": {
+      "text": "intro.md",
+      "credits": ""
+    },
+    "finish": {
+      "text": "finish.md"
+    },
+    "assets": {
+            "host01": [
+                {"file": "wait.sh", "target": "/usr/local/bin/", "chmod": "+x"}
+            ]
+        }
+  },
+  "environment": {
+    "uilayout": "terminal",
+    "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\r\nFollow steps from left - to get your cluster!!!\u001b[m\r\n"
+  },
+  "backend": {
+    "imageid": "kubernetes-cluster:1.18"
+  }
+}
