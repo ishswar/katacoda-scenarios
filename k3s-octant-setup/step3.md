@@ -15,3 +15,10 @@ tar -xf octant_0.13.1_Linux-64bit.tar.gz
 cd octant_0.13.1_Linux-64bit
 OCTANT_LISTENER_ADDR=0.0.0.0:8080 ./octant &
 `{{execute}}
+
+## Open Octant dashboard 
+
+If you use above command to start Octant dashboard than - dashboard is now available at port 8080
+You can open that using below steps : 
+
+![How to open dashboard](./assets/openOctant.gif)
