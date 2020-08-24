@@ -21,6 +21,6 @@ Octant uses ~/.kube/config file to get/fetch data from cluster
 ## Open Octant dashboard 
 
 If you use above command to start Octant dashboard than - dashboard is now available at port 8080
-You can open that using below steps : 
+You can open dashboard using below steps : 
 
 ![How to open dashboard](./assets/openOctant.gif)
