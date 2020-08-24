@@ -2,7 +2,7 @@ Install Octant dashboard
 
 ## Octant dashboard 
 
-Download Octant distribution from github and un-tar it 
+Download [Octant](https://octant.dev/) distribution from github and un-tar it 
 
 `
 wget https://github.com/vmware-tanzu/octant/releases/download/v0.13.1/octant_0.13.1_Linux-64bit.tar.gz
