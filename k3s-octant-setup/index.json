@@ -1,6 +1,6 @@
 {
   "title": "Kubernetes cluster in 5 minutes with k3s and Octant dashboard",
-  "description": "In this scenario we will setup K3S kubernetes cluster (that supports Ingress and Network policy) with Octant dashboard under 5 minutes",
+  "description": "In this scenario we will setup K3S kubernetes cluster (that supports Ingress and Network polices) with Octant dashboard under 5 minutes",
   "difficulty": "intermediate",
   "time": "5 minutes",
   "details": {

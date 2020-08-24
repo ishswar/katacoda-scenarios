@@ -12,5 +12,6 @@ tar -xf octant_0.13.1_Linux-64bit.tar.gz
 ## Start Octant on port 80 
 
 `
+cd octant_0.13.1_Linux-64bit
 OCTANT_LISTENER_ADDR=0.0.0.0:80 ./octant
 `{{execute}}
