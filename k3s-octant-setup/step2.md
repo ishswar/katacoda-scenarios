@@ -18,6 +18,9 @@ Once above is done we can now connect to cluster and check the status
 
 `kubectl cluster-info`{{execute}}
 
+<details>
+  <summary>Click to see sample output</summary>
+  
 ```
 Kubernetes master is running at https://127.0.0.1:6443
 CoreDNS is running at https://127.0.0.1:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
@@ -25,4 +28,4 @@ Metrics-server is running at https://127.0.0.1:6443/api/v1/namespaces/kube-syste
 
 To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 ```
-
+</details>
