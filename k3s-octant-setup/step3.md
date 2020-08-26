@@ -13,7 +13,7 @@ tar -xf octant_0.13.1_Linux-64bit.tar.gz
 
 `
 cd octant_0.13.1_Linux-64bit
-OCTANT_LISTENER_ADDR=0.0.0.0:8080 ./octant &
+OCTANT_LISTENER_ADDR=0.0.0.0:8080 ./octant > /dev/null 2>&1 &
 echo "We are done - you are free to explore cluster"
 `{{execute}}
 
