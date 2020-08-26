@@ -6,7 +6,7 @@ show_progress()
   sleep 2
   clear
   echo "PS1='\t [\u@\h \W]\$ '" >> ~/.bashrc
-  . ~/.bashrc
+  bash
 }
 
 show_progress
