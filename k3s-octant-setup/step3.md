@@ -28,7 +28,7 @@ Use this link to access Octant dashboard
 
 `https://[[HOST_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com`
 
-![Octant dashboard](https://[[HOST_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com)
+[Octant dashboard](https://[[HOST_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com)
 
 Or you can use below steps to get same : 
 
