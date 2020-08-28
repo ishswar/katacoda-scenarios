@@ -24,4 +24,10 @@ Octant uses ~/.kube/config file to get/fetch data from cluster
 If you use above command to start Octant dashboard than - dashboard is now available at port 8080
 You can open dashboard using below steps : 
 
+Use this link to access Octant dashboard 
+
+`https://[[HOST_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com`
+
+Or you can use below steps to get same : 
+
 ![How to open dashboard](./assets/openOctant.gif)
