@@ -3,6 +3,7 @@ kind: CertificateSigningRequest
 metadata:
   name: john
 spec:
+  signerName: kubernetes.io/kube-apiserver-client
   groups:
   - system:authenticated
   request: BASE64ENCODE
