@@ -42,7 +42,7 @@ kubectl get pods
 
 This time it worked !!! 
 
-### List name spaces ? 
+### Can john list namespaces ? 
 
 `kubectl get ns`{{execute}}
 
