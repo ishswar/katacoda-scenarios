@@ -9,11 +9,66 @@ We will use this tool to back and restore etcd data
 
 
 `
-ETCD_CTCL_VERSION=3.4.3
-wget -q https://github.com/etcd-io/etcd/releases/download/v${ETCD_CTCL_VERSION}/etcd-v${ETCD_CTCL_VERSION}-linux-amd64.tar.gz
-tar -zxf etcd-v${ETCD_CTCL_VERSION}-linux-amd64.tar.gz
-cd etcd-v${ETCD_CTCL_VERSION}-linux-amd64
-sudo cp etcdctl /usr/local/bin
+cat << EOF > server_cert.cnf
+[req]
+distinguished_name = req_distinguished_name
+prompt = no
+[req_distinguished_name]
+C = US
+O = finance
+OU = finance
+CN = john
+EOF
+`{{execute}}
+
+`
+openssl req -new -key john.key -out john.csr -config server_cert.cnf
+`{{execute}}
+
+`
+cat <<EOF > certificatesigningrequest.yaml
+apiVersion: certificates.k8s.io/v1
+kind: CertificateSigningRequest
+metadata:
+  name: john
+spec:
+  groups:
+  - system:authenticated
+  request: BASE64ENCODE
+  usages:
+  - client auth
+EOF
+`{{execute}}
+
+`
+JOHN_CSR=$(cat john.csr | base64 | tr -d "\n")
+sed -i "s/BASE64ENCODE/${JOHN_CSR}/g" certificatesigningrequest.yaml
+`{{execute}}
+
+`
+kubectl apply -f certificatesigningrequest.yaml
+kubectl get csr
+kubectl certificate approve john
+kubectl get csr john -o jsonpath="{status.certificate}{\n}"
+`{{execute}}
+
+`
+kubectl get csr john -o jsonpath="{.status.certificate}" | base64 -d
+`{{execute}}
+
+`
+kubectl get csr john -o jsonpath="{.status.certificate}" | base64 -d > john.crt
+`{{execute}}
+
+`
+kubectl create role developer --verb=create --verb=get --verb=list --verb=update --verb=delete --resource=pods
+kubectl create rolebinding developer-binding-john --role=developer --user=john
+`{{execute}}
+
+`
+kubectl config set-credentials john --client-key=john.key --client-certificate=john.crt --embed-certs=true
+kubectl config set-context john --cluster=kubernetes --user=john
+kubectl config use-context john
 `{{execute}}
 
 ## etcdctl connection parameters
