@@ -12,7 +12,7 @@ Now let's approve above CSR
 kubectl certificate approve john
 `{{execute}}
 
-Once the certificate is approved we need to extract signed certificte and save it as john.crt file 
+Once the certificate is approved we need to extract signed certificate and save it as john.crt file 
 
 - Approved certificate can be retrieved using below command 
 
@@ -20,7 +20,7 @@ Once the certificate is approved we need to extract signed certificte and save i
 kubectl get csr john -o jsonpath="{.status.certificate}{'\n'}"
 `{{execute}}
 
-- Above certicicate is in base64 encoded string we need to decode it to see real PEM encoded certificate 
+- Above certificate is in base64 encoded string we need to decode it to see real PEM encoded certificate 
 
 `
 kubectl get csr john -o jsonpath="{.status.certificate}" | base64 -d

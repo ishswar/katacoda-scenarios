@@ -1,7 +1,7 @@
 {
-  "title": "Create a normal user for cluster",
+  "title": "Create a user & RBAC for Kubernetes cluster",
   "description": "In this scenario we will create a normal user called John for Kubernetes 1.19 cluster (generate certificate,get it signed by cluster,created needed Role and Rolebindings so user can access cluster) and use that in kubectl command",
-  "difficulty": "intermediate",
+  "difficulty": "advanced",
   "time": "30 minutes",
   "details": {
     "steps": [{
@@ -22,7 +22,7 @@
       "title": "Step 5 - Setup kubectl to use john's certificates",
       "text": "step5.md"
     },{
-      "title": "Step 6 - Authorized user john to list pods",
+      "title": "Step 6 - Authorized user john to list pods (RBAC)",
       "text": "step6.md"
     }],
     "intro": {

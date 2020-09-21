@@ -2,6 +2,8 @@ Create a john's Certificates (Private and Public certs)
 
 ## Create certificate for John
 
+This will create private certificate for John
+
 `openssl genrsa -out john.key 2048`{{execute}}
 
 ## Create Certificate Signing Request (CSR)
@@ -37,7 +39,7 @@ openssl req -new -key john.key -out john.csr -config server_cert.cnf
 
 ## Create Kubernetes CertificateSigningRequest request
 
-Now we will create a CertificateSigningRequest and submit it to a Kubernetes Cluster via kubectl. We already have template file in certificatesigningrequest.yaml 
+Now we will create a CertificateSigningRequest and submit it to a Kubernetes Cluster via kubectl. We already have template file certificatesigningrequest.yaml 
 (Optional) You can view it if want to `cat /root/certificatesigningrequest.yaml`{{execute}}
 
 - First we will have to convert CSR file to base54 encoded string store it in variable `JOHN_CSR`

@@ -2,8 +2,8 @@ Populate the cluster
 
 ## Remove taint 
 
-As this is single node cluster we need to remove tain from master node 
-if we don't do this than no pods can be secude on master (We are just doing this for demo purpose) 
+As this is single node cluster we need to remove taint from master node 
+if we don't do this than no pods can be schedule on master (We are just doing this for demo purpose) 
 
 `kubectl taint node $(hostname) node-role.kubernetes.io/master:NoSchedule-`{{execute}}
 
