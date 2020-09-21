@@ -1,3 +1,1 @@
-***We are done*** - in this quick scenario we saw how easy it is to create a 
-multiple k3s cluster using k3d and how that can be helpful for folks who need access to
-multiple clusters to learn kubectl context switching.
+***We are done*** - in this scenario we saw how we can create a user for Kubernetes cluster - use certificates to authenticate user and RBAC to authorize them.
