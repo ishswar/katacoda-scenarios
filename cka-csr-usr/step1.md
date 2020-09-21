@@ -1,5 +1,13 @@
 Create cluster 
 
+## Upgrade kubeadm & Kubelet to 1.19
+
+As of now this environmnet has kubeadm 1.18 we want to use 1.19 so we will upgrade them first 
+
+`apt-get update && apt-get install -y kubeadm=1.19.0-00
+ apt-get update && apt-get install -y kubelet=1.19.0-00 kubectl=1.19.0-00
+ `{{execute}}
+
 ## Create cluster using kubeadm
 
 We will create a single master/node kubernetes cluster using kubeadm 

@@ -1,6 +1,8 @@
 Create a backup
 
-## Install etcdctl tool 
+## Create certificate for John
+
+`openssl genrsa -out john.key 2048`{{execute}}
 
 `etcdctl` is command line tool to manage etcd server and it’s date.
 We will use this tool to back and restore etcd data

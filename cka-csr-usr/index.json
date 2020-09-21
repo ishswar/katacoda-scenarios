@@ -1,6 +1,6 @@
 {
-  "title": "Backup and restored kubernetes key-value storage etcd",
-  "description": "In this senario we will first install cluster using `kubeadm` - and will perform a steps to backup etcd and restore it",
+  "title": "Create a user for cluster",
+  "description": "In this scenario we will create a normal user for Kubernetes 1.19 cluster (generate certificate,get it signed by cluster,created needed Role and Rolebindings so user can access cluster) and use that in kubectl command",
   "difficulty": "intermediate",
   "time": "30 minutes",
   "details": {
@@ -40,6 +40,6 @@
     "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\r\nFollow steps from left - Good luck!!!\u001b[m\r\n"
   },
   "backend": {
-    "imageid": "kubernetes-cluster:1.19"
+    "imageid": "kubernetes-cluster:1.18"
   }
 }
