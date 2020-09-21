@@ -21,4 +21,4 @@
 #kubectl create deployment deploy-charts --image=nginx:stable-alpine -n auditing
 
 apt-get update && apt-get install -y kubeadm=1.19.0-00
-apt-get update && apt-get install -y kubelet=1.19.0-00 kubectl=1.19.0-00
+apt-get install -y kubelet=1.19.0-00 kubectl=1.19.0-00
