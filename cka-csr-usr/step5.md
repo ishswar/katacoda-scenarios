@@ -1,6 +1,6 @@
 Setup kubectl to use john's certificates 
 
-## Add to KubeConfig
+## Add certificates to KubeConfig
 
 The last step is to add this user into the KubeConfig.
 
@@ -18,7 +18,7 @@ Then, we need to add the context
 To test it, change kubecontext to john
 
 `kubectl config use-context john
-`{{execute}
+`{{execute}}
 
 All set - now we can run kubectl commands as 'john' - let's try to get pods 
 

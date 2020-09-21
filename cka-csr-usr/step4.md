@@ -41,10 +41,10 @@ Same can be seen in sample image below :
 ![](https://raw.githubusercontent.com/ishswar/katacoda-scenarios/master/cka-csr-usr/assets/approved_cert.png)
 
 
-**john** is now a __Normal user__ who using john.crt and john.key it can authenticate and invoke API. This is becuse he has certificate
-issued by the Kubernetes Cluster, He can present this Certificate to make the API call as the Certificate Header, or through the kubectl.
+**john** is now a __Normal user__ using his certificates *john.crt* and *john.key* he can authenticate and invoke API. This is because he has certificate
+issued (signed) by the Kubernetes Cluster, He can present this Certificate to make the API call as the Certificate Header, or through the kubectl.
 
-Now let see how we setup kubectl to use this certificates to make an kubectl calls on behalf of ***John*** 
+Now let see how we setup ***kubectl*** to use this certificates to make an API calls on behalf of ***John*** 
 
 
 

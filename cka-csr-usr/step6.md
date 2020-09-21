@@ -32,7 +32,7 @@ Change kubecontext to john
 
 `
 kubectl config use-context john
-`{{execute}
+`{{execute}}
 
 Now we can again run kubectl commands as 'john' - let's try to get pods 
 
@@ -44,9 +44,14 @@ This time it worked !!!
 
 ### List name spaces ? 
 
+`kubectl get ns`{{execute}}
+
 If we try to list namespaces as john it fails as it is not authorized to do that 
 
 `
-$ kubectl get ns
 Error from server (Forbidden): namespaces is forbidden: User "john" cannot list resource "namespaces" in API group "" at the cluster scope
 `
+
+## Future task 
+
+Why don't you update or create new Role and Role bindings so ***john*** can list namespaces - try it out ! 
