@@ -7,7 +7,7 @@ show_progress()
   GREEN='\033[0;32m'
   CYAN='\033[0;36m'
   NC='\033[0m' # No Color
-  echo -e  -n "Upgrading kubeadm"
+  echo -e  -n "Upgrading kubeadm to 1.19"
   local -r pid="${1}"
   local -r delay='0.75'
   local spinstr='\|/-'

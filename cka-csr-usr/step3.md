@@ -1,4 +1,4 @@
-Create a john Certificates (Private and Public certs)
+Create a john's Certificates (Private and Public certs)
 
 ## Create certificate for John
 
@@ -54,28 +54,4 @@ Send this Certificate singing request to API server
 
 `kubectl apply -f certificatesigningrequest.yaml`{{execute}} 
 
-`
-kubectl apply -f certificatesigningrequest.yaml
-kubectl get csr
-kubectl certificate approve john
-kubectl get csr john -o jsonpath="{.status.certificate}{'\n'}"
-`{{execute}}
-
-`
-kubectl get csr john -o jsonpath="{.status.certificate}" | base64 -d
-`{{execute}}
-
-`
-kubectl get csr john -o jsonpath="{.status.certificate}" | base64 -d > john.crt
-`{{execute}}
-
-`
-kubectl create role developer --verb=create --verb=get --verb=list --verb=update --verb=delete --resource=pods
-kubectl create rolebinding developer-binding-john --role=developer --user=john
-`{{execute}}
-
-`
-kubectl config set-credentials john --client-key=john.key --client-certificate=john.crt --embed-certs=true
-kubectl config set-context john --cluster=kubernetes --user=john
-kubectl config use-context john
-`{{execute}}
+Certificate singing request has been sent to cluster, next we will get this request approved

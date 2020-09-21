@@ -17,8 +17,7 @@ Then, we need to add the context
 
 To test it, change kubecontext to john
 
-`
-kubectl config use-context john
+`kubectl config use-context john
 `{{execute}
 
 All set - now we can run kubectl commands as 'john' - let's try to get pods 
@@ -35,8 +34,4 @@ Error from server (Forbidden): pods is forbidden: User "john" cannot list resour
 
 This is because we have just done the Authentication part - we need to Authorize `john` to do seething on cluster - let do that next 
 
-`
-kubectl create role developer --verb=create --verb=get --verb=list --verb=update --verb=delete --resource=pods
-kubectl create rolebinding developer-binding-john --role=developer --user=john
-`{{execute}}
 

@@ -24,20 +24,3 @@ curl https://docs.projectcalico.org/manifests/canal.yaml -O
 kubectl apply -f canal.yaml
 `{{execute}}
 
-## Wait for CANAL network to be installed 
-
-`
-EXPECTED_PODS=9
-while true;
-  do CHECK=$(kubectl get pods -n kube-system --field-selector status.phase=Running --no-headers | wc -l);
-   if [ $CHECK -eq $EXPECTED_PODS ];
-     then 
-          echo "ALL PODs are up";
-          kubectl get pods -n kube-system --field-selector status.phase=Running
-          break;
-     else 
-          echo "All PODs are not yet up";
-          echo "Expected $EXPECTED_PODS Pods in kube-system namespace to be running found [$CHECK] running"
-   fi;
-   sleep 5;
-done`{{execute}}
