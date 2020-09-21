@@ -25,20 +25,8 @@ EOF
 openssl req -new -key john.key -out john.csr -config server_cert.cnf
 `{{execute}}
 
-`
-cat <<EOF > certificatesigningrequest.yaml
-apiVersion: certificates.k8s.io/v1
-kind: CertificateSigningRequest
-metadata:
-  name: john
-spec:
-  groups:
-  - system:authenticated
-  request: BASE64ENCODE
-  usages:
-  - client auth
-EOF
-`{{execute}}
+yaml file 
+
 
 `
 JOHN_CSR=$(cat john.csr | base64 | tr -d "\n")
