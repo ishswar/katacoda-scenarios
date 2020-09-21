@@ -1,45 +1,42 @@
-Restore from backup 
+Setup kubectl to use john's certificates 
 
-## Restore etcd data back from backup 
+## Add to KubeConfig
 
-First we back up existing data (we never know we might need this)
+The last step is to add this user into the KubeConfig.
 
-`
-DATA_DIR=$(cat /etc/kubernetes/manifests/etcd.yaml | grep data-dir | cut -d= -f2)
-mv $DATA_DIR $DATA_DIR.old`{{execute}}
-
-Restore data locally 
-
-`ETCDCTL_API=3 etcdctl snapshot restore snapshot.db`{{execute}}
-
-Stop the etcd container and move the back quickly 
+First, we need to add new credentials
 
 `
-DATA_DIR=$(cat /etc/kubernetes/manifests/etcd.yaml | grep data-dir | cut -d= -f2)
-echo "etcd data directory is $DATA_DIR"
-docker stop $(docker ps | grep etcd | cut -d" " -f1) ;
-mkdir -p $DATA_DIR 
-cp -rf ./default.etcd/* $DATA_DIR
+kubectl config set-credentials john --client-key=john.key --client-certificate=john.crt --embed-certs=true
 `{{execute}}
 
+Then, we need to add the context
 
-## etcd pod must has been restarted 
+`kubectl config set-context john --cluster=kubernetes --user=john
+`{{execute}}
 
-In above stop we stop the etcd container - `kubelet` would have detected that and must have restarted etcd pod 
-We can check this by looking at RESTART count on pod 
+To test it, change kubecontext to john
 
-`kubectl get pod -n kube-system etcd-$(hostname)`{{execute}}
+`
+kubectl config use-context john
+`{{execute}
 
-Sample output should show like this 
+All set - now we can run kubectl commands as 'john' - let's try to get pods 
 
-```bash
-master $ 
-NAME                READY   STATUS    RESTARTS   AGE
-etcd-controlplane   1/1     Running   2          12m
-``` 
+`
+kubectl get pods
+`{{execute}} 
 
-## Check new Pod (that was created backup was taken) is gone 
+Oh, we got Error 
 
-`kubectl get pods`{{execute}} 
+`
+Error from server (Forbidden): pods is forbidden: User "john" cannot list resource "pods" in API group "" in the namespace "default"
+`
 
-Above command should only show one pod running in cluster - if you see that then restore is ***SUCCESS***
+This is because we have just done the Authentication part - we need to Authorize `john` to do seething on cluster - let do that next 
+
+`
+kubectl create role developer --verb=create --verb=get --verb=list --verb=update --verb=delete --resource=pods
+kubectl create rolebinding developer-binding-john --role=developer --user=john
+`{{execute}}
+

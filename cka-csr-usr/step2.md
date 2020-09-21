@@ -13,4 +13,4 @@ As of now our kubernetes cluster is empty - lets quickly create a simple `nginx`
 
 `kubectl run tester --image=nginx`{{execute}} 
 
-Next, now lets create a user user *john* so he can access cluster and see above pod
+Next, now lets create a user user *john* so he can access cluster and see above pod in default namespace

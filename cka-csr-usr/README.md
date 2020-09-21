@@ -1,1 +1,1 @@
-## Repo for katacoda k3d base k3s clusters  
+## Repo for create normal kubernetes cluster who can authenticate and list pods in default namespace 

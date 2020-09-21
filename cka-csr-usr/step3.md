@@ -1,12 +1,17 @@
-Create a backup
+Create a john Certificates (Private and Public certs)
 
 ## Create certificate for John
 
 `openssl genrsa -out john.key 2048`{{execute}}
 
-`etcdctl` is command line tool to manage etcd server and it’s date.
-We will use this tool to back and restore etcd data
+## Create Certificate Signing Request (CSR)
 
+We will create a CSR in *Non-interactive* way
+
+This is the place you decide what will be username for your user - we are using *john* (CN=john) in our case
+Organization for *john* is *devops* 
+
+Create a configuration file with the content required to generate CSR. We will use below file.
 
 `
 cat << EOF > server_cert.cnf
@@ -15,23 +20,39 @@ distinguished_name = req_distinguished_name
 prompt = no
 [req_distinguished_name]
 C = US
-O = finance
-OU = finance
+O = devops
+OU = devops
 CN = john
 EOF
 `{{execute}}
+
+Now generate CSR file using openssl , we will pass above request file as input so openssl will not prompt for any input
 
 `
 openssl req -new -key john.key -out john.csr -config server_cert.cnf
 `{{execute}}
 
-yaml file 
+(Optional) - if you are curious to see how Certification Singing request file (.csr) looks like you can use OpenSSL tool to see it 
+`openssl req -noout -text -in john.csr`{{execute}}
 
+## Create Kubernetes CertificateSigningRequest request
+
+Now we will create a CertificateSigningRequest and submit it to a Kubernetes Cluster via kubectl. We already have template file in certificatesigningrequest.yaml 
+(Optional) You can view it if want to `cat /root/certificatesigningrequest.yaml`{{execute}}
+
+- First we will have to convert CSR file to base54 encoded string store it in variable `JOHN_CSR`
+- Now we will substitute that value in certificatesigningrequest.yaml file 
 
 `
 JOHN_CSR=$(cat john.csr | base64 | tr -d "\n")
 sed -i "s/BASE64ENCODE/${JOHN_CSR}/g" certificatesigningrequest.yaml
 `{{execute}}
+
+In kubernetes 1.19 certificatesigningrequest also needs to have `spec.signerName` defined - in our case we have set it to `kubernetes.io/kube-apiserver-client`
+
+Send this Certificate singing request to API server 
+
+`kubectl apply -f certificatesigningrequest.yaml`{{execute}} 
 
 `
 kubectl apply -f certificatesigningrequest.yaml
@@ -58,53 +79,3 @@ kubectl config set-credentials john --client-key=john.key --client-certificate=j
 kubectl config set-context john --cluster=kubernetes --user=john
 kubectl config use-context john
 `{{execute}}
-
-## etcdctl connection parameters
-
-`etcdctl` is command line tool to manage etcd server and it’s date.
-Before we create a etcd backup we need to connect to running etcd server; as in case of kubernetes it is secured endpoint.
-We need to know it's connection parameters.
-
-** NOTE : this restore process is for a locally hosted etcd running in a static pod. **
-
-We can find that using etcd pod's static manifest 
-
-`cat /etc/kubernetes/manifests/etcd.yaml`{{execute}}
-
-From above file we need 4 things :
-
-1. etcd endpoint(s)
-1. CA Certs file 
-1. Server certificate 
-1. Server certificate key
-
-## Check connectivity 
-
-Verify we're connecting to the right cluster...define your endpoints and keys
-
-`
-CACERT=$(cat /etc/kubernetes/manifests/etcd.yaml | grep peer-trusted-ca-file | cut -d= -f2)
-SERVER_KEY=$(cat /etc/kubernetes/manifests/etcd.yaml | grep peer-key-file | cut -d= -f2)
-SERVER_CERT=$(cat /etc/kubernetes/manifests/etcd.yaml | grep peer-cert-file | cut -d= -f2)
-ENDPOINTS=$(cat /etc/kubernetes/manifests/etcd.yaml | grep advertise-client-urls= | cut -d= -f2)
-ETCDCTL_API=3 etcdctl --endpoints $ENDPOINTS --write-out=table --cacert $CACERT --cert $SERVER_CERT --key $SERVER_KEY \
-   member list
-`{{execute}}
-
-## Take a backup 
-
-Lets take a backup - we are saving backup named 'snapshot.db' in current directory 
-
-`
-CACERT=$(cat /etc/kubernetes/manifests/etcd.yaml | grep peer-trusted-ca-file | cut -d= -f2)
-SERVER_KEY=$(cat /etc/kubernetes/manifests/etcd.yaml | grep "\-\-key-file" | cut -d= -f2)
-SERVER_CERT=$(cat /etc/kubernetes/manifests/etcd.yaml | grep "\-\-cert-file" | cut -d= -f2)
-ENDPOINTS=$(cat /etc/kubernetes/manifests/etcd.yaml | grep advertise-client-urls= | cut -d= -f2)
-ETCDCTL_API=3 etcdctl --endpoints $ENDPOINTS snapshot save snapshot.db --cacert $CACERT --cert $SERVER_CERT --key $SERVER_KEY
-`{{execute}}
-
-## Check a backup (We need to make sure backup is good)
-
-Read the metadata from the backup/snapshot to print out the snapshot's status 
-
-`ETCDCTL_API=3 etcdctl --write-out=table snapshot status snapshot.db`{{execute}}

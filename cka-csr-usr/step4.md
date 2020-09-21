@@ -1,9 +1,45 @@
-Extra pod 
+Get certificate signed 
 
-## Create one extra pod 
+## Approve the CSR 
 
-We will create one extra pod in cluster - as we are creating this pod after taking backup when we restore the backup 
-cluster will forget about this pod as all source of truth is etcd DB.
+You can see that now CSR is in `Pending` state and waiting for kube admin to approve it 
 
-`kubectl run forgetme --image=nginx && kubectl get pods`{{execute}}
+`kubectl get csr`{{execute}}
+
+Now let's approve above CSR
+`
+kubectl certificate approve john
+kubectl get csr john -o jsonpath="{.status.certificate}{'\n'}"
+`{{execute}}
+
+Once the certificate is approved we need to extract signed certificte and save it as john.crt file 
+
+- Approved certificate can be retrieved using below command 
+
+`
+kubectl get csr john -o jsonpath="{.status.certificate}{'\n'}"
+`{{execute}}
+
+- Above certicicate is in base64 encoded string we need to decode it to see real PEM encoded certificate 
+
+`
+kubectl get csr john -o jsonpath="{.status.certificate}" | base64 -d
+`{{execute}}
+
+- Save above output as john.crt file 
+
+`
+kubectl get csr john -o jsonpath="{.status.certificate}" | base64 -d > john.crt
+`{{execute}}
+
+- (Optionally) We can see that this certificate is signed by "kubernetes" (Signing authority) and validity is 1 year
+
+`openssl x509 -in john.crt -text`{{execute}}
+
+**john** is now a ++Normal user++ who using john.crt and john.key it can authenticate and invoke API. This is becuse he has certificate
+issued by the Kubernetes Cluster, He can present this Certificate to make the API call as the Certificate Header, or through the kubectl.
+
+Now let see how we setup kubectl to use this certificates to make an kubectl calls on behalf of ***John*** 
+
+
 
