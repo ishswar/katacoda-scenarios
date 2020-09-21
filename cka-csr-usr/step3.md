@@ -37,7 +37,7 @@ sed -i "s/BASE64ENCODE/${JOHN_CSR}/g" certificatesigningrequest.yaml
 kubectl apply -f certificatesigningrequest.yaml
 kubectl get csr
 kubectl certificate approve john
-kubectl get csr john -o jsonpath="{status.certificate}{\n}"
+kubectl get csr john -o jsonpath="{.status.certificate}{'\n'}"
 `{{execute}}
 
 `
