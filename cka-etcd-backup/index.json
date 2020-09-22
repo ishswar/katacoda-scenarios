@@ -1,6 +1,6 @@
 {
   "title": "Backup and restored kubernetes key-value storage etcd",
-  "description": "In this senario we will first install cluster using `kubeadm` - and will perform a steps to backup etcd and restore it",
+  "description": "In this scenario we will first install cluster using `kubeadm` - and will perform a steps to backup etcd and restore it",
   "difficulty": "intermediate",
   "time": "30 minutes",
   "details": {

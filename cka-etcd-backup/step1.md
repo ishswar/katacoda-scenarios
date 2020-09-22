@@ -2,7 +2,7 @@ Create cluster
 
 ## Create cluster using kubeadm
 
-We will create a single master/node kubernetes cluster using kubeadm 
+We will create a single master/node kubernetes cluster using kubeadm (version: 1.19)
 
 `kubeadm init --pod-network-cidr=10.244.0.0/16`{{execute}}
 
