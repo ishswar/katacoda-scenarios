@@ -50,7 +50,7 @@ JOHN_CSR=$(cat john.csr | base64 | tr -d "\n")
 sed -i "s/BASE64ENCODE/${JOHN_CSR}/g" certificatesigningrequest.yaml
 `{{execute}}
 
-(Optional) View updated ***yaml*** file that we are about to submit to API server `bat /root/certificatesigningrequest.yaml`{{execute}}
+(Optional) View updated ***yaml*** file that we are about to submit to API server `bat /root/certificatesigningrequest.yaml --highlight-line 9 --wrap auto`{{execute}}
 
 In kubernetes 1.19 certificatesigningrequest also needs to have `spec.signerName` defined - in our case we have set it to `kubernetes.io/kube-apiserver-client`
 
