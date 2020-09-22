@@ -8,6 +8,7 @@ We will create a single master/node kubernetes cluster using kubeadm (version: 1
 
 Once above command succeeds we got ourselves working cluster 
 
+Lets setup kubeconfig so we can run kubectl and interact with cluster 
 `
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
