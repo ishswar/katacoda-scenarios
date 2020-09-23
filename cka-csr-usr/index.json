@@ -35,7 +35,9 @@
     "assets": {
             "host01": [
                 {"file": "wait.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-                {"file": "certificatesigningrequest.yaml", "target": "/root"}
+                {"file": "certificatesigningrequest.yaml", "target": "/root"},
+                {"file": "audit-policy.yaml", "target": "/root"},
+                {"file": "kube-apiserver.yaml", "target": "/root"}
             ]
         }
   },
