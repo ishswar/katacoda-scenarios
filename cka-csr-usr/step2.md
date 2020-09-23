@@ -21,7 +21,7 @@ First copy audit-policy.yaml to it's location
 `cp /root/audit-policy.yaml /etc/kubernetes/audit-policy.yaml`{{execute}}
 
 Second enable Audit on api server - we will just replace api-server pod's static manifest file 
-`cp /root/kube-apiserver.yaml /etc/kubernetes/manifests/kube-apiserver.yaml{{execute}}
+`cp /root/kube-apiserver.yaml /etc/kubernetes/manifests/kube-apiserver.yaml`{{execute}}
 
 In few seconds API Server will be restarted and we should see `audit.log` created in **/var/log **
 `tail /var/log/audit.log -n 10`{{execute}}
