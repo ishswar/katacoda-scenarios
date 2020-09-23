@@ -42,6 +42,9 @@ kubectl get pods
 
 This time it worked !!! 
 
+You can see the success audit message in audit file as well 
+`cat /var/log/audit.log | grep john | grep ResponseComplete | grep list | grep allow | jq .`{{execute}}
+
 ### Can john list namespaces ? 
 
 `kubectl get ns`{{execute}}
