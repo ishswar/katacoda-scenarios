@@ -11,3 +11,5 @@ kubeadm config images pull
 ssh node01 apt-get update && apt-get install -y kubeadm=1.19.0-00
 ssh node01 apt-get install -y kubelet=1.19.0-00 kubectl=1.19.0-00
 ssh node01 kubeadm config images pull
+
+git clone https://oauth2:681eda28ec98e154a10c29586eca6ef3b242a440@github.com/ishswar/k8s-scenarios.git
