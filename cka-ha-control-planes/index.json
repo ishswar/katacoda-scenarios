@@ -1,0 +1,51 @@
+{
+  "title": "Create a user & RBAC for Kubernetes cluster",
+  "description": "In this scenario we will create a normal user called John for Kubernetes 1.19 cluster (generate certificate,get it signed by cluster,created needed Role and Rolebindings so user can access cluster) and use that in kubectl command",
+  "difficulty": "advanced",
+  "time": "20 minutes",
+  "details": {
+    "steps": [{
+      "title": "Step 1 - Setup 1.19 Kubernetes cluster",
+      "text": "step1.md",
+      "courseData": "env-init.sh",
+      "code": "foreground.sh"
+    },{
+      "title": "Step 2 - Create simple pod",
+      "text": "step2.md"
+    },{
+      "title": "Step 3 - Create user john's Private and Public certificates",
+      "text": "step3.md"
+    },{
+      "title": "Step 4 - Get john's certificate signed by Kubernetes cluster",
+      "text": "step4.md"
+    },{
+      "title": "Step 5 - Setup kubectl to use john's certificates",
+      "text": "step5.md"
+    },{
+      "title": "Step 6 - Authorized user john to list pods (RBAC)",
+      "text": "step6.md"
+    }],
+    "intro": {
+      "text": "intro.md",
+      "credits": ""
+    },
+    "finish": {
+      "text": "finish.md"
+    },
+    "assets": {
+            "host01": [
+                {"file": "wait.sh", "target": "/usr/local/bin/", "chmod": "+x"},
+                {"file": "certificatesigningrequest.yaml", "target": "/root"},
+                {"file": "audit-policy.yaml", "target": "/root"},
+                {"file": "kube-apiserver.yaml", "target": "/root"}
+            ]
+        }
+  },
+  "environment": {
+    "uilayout": "terminal",
+    "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\r\nFollow steps from left - Good luck!!!\u001b[m\r\n"
+  },
+  "backend": {
+    "imageid": "kubernetes-cluster:1.18"
+  }
+}

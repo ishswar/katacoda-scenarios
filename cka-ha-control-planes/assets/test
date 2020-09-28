@@ -1,0 +1,37 @@
+master $ cat /var/log/audit.log | grep pranay | grep kubernetes-admin | jq .
+{
+  "kind": "Event",
+  "apiVersion": "audit.k8s.io/v1",
+  "level": "Metadata",
+  "auditID": "d788dbe2-dee3-45c4-8194-d60103bfa03e",
+  "stage": "ResponseComplete",
+  "requestURI": "/api/v1/namespaces/default/pods?fieldManager=kubectl-run",
+  "verb": "create",
+  "user": {
+    "username": "kubernetes-admin",
+    "groups": [
+      "system:masters",
+      "system:authenticated"
+    ]
+  },
+  "sourceIPs": [
+    "172.17.0.21"
+  ],
+  "userAgent": "kubectl/v1.19.0 (linux/amd64) kubernetes/e199641",
+  "objectRef": {
+    "resource": "pods",
+    "namespace": "default",
+    "name": "pranay",
+    "apiVersion": "v1"
+  },
+  "responseStatus": {
+    "metadata": {},
+    "code": 201
+  },
+  "requestReceivedTimestamp": "2020-09-23T18:52:29.381472Z",
+  "stageTimestamp": "2020-09-23T18:52:29.397059Z",
+  "annotations": {
+    "authorization.k8s.io/decision": "allow",
+    "authorization.k8s.io/reason": ""
+  }
+}
