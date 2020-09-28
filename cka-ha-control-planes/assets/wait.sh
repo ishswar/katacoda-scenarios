@@ -79,7 +79,7 @@ show_progress()
   echo ""
   echo -e  "${GREEN}Done${NC} upgrading ${CYAN}kubeadm,kubelet and kubectl to 1.19 ${NC}"
 
-  sleep 10
+  sleep 1
   clear
 }
 
