@@ -1,5 +1,5 @@
 {
-  "title": "Create a user & RBAC for Kubernetes cluster",
+  "title": "Creating Highly Available clusters with kubeadm",
   "description": "In this scenario we will create a normal user called John for Kubernetes 1.19 cluster (generate certificate,get it signed by cluster,created needed Role and Rolebindings so user can access cluster) and use that in kubectl command",
   "difficulty": "advanced",
   "time": "20 minutes",
