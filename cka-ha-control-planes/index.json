@@ -1,6 +1,6 @@
 {
   "title": "Creating Highly Available clusters with kubeadm",
-  "description": "In this scenario we will install NGINX based TLS pipethrough load balancer, and two Kubernetes master (control-plane) nodes to two separate nodes thus forming High availability cluster ",
+  "description": "In this scenario we will install NGINX based (TLS pass-through) load balancer, and two Kubernetes master (control-plane) nodes to two separate machines thus forming High availability cluster ",
   "difficulty": "advanced",
   "time": "20 minutes",
   "details": {
