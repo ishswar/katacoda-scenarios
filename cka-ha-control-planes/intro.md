@@ -7,13 +7,13 @@ in kubeconfig . We will test out the fail our as well in action .
 
 High-level steps that we will perform in this scenario are :
 
-1. Install NGINX , enable TLS tunneling (so to end TLS traffic at API server and not at NGINX)
-1. Will add two Host(s) and Ports to NGINX load balancer config so it can load balancer among two Master(s)
-1. Install first master in control plane (will use NGINX hostname and port as API server endpoint)
-1. Install second master 
-1. Using kubectl tool check out the we are seeing two masters 
-1. Create few Pods 
-1. Try out fail-over and see HA is indeed working  
+1. Install **NGINX** , enable **TLS tunneling **(so to end TLS traffic at API server and not at NGINX)
+1. Will add two Host(s) and Ports to NGINX **load balancer** config so it can load balancer among two Master(s)
+1. Install **first** master in control plane (will use NGINX hostname and port as API server endpoint)
+1. Install **second** master 
+1. Using **kubectl** tool check out the we are seeing **two masters **
+1. Create few **Pods** 
+1. Try out **Failover** and see HA is indeed working  
 
 At he end our setup should look like this : 
 
