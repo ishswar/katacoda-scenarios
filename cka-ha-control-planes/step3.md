@@ -14,7 +14,7 @@ CERT_KEY=$(kubeadm init phase upload-certs --upload-certs | sed -n 3p)
 CONTROL_PLANE_JOIN_COMMAND=$(kubeadm token create --print-join-command --certificate-key "$CERT_KEY")
 `{{execute}}
 
-## Run kubeadm on second server 
+## Run kubeadm join on second server 
 
 Now we run above `kubeadm join` command on second server (node01) that will create a **second** master node in cluster 
 
