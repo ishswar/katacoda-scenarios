@@ -1,4 +1,4 @@
-Create cluster 
+Create first master node in cluster 
 
 ## Create cluster using kubeadm
 
@@ -50,4 +50,6 @@ done`{{execute}}
 
 Lets quickly test out kube config to see we are able to connect via LB to AIP server 
 
-`kubectl get nodes`{{execute}}
+`kubectl get pods -v 6`{{execute}}
+
+You should see kubectl is using load balalncer's URL to connect to API server

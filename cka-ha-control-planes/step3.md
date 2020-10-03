@@ -1,61 +1,63 @@
-Create a john's Certificates (Private and Public certs)
+Create second master node in cluster 
 
-## Create certificate for John
+# Create second master 
 
-This will create private certificate for John
+For this we need to run kubeadm join command but as --control-plane 
 
-`openssl genrsa -out john.key 2048`{{execute}}
+## Get join command 
 
-## Create Certificate Signing Request (CSR)
-
-We will create a CSR in *Non-interactive* way
-
-This is the place you decide what will be username for your user - we are using *john* (CN=john) in our case
-Organization for *john* is *devops* 
-
-Create a configuration file with the content required to generate CSR. We will use below file.
+On first master server run below command to get join command that we need to execute on second server.
 
 `
-cat << EOF > server_cert.cnf
-[req]
-distinguished_name = req_distinguished_name
-prompt = no
-[req_distinguished_name]
-C = US
-O = devops
-OU = devops
-CN = john
-EOF
+echo "Generating joining command that remote kubeadm can use to join this cluster"
+#CERT_KEY=$(kubeadm alpha certs certificate-key) <-- This should work in 1.19 but it does not (or failed for me)
+CERT_KEY=$(kubeadm init phase upload-certs --upload-certs | sed -n 3p)
+CONTROL_PLANE_JOIN_COMMAND=$(kubeadm token create --print-join-command --certificate-key "$CERT_KEY")
 `{{execute}}
 
-Now generate CSR file using openssl , we will pass above request file as input so openssl will not prompt for any input
+## Run kubeadm on second server 
+
+Now we run above kubeadm join command on second server that will create a second master node in cluster 
 
 `
-openssl req -new -key john.key -out john.csr -config server_cert.cnf
+SECOND_MACHINE_NAME=node01
+echo "JOIN COMMAND is [$CONTROL_PLANE_JOIN_COMMAND]"
+echo "$CONTROL_PLANE_JOIN_COMMAND" > join.text
+echo "Running joining command from remote machine"
+echo ""
+ssh $SECOND_MACHINE_NAME "$CONTROL_PLANE_JOIN_COMMAND"
 `{{execute}}
 
-(Optional) - if you are curious to see how Certification Singing request file (.csr) looks like you can use OpenSSL tool to see it 
-`openssl req -noout -text -in john.csr`{{execute}}
+# Check to see we have two masters now 
 
-## Create Kubernetes CertificateSigningRequest request
-
-Now we will create a CertificateSigningRequest and submit it to a Kubernetes Cluster via kubectl. We already have template file certificatesigningrequest.yaml 
-(Optional) You can view it if want to `bat /root/certificatesigningrequest.yaml`{{execute}}
-
-- First we will have to convert CSR file to base54 encoded string store it in variable `JOHN_CSR`
-- Now we will substitute that value in certificatesigningrequest.yaml file 
+From first master server we run simple `kubectl get nodes` command to see now we have two masters in cluster 
 
 `
-JOHN_CSR=$(cat john.csr | base64 | tr -d "\n")
-sed -i "s/BASE64ENCODE/${JOHN_CSR}/g" certificatesigningrequest.yaml
+NUMBER_READY_NODES=$(kubectl get nodes -o jsonpath='{range .items[*]}{range .status.conditions[?(@.type=="Ready")]}{.reason}{"\n"}{end}{end}' | grep "KubeletReady" | wc -l)
+if [ "$NUMBER_READY_NODES" -eq 2 ]; then
+  echo "SUCCESS - we now have $NO_READY_NODES master nodes"
+  kubectl get nodes
+fi
 `{{execute}}
 
-(Optional) View updated ***yaml*** file that we are about to submit to API server `bat /root/certificatesigningrequest.yaml --highlight-line 9 --wrap auto`{{execute}}
+# Populate the cluster
 
-In kubernetes 1.19 certificatesigningrequest also needs to have `spec.signerName` defined - in our case we have set it to `kubernetes.io/kube-apiserver-client`
+For testing we need to populate cluster with some pods/deployments - lets to that first
 
-Send this Certificate singing request to API server 
+## Remove taints 
 
-`kubectl apply -f certificatesigningrequest.yaml`{{execute}} 
+As we have two master nodes - in general we are not suppose to run any workload on these masters 
+But since we don't have more than two machines we are going to remove taints from these two masters so we can run some workload on these two nodes
 
-Certificate singing request has been sent to cluster, next we will get this request approved
+`
+kubectl taint node controlplane node-role.kubernetes.io/master:NoSchedule-
+kubectl taint node node01 node-role.kubernetes.io/master:NoSchedule-
+`{{execute}}
+
+## Run 6 instance of *busybox* deployment 
+
+`
+kubectl create deployment test --image=busybox -- sleep 3600
+kubectl scale deployment test --replicas=6
+`{{execute}}
+
