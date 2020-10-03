@@ -1,39 +1,34 @@
-Test Fault tolerance (HA)
+Use kubectl tool to test configuration
 
-# Stop one of the master node 
+# Check to see we have two masters now 
 
-As kublet (is node) that controls node and is running as linux service - we can just stop this service 
-
-`
-systemctl stop kubelet
-`{{execute}}
-
-This should stop node on server 'controlplane' - we can confirm that uisng kubectl 
+From first master server we run simple `kubectl get nodes` command to see now we have two masters in cluster 
 
 `
-kubectl get nodes -o wide
+NUMBER_READY_NODES=$(kubectl get nodes -o jsonpath='{range .items[*]}{range .status.conditions[?(@.type=="Ready")]}{.reason}{"\n"}{end}{end}' | grep "KubeletReady" | wc -l)
+if [ "$NUMBER_READY_NODES" -eq 2 ]; then
+  echo "SUCCESS - we now have $NO_READY_NODES master nodes"
+  kubectl get nodes
+fi
 `{{execute}}
 
-We can see node on 'controlplane' is in **NotReady** state 
+# Populate the cluster
 
-Fact that we got this reply ***proves*** that HA worked - as API server on 'controlplane' is gone so NGINX forwarded 
-request to second server in list 'node01' and it responded to `kubectl` request 
+For testing we need to populate cluster with some pods/deployments - lets to that first
 
-# PODS on stopped master is still running 
+## Remove taints 
 
-If you run command 
+As we have two master nodes - in general we are not suppose to run any workload on these masters 
+But since we don't have more than two machines we are going to remove taints from these two masters so we can run some workload on these two nodes
 
 `
-kubectl get pods
+kubectl taint node controlplane node-role.kubernetes.io/master:NoSchedule-
+kubectl taint node node01 node-role.kubernetes.io/master:NoSchedule-
 `{{execute}}
 
-You will see they are still running - they are not evicted or terminated - this is because
-scheduler waites 5 (300 seconds) before evicting or terminatating pod in case of node is not reachable 
+## Run 6 instance of *busybox* deployment 
 
-We can see this limit from output of describe POD
-
-`kubectl get pod test-5f6778868d-jlbd2 -o jsonpath="{.spec.tolerations[?(@.key=='node.kubernetes.io/unreachable')]}" | jq .
-kubectl get pods -o jsonpath="{.items[0].metadata.name}"`{{execute}}
-
-So , if you wait 5 min after stopping first master node you will see pods running on 'controlplane' are 
-terminated and new one are created on other working node 
+`
+kubectl create deployment test --image=busybox -- sleep 3600
+kubectl scale deployment test --replicas=6
+`{{execute}}

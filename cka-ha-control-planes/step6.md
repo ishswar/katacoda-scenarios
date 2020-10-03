@@ -1,60 +1,63 @@
-Authorize john to list,delete and create Pods 
 
-## Create Role and Role Binding
+Test Fault tolerance (HA)
 
-Part of RBAC - we need to define the Role and Role Binding for user `john` to access Kubernetes Cluster resources - PODs 
+# Stop one of the master node 
 
-We need to switch back to default user in our kubectl so we can do below administrative actions 
-
-`
-kubectl config use-context kubernetes-admin@kubernetes
-`{{execute}}
-
-### We will first create Role that can list,update/delete Pods and then add `john` to that Role via Role binding
-
-This is a sample script to create ***role*** for this new user, Role name is called `developer`
-This is role for `default` namespace 
+As kublet (is node) that controls node and is running as linux service - we can just stop this service 
 
 `
-kubectl create role developer --verb=create --verb=get --verb=list --verb=update --verb=delete --resource=pods
+systemctl stop kubelet
 `{{execute}}
 
-This is a sample script to create ***role binding*** for this new user , Role binding name is called `developer-binding-john`
+This should stop node on server `controlplane` - we can confirm that uisng kubectl 
+
+Lets wait till node on `controlplane` goes down 
+`
+SECONDS=0
+while : ;
+ do
+  if [ $(kubectl get nodes $(hostname) -o jsonpath='{range .status.conditions[?(@.type=="Ready")]}{.reason}{end}') != "NodeStatusUnknown" ]; then
+  echo "Node/kubelet on Host $(hostname) is still running ... waited $SECONDS(seconds)";
+  sleep 5;
+  if [ $SECONDS -gt 180 ]; then
+     echo "Waited $SECONDS - will exit now - this needs to be invastigated"
+     break;
+  fi
+  elif [ $(kubectl get nodes $(hostname) -o jsonpath='{range .status.conditions[?(@.type=="Ready")]}{.reason}{end}') = "NodeStatusUnknown" ]; then
+    echo "Node/kubelet is posted Not Ready - it has gone down now"
+    break;
+  fi
+ done
+`
+
+Now if you run below command 
 
 `
-kubectl create rolebinding developer-binding-john --role=developer --user=john
+kubectl get nodes -o wide
 `{{execute}}
 
+We can see node on `controlplane` is in **NotReady** state 
 
-## Switch back as `john` and try listing pods again 
+Fact that we got this reply ***proves*** that HA worked - as API server on 'controlplane' is ***gone*** so NGINX forwarded 
+request to second server in list that is 'node01' and it responded to `kubectl` request 
 
-Change kubecontext to john
+# Why Pods on stopped master node is still running 
 
-`
-kubectl config use-context john
-`{{execute}}
-
-Now we can again run kubectl commands as 'john' - let's try to get pods 
+If you run command 
 
 `
 kubectl get pods
-`{{execute}} 
+`{{execute}}
 
-This time it worked !!! 
+You will see they are still running - they are not evicted or terminated - this is because
+scheduler waite 5 (300 seconds) before evicting or terminating pod in case of node is not reachable 
 
-You can see the success audit message in audit file as well 
-`cat /var/log/audit.log | grep john | grep ResponseComplete | grep list | grep allow | jq .`{{execute}}
-
-### Can john list namespaces ? 
-
-`kubectl get ns`{{execute}}
-
-If we try to list namespaces as john it fails as it is not authorized to do that 
+We can see this limit from output of describe POD
 
 `
-Error from server (Forbidden): namespaces is forbidden: User "john" cannot list resource "namespaces" in API group "" at the cluster scope
-`
+ONE_POD_ID=$(kubectl get pods -o jsonpath="{.items[0].metadata.name}")
+kubectl get pod $ONE_POD_ID -o jsonpath="{.spec.tolerations[?(@.key=='node.kubernetes.io/unreachable')]}" | jq .
+`{{execute}}
 
-## Future task 
-
-Why don't you update or create new Role and Role bindings so ***john*** can list namespaces - try it out ! 
+So , if you wait 5 min after stopping first master node you will see pods running on '*controlplane*' are 
+terminated and new one are created on other working node 

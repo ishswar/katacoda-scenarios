@@ -16,13 +16,13 @@
       "title": "Step 3 - Create second master",
       "text": "step3.md"
     },{
-      "title": "Step 4 - Use kbectl tool to test configuration",
+      "title": "Step 4 - Use kubectl tool to test configuration",
       "text": "step4.md"
     },{
-      "title": "Step 5 - Do Failover test",
+      "title": "Step 5 - Inspect HA Setup",
       "text": "step5.md"
     },{
-      "title": "Step 6 - Authorized user john to list pods (RBAC)",
+      "title": "Step 6 - Do Failover test",
       "text": "step6.md"
     }],
     "intro": {
