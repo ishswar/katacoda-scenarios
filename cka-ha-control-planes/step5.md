@@ -14,14 +14,14 @@ kubectl get endpoints kube-scheduler -n kube-system -o jsonpath="{.metadata.anno
 `{{execute}}
 
 Out might look like this - the field holderIdentity tells us which master is **leader** 
-in below case it is 'node01'
+in below case it is 'controlplane'
 
 ```
 {
-  "holderIdentity": "node01_9514ebe4-b85f-45e5-a8d2-4152e6abb812",
+  "holderIdentity": "controlplane_737f8152-4247-49d4-b3c9-c279dc32fff8",
   "leaseDurationSeconds": 15,
-  "acquireTime": "2020-10-03T07:49:57Z",
-  "renewTime": "2020-10-03T08:22:39Z",
-  "leaderTransitions": 2
+  "acquireTime": "2020-10-03T09:19:00Z",
+  "renewTime": "2020-10-03T09:20:31Z",
+  "leaderTransitions": 0
 }
 ```
