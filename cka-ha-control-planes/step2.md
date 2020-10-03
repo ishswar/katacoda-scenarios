@@ -1,30 +1,47 @@
-Populate the cluster
+Create cluster 
 
-## Remove taint 
+## Create cluster using kubeadm
 
-As this is single node cluster we need to remove taint from master node 
-if we don't do this than no pods can be schedule on master (We are just doing this for demo purpose) 
+We will create first master/node in cluster using kubeadm (version:
+1.19)
 
-`kubectl taint node $(hostname) node-role.kubernetes.io/master:NoSchedule-`{{execute}}
+We will pass **Load balancer** IP and port as input to flag `control-plane-endpoint`
 
-## Create pod 
+`kubeadm init --control-plane-endpoint "$LB_IP:$LB_PORT" --upload-certs --pod-network-cidr=10.244.0.0/16 || { echo "kubeadm init failed ... need to investigated";}`{{execute}}
 
-As of now our kubernetes cluster is empty - lets quickly create a simple `nginx` pod 
+Once above command succeeds we got ourselves first master node in cluster 
 
-`kubectl run tester --image=nginx`{{execute}} 
+Lets setup kubeconfig so we can run kubectl and interact with cluster 
+`
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+`{{execute}}
 
-## Enable auditing on API Server 
+## Install network 
 
-Lets enable audit tracing on API Server so we can see audit logs that gets generated when users interact with API server 
+As of now cluster is not ready (1st master node) - because it is waiting network to be add to cluster
+Lets installed [Canal](https://docs.projectcalico.org/getting-started/kubernetes/flannel/flannel) network to cluster 
 
-First copy audit-policy.yaml to it's location 
-`cp /root/audit-policy.yaml /etc/kubernetes/audit-policy.yaml`{{execute}}
+`
+curl https://docs.projectcalico.org/manifests/canal.yaml -O
+kubectl apply -f canal.yaml
+`{{execute}}
 
-Second enable Audit on api server - we will just replace api-server pod's static manifest file 
-`cp /root/kube-apiserver.yaml /etc/kubernetes/manifests/kube-apiserver.yaml`{{execute}}
+### Wait for CANAL network to be installed 
 
-In few seconds API Server will be restarted and we should see `audit.log` created in **/var/log **
-`tail /var/log/audit.log -n 10`{{execute}}
-
-Okay we are all set ...
-Next, now lets create a user *john* so he can access cluster and see above pod in default namespace
+`
+EXPECTED_PODS=9
+while true;
+  do CHECK=$(kubectl get pods -n kube-system --field-selector status.phase=Running --no-headers | wc -l);
+   if [ $CHECK -eq $EXPECTED_PODS ];
+     then 
+          echo "ALL PODs are up";
+          kubectl get pods -n kube-system --field-selector status.phase=Running
+          break;
+     else 
+          echo "All PODs are not yet up";
+          echo "Expected $EXPECTED_PODS Pods in kube-system namespace to be running found [$CHECK] running"
+   fi;
+   sleep 5;
+done`{{execute}}

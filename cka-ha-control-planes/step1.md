@@ -21,7 +21,11 @@ sudo apt-get install nginx
 In this scenario we are going to install first master node on same machine as NGINX server named **controlplane** 
 second master node will be installed on server named **node01**
 
-### We need their IP address 
+### Build pass-through NGINX configuration file 
+
+#### Get IP address of servers
+
+Before we build pass through config file we need IP Address of two servers 
 
 `
 MASTER_IP=$(dig controlplane +short)
@@ -59,9 +63,10 @@ log_format basic '$remote_addr [$time_local] '
 EOF
 `{{execute}}
 
-We are telling NGINX to listen on port 9443 in above configuration - that will be our port to access
-API server in our ~/.kueb/config file
-We are also assuming the two control plane will come up on port 6443 on their respective IPs 
+We are telling NGINX to listen on port **9443** in above configuration -
+that will be our port to access API server in our `~/.kueb/config` file
+We are also assuming the two control plane will come up on port **6443** on
+their respective IPs
 
 *(Optional)*
 If you want to see how (final) config file looks like use this command 
@@ -86,7 +91,7 @@ Check out nginx.conf file
 
 `bat /etc/nginx/nginx.conf || cat /etc/nginx/nginx.conf`{{execute}}
 
-### Finally start NGINX service 
+## Start NGINX service 
 
 We will just restart (if not started this will start the service) NGINX service
 
@@ -101,7 +106,6 @@ if (systemctl status nginx) ;
     echo "NGINX Service started successful"
   else
     echo "NGINX Service did not start successful - need to investigate";
-    exit 1;
 fi
 `{{execute}}
 
