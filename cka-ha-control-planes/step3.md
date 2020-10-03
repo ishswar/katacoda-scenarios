@@ -10,7 +10,6 @@ On first master server run below command to get join command that we need to exe
 
 `
 echo "Generating joining command that remote kubeadm can use to join this cluster"
-#CERT_KEY=$(kubeadm alpha certs certificate-key) <-- This should work in 1.19 but it does not (or failed for me)
 CERT_KEY=$(kubeadm init phase upload-certs --upload-certs | sed -n 3p)
 CONTROL_PLANE_JOIN_COMMAND=$(kubeadm token create --print-join-command --certificate-key "$CERT_KEY")
 `{{execute}}
