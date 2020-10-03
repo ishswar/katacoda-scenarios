@@ -6,7 +6,7 @@ show_progress()
   clear
   export GREEN='\033[0;32m'
   export RED='\033[0;31m'
-  export LRED='\033[1;31m'
+  export YELLOW='\033[1;33m'
   export CYAN='\033[0;36m'
   export NC='\033[0m' # No Color
   echo -e  -n "Upgrading kubeadm to 1.19"
