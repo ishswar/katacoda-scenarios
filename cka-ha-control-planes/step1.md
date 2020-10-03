@@ -18,8 +18,8 @@ sudo apt-get install nginx
 
 ## Configure NGINX to load balance among two master nodes
 
-In this scenario we are going to install NGINX on same server as first master server `controlplane`
-Ideally as seen below you will have NGINX on it's on server and 3 kubernetes masters but in this scenario
+In this scenario we are going to install NGINX on same server as first master server `controlplane`.
+Ideally as seen below you will have NGINX on it's on server and 3 kubernetes masters; but in this scenario
 we will have only two masters and NGINX running on same server as one of master.
 
 ![NGINX Senario](./assets/Kubernetes-NG-Katacoda.png)

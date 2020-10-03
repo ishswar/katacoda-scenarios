@@ -14,6 +14,7 @@ if [ "$NUMBER_READY_NODES" -eq 2 ]; then
   break;
 else
   echo "Waiting both the master node to post 'Ready' status"
+  sleep 2
 fi
 done
 `{{execute}}
@@ -22,12 +23,12 @@ After sometime we should see output like this :
 
 `
 SUCCESS - we now have [2] master nodes
-NAME           STATUS   ROLES    AGE   VERSION
-controlplane   Ready    master   23m   v1.19.0
-node01         Ready    <none>   20m   v1.19.0
+NAME           STATUS   ROLES    AGE    VERSION
+controlplane   Ready    master   106s   v1.19.0
+node01         Ready    master   27s    v1.19.0
 `
 
-This confirmes we have 
+This confirms we have **two master** nodes
 
 # Populate the cluster
 

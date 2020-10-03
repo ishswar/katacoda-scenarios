@@ -16,7 +16,7 @@ CONTROL_PLANE_JOIN_COMMAND=$(kubeadm token create --print-join-command --certifi
 
 ## Run kubeadm on second server 
 
-Now we run above kubeadm join command on second server that will create a second master node in cluster 
+Now we run above `kubeadm join` command on second server (node01) that will create a **second** master node in cluster 
 
 `
 SECOND_MACHINE_NAME=node01
