@@ -6,9 +6,10 @@ From first master server we run simple `kubectl get nodes` command to see now we
 
 `
 while true;
+do
 NUMBER_READY_NODES=$(kubectl get nodes -o jsonpath='{range .items[*]}{range .status.conditions[?(@.type=="Ready")]}{.reason}{"\n"}{end}{end}' | grep "KubeletReady" | wc -l)
 if [ "$NUMBER_READY_NODES" -eq 2 ]; then
-  echo "SUCCESS - we now have $NO_READY_NODES master nodes"
+  echo "SUCCESS - we now have [$NUMBER_READY_NODES] master nodes"
   kubectl get nodes
   break;
 else
@@ -16,6 +17,17 @@ else
 fi
 done
 `{{execute}}
+
+After sometime we should see output like this :
+
+`
+SUCCESS - we now have [2] master nodes
+NAME           STATUS   ROLES    AGE   VERSION
+controlplane   Ready    master   23m   v1.19.0
+node01         Ready    <none>   20m   v1.19.0
+`
+
+This confirmes we have 
 
 # Populate the cluster
 

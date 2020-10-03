@@ -16,10 +16,13 @@ sudo apt-get install nginx
 `{{execute}}
 
 
-## Configure NGINX to load balance among two master nodes (machines)
+## Configure NGINX to load balance among two master nodes
 
-In this scenario we are going to install first master node on same machine as NGINX server named **controlplane** 
-second master node will be installed on server named **node01**
+In this scenario we are going to install NGINX on same server as first master server `controlplane`
+Ideally as seen below you will have NGINX on it's on server and 3 kubernetes masters but in this scenario
+we will have only two masters and NGINX running on same server as one of master.
+
+![NGINX Senario](./assets/Kubernetes-NG-Katacoda .png)
 
 ### Build pass-through NGINX configuration file 
 
