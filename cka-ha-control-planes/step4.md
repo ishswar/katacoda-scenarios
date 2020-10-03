@@ -9,7 +9,7 @@ while true;
 do
 NUMBER_READY_NODES=$(kubectl get nodes -o jsonpath='{range .items[*]}{range .status.conditions[?(@.type=="Ready")]}{.reason}{"\n"}{end}{end}' | grep "KubeletReady" | wc -l)
 if [ "$NUMBER_READY_NODES" -eq 2 ]; then
-  echo "SUCCESS - we now have [$NUMBER_READY_NODES] master nodes"
+  echo -e "${GREEN}SUCCESS - we now have [$NUMBER_READY_NODES] master nodes${NC}"
   kubectl get nodes
   break;
 else

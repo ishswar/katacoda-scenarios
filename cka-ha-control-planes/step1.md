@@ -126,9 +126,9 @@ echo "Checking NGINX Service status"
 echo ""
 if (systemctl status nginx) ;
   then
-    echo "NGINX Service started successful"
+    echo -e "${GREEN}NGINX Service started successful${NC}"
   else
-    echo "NGINX Service did not start successful - need to investigate";
+    echo -e  "${RED}NGINX Service did not start successful - need to investigate${NC}";
 fi
 `{{execute}}
 

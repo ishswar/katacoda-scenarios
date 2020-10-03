@@ -36,12 +36,12 @@ while true;
   do CHECK=$(kubectl get pods -n kube-system --field-selector status.phase=Running --no-headers | wc -l);
    if [ $CHECK -eq $EXPECTED_PODS ];
      then 
-          echo "ALL PODs are up";
+          echo -e "${GREEN}ALL PODs are up${NC}";
           kubectl get pods -n kube-system --field-selector status.phase=Running
           break;
      else 
           echo "All PODs are not yet up";
-          echo "Expected $EXPECTED_PODS Pods in kube-system namespace to be running found [$CHECK] running"
+          echo -e "${LRED}Expected $EXPECTED_PODS Pods in kube-system namespace to be running found [$CHECK] running${NC}";
    fi;
    sleep 5;
 done`{{execute}}

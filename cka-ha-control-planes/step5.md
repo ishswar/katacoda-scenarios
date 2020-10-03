@@ -1,6 +1,6 @@
 Inspect HA Setup 
 
-# Who is leader (in scheduler)
+# Who is the leader (in scheduler)
 
 As we see from below diagram only one of scheduler can be active at a time - and that esentailly decides 
 who is leader in this HA setup 
@@ -27,7 +27,7 @@ in below case it is 'controlplane'
 }
 ```
 
-# Who is leader (in ETCD)
+# Who is the leader (in ETCD)
 
 As seen ETCD component in HA setup is always active-active in all master nodes  
 
