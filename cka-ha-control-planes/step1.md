@@ -23,6 +23,26 @@ second master node will be installed on server named **node01**
 
 ### Build pass-through NGINX configuration file 
 
+Usually, SSL termination takes place at the load balancer and unencrypted traffic sent to the backend web servers.
+All HTTPS/SSL/TLS and HTTP requests are terminated on the Nginx server itself. Kubernetes API server 
+by default is not configured to accept plain text connection - that means we can't stop TLS traffic at
+NGINX server we need to tunnel/pass-through it and end at API server . For this we will need to use
+the ngx_stream_core_module module for TCP load balancing and is available since version 1.9.0
+
+Once we are done we will have three config files 
+
+1. nginx.conf main NGINX server config file
+1. default.conf as name says default config file (starts server on port 80)
+1. passthrough.conf this is file we will be creating ( starts server on 9443 with TLS pass-through)
+
+`
+/etc/nginx/
+├── conf.d
+│   └── default.conf
+├── nginx.conf
+└── passthrough.conf
+`
+
 #### Get IP address of servers
 
 Before we build pass through config file we need IP Address of two servers 
@@ -53,7 +73,7 @@ log_format basic '$remote_addr [$time_local] '
                  '$session_time "$upstream_addr" '
                  '"$upstream_bytes_sent" "$upstream_bytes_received" "$upstream_connect_time"';
     access_log /var/log/nginx/control.plane.master_access.log basic;
-    error_log /var/log/nginx/wcontrol.plane.master_error.log;
+    error_log /var/log/nginx/control.plane.master_error.log;
     server {
         listen 9443;
         proxy_pass controlplane;
