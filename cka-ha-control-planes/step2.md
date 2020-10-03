@@ -45,3 +45,9 @@ while true;
    fi;
    sleep 5;
 done`{{execute}}
+
+## Check kube config 
+
+Lets quickly test out kube config to see we are able to connect via LB to AIP server 
+
+`kubectl get nodes`{{execute}}
