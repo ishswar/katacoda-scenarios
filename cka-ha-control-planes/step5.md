@@ -29,7 +29,7 @@ in below case it is 'controlplane'
 
 # Who is the leader (in ETCD)
 
-As seen ETCD component in HA setup is always active-active in all master nodes  
+As seen below ETCD component in HA setup is always active-active in all master nodes  
 
 ![](./assets/ETCD-active-active.png) 
 

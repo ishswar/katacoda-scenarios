@@ -1,1 +1,1 @@
-sleep 4; wait.sh
+. ~/.bashrc; sleep 4; wait.sh
