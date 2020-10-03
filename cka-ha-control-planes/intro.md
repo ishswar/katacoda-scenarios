@@ -1,8 +1,9 @@
 
-In this scenario we will see how we can create a normal user for Kubernetes cluster 
+ In this scenario we will see how we can create HA Control plane (masters) nodes in Kubernetes 
 
-At the end of the this scenario we will have a user named `john` who can authenticate himself against cluster and should be able 
-to List,Update and Delete Pods in `default` namespace
+At the end of this scenario we will have two Master nodes running on two different machines fronted ended 
+by single NGINX load balancer . We should be able to use single API Server URL that we can use 
+in kubeconfig . We will test out the fail our as well in action . 
 
 High-level steps that we will perform in this scenario are :
 
@@ -13,3 +14,6 @@ High-level steps that we will perform in this scenario are :
 1. Add john's certificates to **kubectl**  
 1. Create **Role and Role bindings** in cluster so *John* can List,Update and Delete Pods in default namespace 
 1. **Test** that everything works as expected 
+
+At he end our setup should look like this : 
+
