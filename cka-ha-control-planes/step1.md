@@ -18,7 +18,7 @@ sudo apt-get install nginx
 
 ## Configure NGINX to load balance among two master nodes
 
-In this scenario we are going to install NGINX on same server as first master server `controlplane`.
+In this scenario we are going to install NGINX on same server as first master server `controlplane`.  
 Ideally as seen below you will have NGINX on it's on server and 3 kubernetes masters; but in this scenario
 we will have only two masters and NGINX running on same server as one of master.
 
@@ -87,7 +87,7 @@ EOF
 `{{execute}}
 
 We are telling NGINX to listen on port **9443** in above configuration -
-that will be our port to access API server in our `~/.kueb/config` file
+that will be our port to access API server in our `~/.kueb/config` file.  
 We are also assuming the two control plane will come up on port **6443** on
 their respective IPs
 
@@ -145,7 +145,7 @@ if [ -n "$LB_IP" ];
     echo "Could not find LB_IP from hostname '$FIRST_MACHINE_NAME' trying using hostname command now";
     LB_IP=$(hostname -I | cut -d " " -f 1)
 fi
-nc -zv "$LB_IP" $LB_PORT || { echo "Issue connecting to load balanacer @ $LB_IP:$LB_PORT - this needs to be investigated"; }
+nc -zv "$LB_IP" $LB_PORT || { echo -e  "${RED}Issue connecting to load balanacer @ $LB_IP:$LB_PORT - this needs to be investigated{NC}"; }
 `{{execute}}
 
 We are done with NGINX setting - we can proceed to now setting up kubernetes first control plane

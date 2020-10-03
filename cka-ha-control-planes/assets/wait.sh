@@ -4,9 +4,11 @@ show_progress()
 {
   echo "environment ready"
   clear
-  GREEN='\033[0;32m'
-  CYAN='\033[0;36m'
-  NC='\033[0m' # No Color
+  export GREEN='\033[0;32m'
+  export RED='\033[0;31m'
+  export LRED='\033[1;31m'
+  export CYAN='\033[0;36m'
+  export NC='\033[0m' # No Color
   echo -e  -n "Upgrading kubeadm to 1.19"
   local -r pid="${1}"
   local -r delay='0.75'
@@ -80,6 +82,7 @@ show_progress()
   echo -e  "${GREEN}Done${NC} upgrading ${CYAN}kubeadm,kubelet and kubectl to 1.19 ${NC}"
 
   sleep 1
+
   clear
 }
 

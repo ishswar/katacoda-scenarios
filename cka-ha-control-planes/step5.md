@@ -46,14 +46,7 @@ ETCDCTL_API=3 etcdctl --endpoints $ENDPOINTS --write-out=table --cacert $CACERT 
 
 You will see output like this :
 
-`
-+------------------+---------+--------------+--------------------------+--------------------------+------------+
-|        ID        | STATUS  |     NAME     |        PEER ADDRS        |       CLIENT ADDRS       | IS LEARNER |
-+------------------+---------+--------------+--------------------------+--------------------------+------------+
-| 75c889cf7ea767d8 | started | controlplane | https://172.17.0.44:2380 | https://172.17.0.44:2379 |      false |
-| b16e9358c8696a2b | started |       node01 | https://172.17.0.46:2380 | https://172.17.0.46:2379 |      false |
-+------------------+---------+--------------+--------------------------+--------------------------+------------+
-`
+![](./assets/etcd-leader.png)
 
 This shows one (**big**) problem - we can see both ETCD component of cluster is saying they it is not `leader`
 This is because ETCD clusters are based on [raft](http://thesecretlivesofdata.com/raft/) consensus - and it needs [odd number](https://etcd.io/docs/v3.2.17/faq/) of members to reach consensus (elect leader)
