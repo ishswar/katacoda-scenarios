@@ -2,7 +2,7 @@
  In this scenario we will see how we can create HA Control plane (masters) nodes in Kubernetes 
 
 At the end of this scenario we will have two Master nodes running on two different machines fronted ended 
-by single NGINX load balancer.
+by single NGINX load balancer.  
 We should be able to use single API Server URL that we can use in kubeconfig .
 We will test out the fail our as well in action . 
 
