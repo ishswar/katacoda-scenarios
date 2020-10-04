@@ -145,9 +145,7 @@ if [ -n "$LB_IP" ];
     echo "Could not find LB_IP from hostname '$FIRST_MACHINE_NAME' trying using hostname command now";
     LB_IP=$(hostname -I | cut -d " " -f 1)
 fi
-echo -e "${GREEN}"
 nc -zv "$LB_IP" $LB_PORT || { echo -e  "${RED}Issue connecting to load balanacer @ $LB_IP:$LB_PORT - this needs to be investigated{NC}"; }
-echo -e "${NC}"
 `{{execute}}
 
 We are done with NGINX setting - we can proceed to now setting up kubernetes first control plane
