@@ -13,7 +13,7 @@ if [ "$NUMBER_READY_NODES" -eq 2 ]; then
   kubectl get nodes
   break;
 else
-  echo "Waiting both the master node to post 'Ready' status"
+  echo "Waiting for both the master node to post 'Ready' status"
   sleep 2
 fi
 done
