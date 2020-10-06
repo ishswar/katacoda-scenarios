@@ -47,6 +47,6 @@ kubectl taint node node01 node-role.kubernetes.io/master:NoSchedule-
 ## Run 6 instance of *busybox* deployment 
 
 `
-kubectl create deployment test --image=busybox -- sleep 3600
-kubectl scale deployment test --replicas=6
+kubectl create deployment hatest --image=busybox -- sleep 3600
+kubectl scale deployment hatest --replicas=6
 `{{execute}}

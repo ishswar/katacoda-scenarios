@@ -22,13 +22,6 @@ echo "export CYAN='\033[0;36m'" >> ~/.bashrc
 echo "export NC='\033[0m' # No Color" >> ~/.bashrc
 
 #git clone https://github.com/ishswar/k8s-scenarios.git
-
-ssh node01 systemctl stop kubelet
-ssh node01 systemctl disable kubelet
-ssh node01 systemctl status kubelet >> ser.txt
-echo "========" >> ser.txt
-ssh node01 systemctl list-unit-files --type=service | grep kubelet >> ser.txt
-
 ssh node01 apt-get update
 ssh node01 apt-get install -y kubeadm=1.19.0-00
 ssh node01 apt-get install -y kubelet=1.19.0-00 kubectl=1.19.0-00
@@ -40,5 +33,11 @@ ssh node01 systemctl status kubelet >> ser.txt
 echo "========" >> ser.txt
 ssh node01 systemctl list-unit-files --type=service | grep kubelet >> ser.txt
 
+ETCD_CTCL_VERSION=3.4.3
+
+ssh node01 wget -q https://github.com/etcd-io/etcd/releases/download/v3.4.3/etcd-v3.4.3-linux-amd64.tar.gz
+ssh node01 tar -zxf etcd-v3.4.3-linux-amd64.tar.gz
+ssh node01 cd etcd-v3.4.3-linux-amd64
+ssh node01 sudo cp etcdctl /usr/local/bin
 
 
