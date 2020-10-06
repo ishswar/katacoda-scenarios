@@ -81,6 +81,23 @@ show_progress()
   echo ""
   echo -e  "${GREEN}Done${NC} upgrading ${CYAN}kubeadm,kubelet and kubectl to 1.19 ${NC}"
 
+  echo -e  -n "Installing etcdctl tool"
+  while true; do
+    type etcdctl
+    if [[ "$?" -ne 0 ]]; then
+      temp="${spinstr#?}"
+      printf " [%c]  " "${spinstr}"
+      spinstr=${temp}${spinstr%"${temp}"}
+      sleep "${delay}"
+      printf "\b\b\b\b\b\b"
+    else
+      break
+    fi
+  done
+  printf "    \b\b\b\b"
+  echo ""
+  echo -e  "${GREEN}Done${NC} installing ${CYAN}etcdctl ${NC}"
+
   sleep 1
 
   clear
