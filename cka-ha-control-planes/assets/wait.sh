@@ -83,7 +83,7 @@ show_progress()
 
   echo -e  -n "Installing etcdctl tool"
   while true; do
-    type etcdctl
+    type etcdctl > /dev/null 2>&1
     if [[ "$?" -ne 0 ]]; then
       temp="${spinstr#?}"
       printf " [%c]  " "${spinstr}"
