@@ -74,7 +74,7 @@ Output will look like this :
 +------------------+---------+--------------+--------------------------+--------------------------+------------+
 `
 
-From above tow table we can see that `controlplane` is leader - but the problem is RAFT conseses has not yet reached as we only have two ETCD members. 
+From above tow table we can see that `controlplane` is leader - but the problem is RAFT consensus has not yet reached as we only have **two** ETCD members. 
 This is because ETCD clusters are based on [raft](http://thesecretlivesofdata.com/raft/) consensus - and it needs [odd number](https://etcd.io/docs/v3.2.17/faq/) of members to reach consensus (elect leader)
 
 For now we are okay but with this setting we can't go in production - in this case it is better to have
@@ -92,7 +92,7 @@ If you run below commands you will see that on 'controlplane' server we do see o
 echo "Dump ETCD keyvalue(s) to json file"
 ETCDCTL_API=3 etcdctl --endpoints $ENDPOINTS --write-out=table --cacert $CACERT --cert $SERVER_CERT --key $SERVER_KEY get "" --prefix=true -w json> etcd-dump.json
 echo "Search for string hatest in JSON file"
-for i in $(cat etcd-dump.json | jq ".kvs[] | .key" -r); do echo $i | base64 -d;echo ""; done | grep grep -m 5 hatest
+for i in $(cat etcd-dump.json | jq ".kvs[] | .key" -r); do echo $i | base64 -d;echo ""; done | grep -m 5 hatest
 `{{execute}}
 
 Now, If you run same commands on 'node01' server we will see ETCD running on this machine also has 
@@ -102,7 +102,7 @@ same data duplicated
 echo "Dump ETCD keyvalue(s) to json file"
 ssh node01 ETCDCTL_API=3 etcdctl --endpoints $ENDPOINTS --write-out=table --cacert $CACERT --cert $SERVER_CERT --key $SERVER_KEY get \"\" --prefix=true -w json> etcd-dump.json
 echo "Search for string hatest in JSON file"
-ssh node01 for i in $(cat etcd-dump.json | jq ".kvs[] | .key" -r); do echo $i | base64 -d;echo ""; done | grep grep -m 5 hatest
+ssh node01 for i in $(cat etcd-dump.json | jq ".kvs[] | .key" -r); do echo $i | base64 -d;echo ""; done | grep -m 5 hatest
 `{{execute}}
 
 So this tells us that ETCD data is getting replicated on both ETCD members as expected.

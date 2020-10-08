@@ -2,7 +2,7 @@ Use kubectl tool to test configuration
 
 # Check to see we have two masters now 
 
-From first master server we run simple `kubectl get nodes` command to see now we have two masters in cluster 
+From first master server we run simple `kubectl get nodes` command should now we have two master(s) in cluster 
 
 `
 while true;

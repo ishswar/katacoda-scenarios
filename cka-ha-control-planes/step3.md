@@ -2,7 +2,7 @@ Create second master node in cluster
 
 # Create second master 
 
-For this we need to run kubeadm join command but as --control-plane 
+For this we need to run `kubeadm join` command but also add flag `--control-plane` 
 
 ## Get join command 
 
@@ -29,7 +29,10 @@ Now we run above `kubeadm join` command on second server (node01) that will crea
 
 `
 SECOND_MACHINE_NAME=node01
+echo "----------------------------------------------------------"
 echo "JOIN COMMAND is [$CONTROL_PLANE_JOIN_COMMAND]"
+echo "----------------------------------------------------------"
+echo ""
 echo "$CONTROL_PLANE_JOIN_COMMAND" > join.text
 echo "Running joining command from remote machine"
 echo ""

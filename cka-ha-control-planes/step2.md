@@ -7,7 +7,7 @@ We will create first master/node in cluster using kubeadm (version:
 
 We will pass **Load balancer** IP and port as input to flag `control-plane-endpoint`
 
-`kubeadm init --control-plane-endpoint "$LB_IP:$LB_PORT" --upload-certs --pod-network-cidr=10.244.0.0/16 || { echo "kubeadm init failed ... need to investigated";}`{{execute}}
+`kubeadm init --control-plane-endpoint "$LB_IP:$LB_PORT" --upload-certs --pod-network-cidr=10.244.0.0/16 || { echo "kubeadm init failed ... need to investigate";}`{{execute}}
 
 Once above command succeeds we got ourselves first master node in cluster 
 
