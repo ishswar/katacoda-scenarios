@@ -46,15 +46,7 @@ ETCDCTL_API=3 etcdctl --endpoints $ENDPOINTS --write-out=table --cacert $CACERT 
 
 You will see output like this :
 
-`
-+--------------------------+------------------+---------+---------+-----------+------------+-----------+------------+--------------------+--------+
-|         ENDPOINT         |        ID        | VERSION | DB SIZE | IS LEADER | IS LEARNER | RAFT TERM | RAFT INDEX | RAFT APPLIED INDEX | ERRORS |
-+--------------------------+------------------+---------+---------+-----------+------------+-----------+------------+--------------------+--------+
-| https://172.17.0.54:2379 | 6ceecc5bcb02d8d7 |   3.4.9 |  3.8 MB |      true |      false |         6 |       1983 |               1983 |        |
-| https://172.17.0.68:2379 | 9be599799432f2f7 |   3.4.9 |  3.7 MB |     false |      false |         6 |       1983 |               1983 |        |
-+--------------------------+------------------+---------+---------+-----------+------------+-----------+------------+--------------------+--------+
-`
-
+![ETCD Leader](./assets/etcd_leader.png) 
 
 If you need to know exact member (names) you can use this command 
 
@@ -65,14 +57,7 @@ ETCDCTL_API=3 etcdctl --endpoints $ENDPOINTS --write-out=table --cacert $CACERT 
 
 Output will look like this : 
 
-`
-+------------------+---------+--------------+--------------------------+--------------------------+------------+
-|        ID        | STATUS  |     NAME     |        PEER ADDRS        |       CLIENT ADDRS       | IS LEARNER |
-+------------------+---------+--------------+--------------------------+--------------------------+------------+
-| 6ceecc5bcb02d8d7 | started | controlplane | https://172.17.0.54:2380 | https://172.17.0.54:2379 |      false |
-| 9be599799432f2f7 | started |       node01 | https://172.17.0.68:2380 | https://172.17.0.68:2379 |      false |
-+------------------+---------+--------------+--------------------------+--------------------------+------------+
-`
+![ETCD Leader](./assets/etcd_member.png)
 
 From above tow table we can see that `controlplane` is leader - but the problem is RAFT consensus has not yet reached as we only have **two** ETCD members. 
 This is because ETCD clusters are based on [raft](http://thesecretlivesofdata.com/raft/) consensus - and it needs [odd number](https://etcd.io/docs/v3.2.17/faq/) of members to reach consensus (elect leader)
