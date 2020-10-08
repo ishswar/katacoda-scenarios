@@ -18,7 +18,8 @@ echo "export NC='\033[0m' # No Color" >> ~/.bashrc
 #git clone https://github.com/ishswar/k8s-scenarios.git
 
 ssh node01 apt-get update
-ssh node01 apt-get install -y kubeadm=1.19.0-00
+# Remove kubeadmin tool from node01 as it causes issue in initail setup
+ssh node01 apt-get purge kubeadm -y
 ssh node01 apt-get install -y kubelet=1.19.0-00 kubectl=1.19.0-00
 ssh node01 kubeadm config images pull
 ssh node01 systemctl stop kubelet

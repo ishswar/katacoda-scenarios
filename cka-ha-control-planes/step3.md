@@ -16,6 +16,12 @@ CONTROL_PLANE_JOIN_COMMAND=$(kubeadm token create --print-join-command --certifi
 
 ## Run kubeadm join on second server 
 
+### Install kubeam on second server 
+
+`
+ssh node01 apt-get install kubeadm=1.19.0-00 -y -qq;kubeadm version -o short
+`{{execute}}
+
 Now we run above `kubeadm join` command on second server (node01) that will create a **second** master node in cluster 
 
 `
