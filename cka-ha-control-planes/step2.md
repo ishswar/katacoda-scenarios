@@ -40,7 +40,7 @@ while true;
           kubectl get pods -n kube-system --field-selector status.phase=Running
           break;
      else 
-          echo "All PODs are not yet up";
+          echo "All PODs are not up; waiting";
           echo -e "${YELLOW}Expected $EXPECTED_PODS Pods in kube-system namespace to be running found [$CHECK] running${NC}";
    fi;
    sleep 5;
