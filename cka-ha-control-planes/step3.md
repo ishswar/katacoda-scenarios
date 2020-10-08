@@ -16,7 +16,10 @@ CONTROL_PLANE_JOIN_COMMAND=$(kubeadm token create --print-join-command --certifi
 
 ## Run kubeadm join on second server 
 
-### Install kubeam on second server 
+Now we can run kubeadm join command on second server `node01` but before that we need to install kubeadm
+on that server . kubelet is already there on that server.
+
+### Install kubeadm on second server 
 
 `
 ssh node01 apt-get install kubeadm=1.19.0-00 -y -qq;kubeadm version -o short
