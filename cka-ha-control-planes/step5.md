@@ -82,6 +82,9 @@ For now we are okay but with this setting we can't go in production - in this ca
 
 # Is ETCD keeping copy of data on both instances
 
+Lets check if both ETCD members running on two servers are writing/saving cluster data as expected
+Way we check is we look for data that we know needs to be there in ETCD key/value DB
+
 If you run below commands you will see that on 'controlplane' server we do see our deployment named
 `hatest` is there in ETCD DB. Run below commands to check that out
 
