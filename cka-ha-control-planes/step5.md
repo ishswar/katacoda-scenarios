@@ -97,7 +97,7 @@ same data duplicated
 
 `
 echo "Dump ETCD keyvalue(s) to json file"
-ssh node01 ETCDCTL_API=3 etcdctl --endpoints $ENDPOINTS --write-out=table --cacert $CACERT --cert $SERVER_CERT --key $SERVER_KEY get "" --prefix=true -w json> etcd-dump.json
+ssh node01 ETCDCTL_API=3 etcdctl --endpoints $ENDPOINTS --write-out=table --cacert $CACERT --cert $SERVER_CERT --key $SERVER_KEY get \"\" --prefix=true -w json> etcd-dump.json
 echo "Search for string hatest in JSON file"
 ssh node01 for i in $(cat etcd-dump.json | jq ".kvs[] | .key" -r); do echo $i | base64 -d;echo ""; done | grep grep -m 5 hatest
 `{{execute}}
