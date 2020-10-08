@@ -30,8 +30,7 @@ ssh node01 systemctl list-unit-files --type=service | grep kubelet >> ser.txt
 
 ssh node01 wget -q https://github.com/etcd-io/etcd/releases/download/v3.4.3/etcd-v3.4.3-linux-amd64.tar.gz
 ssh node01 tar -zxf etcd-v3.4.3-linux-amd64.tar.gz
-ssh node01 cd etcd-v3.4.3-linux-amd64
-ssh node01 sudo cp etcdctl /usr/local/bin
+ssh node01 sudo cp etcd-v3.4.3-linux-amd64/etcdctl /usr/local/bin
 
 ETCD_CTCL_VERSION=3.4.3
 wget -q https://github.com/etcd-io/etcd/releases/download/v${ETCD_CTCL_VERSION}/etcd-v${ETCD_CTCL_VERSION}-linux-amd64.tar.gz
