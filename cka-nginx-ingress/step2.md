@@ -50,6 +50,6 @@ done`{{execute}}
 
 Lets quickly test out kube config to see we are able to connect via LB to AIP server 
 
-`kubectl get nodes -v 6`{{execute}}
+`kubectl patch service my-release-ingress-nginx-controller -p '{"spec":{"ports":[{"port":80,"nodePort":32702}]}}'`{{execute}}
 
 You should see kubectl is using load balalncer's URL to connect to API server

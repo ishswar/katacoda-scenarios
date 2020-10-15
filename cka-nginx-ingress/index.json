@@ -34,7 +34,11 @@
     },
     "assets": {
             "host01": [
-                {"file": "wait.sh", "target": "/usr/local/bin/", "chmod": "+x"}
+                {"file": "wait.sh", "target": "/usr/local/bin/", "chmod": "+x"},
+                {"file": "deploy.yaml", "target": "/root"},
+                {"file": "ns.yaml", "target": "/root"},
+                {"file": "service.yaml", "target": "/root"},
+                {"file": "minimal-ingress.yaml", "target": "/root"}
             ]
         }
   },
