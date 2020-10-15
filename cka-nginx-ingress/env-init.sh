@@ -17,6 +17,8 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 curl https://docs.projectcalico.org/manifests/canal.yaml -O
 kubectl apply -f canal.yaml
 
+kubectl taint node controlplane node-role.kubernetes.io/master:NoSchedule-
+
 wget https://get.helm.sh/helm-v3.3.4-linux-amd64.tar.gz
 tar -zxvf helm-v3.3.4-linux-amd64.tar.gz
 mv linux-amd64/helm /usr/local/bin/helm
