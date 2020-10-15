@@ -1,11 +1,11 @@
 {
-  "title": "Creating Highly Available clusters with kubeadm",
-  "description": "In this scenario we will install NGINX based (TLS pass-through) load balancer, and two Kubernetes master (control-plane) nodes to two separate machines thus forming High availability cluster ",
+  "title": "NGINX Ingress controller",
+  "description": "In this scenario we will use Helm 3 to install NGINX based Ingress controller to kubernetes cluster, we will deploy few applications and try out diffrent way of creating Ingresses",
   "difficulty": "advanced",
   "time": "20 minutes",
   "details": {
     "steps": [{
-      "title": "Step 1 - Setup NGINX",
+      "title": "Step 1 - Setup NGINX Ingress controller",
       "text": "step1.md",
       "courseData": "env-init.sh",
       "code": "foreground.sh"

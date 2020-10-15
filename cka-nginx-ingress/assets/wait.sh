@@ -64,9 +64,9 @@ show_progress()
   echo ""
   echo -e  "${GREEN}Done${NC} - upgrading kubeadm,kubectl and kubelet"
 
-  echo -e  -n "Upgrading kubeadm,kubelet and kubectl to 1.19 on remote machine node01"
+  echo -e  -n "Creating Kubernetes cluster using kubeadm"
   while true; do
-    [ $(ssh node01 kubectl version --client --short | grep 1.19 | wc -l) -eq 1 ]
+    [ $(kubectl version --short -o json | jq .serverVersion.minor -r) -eq 19 ]
     if [[ "$?" -ne 0 ]]; then
       temp="${spinstr#?}"
       printf " [%c]  " "${spinstr}"
@@ -79,11 +79,11 @@ show_progress()
   done
   printf "    \b\b\b\b"
   echo ""
-  echo -e  "${GREEN}Done${NC} upgrading ${CYAN}kubeadm,kubelet and kubectl to 1.19 ${NC}"
+  echo -e  "${GREEN}Done${NC} creating ${CYAN}cluster of version 1.19 ${NC}"
 
-  echo -e  -n "Installing etcdctl tool"
+  echo -e  -n "Installing helm 3 tool"
   while true; do
-    type etcdctl > /dev/null 2>&1
+    type helm > /dev/null 2>&1
     if [[ "$?" -ne 0 ]]; then
       temp="${spinstr#?}"
       printf " [%c]  " "${spinstr}"
@@ -96,7 +96,7 @@ show_progress()
   done
   printf "    \b\b\b\b"
   echo ""
-  echo -e  "${GREEN}Done${NC} installing ${CYAN}etcdctl ${NC}"
+  echo -e  "${GREEN}Done${NC} installing ${CYAN}Helm 3 ${NC}"
 
   sleep 1
 
