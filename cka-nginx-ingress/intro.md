@@ -18,4 +18,6 @@ High-level steps that we will perform in this scenario are :
 
 At the end our setup should look like this : 
 
-![HA Setup in Katacoda](./assets/Kubernetes_HA_Control_plane_setup_on_Katacoda.png)
+(I am still working on this scenario)
+
+![](./assets/work_in_progress.jpg)
