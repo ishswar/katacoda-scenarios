@@ -16,6 +16,6 @@ We will use Helm 3 to install it
 
 `
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-helm install my-release ingress-nginx/ingress-nginx
+helm install ng-ingress-release ingress-nginx/ingress-nginx
 `{{execute}}
 

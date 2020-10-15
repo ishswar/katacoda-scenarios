@@ -66,7 +66,7 @@ show_progress()
 
   echo -e  -n "Creating Kubernetes cluster using kubeadm"
   while true; do
-    [ $(kubectl version --short -o json | jq .serverVersion.minor -r) -eq 19 ]
+    kubectl version > /dev/null 2>&1
     if [[ "$?" -ne 0 ]]; then
       temp="${spinstr#?}"
       printf " [%c]  " "${spinstr}"
