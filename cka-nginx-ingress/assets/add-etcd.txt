@@ -1,0 +1,4 @@
+#Add addtional member
+ETCDCTL_API=3 etcdctl --endpoints $ENDPOINTS --cacert $CACERT --cert $SERVER_CERT --key $SERVER_KEY member add node02 --peer-urls=https://172.17.0.50:2390
+#Who is leader
+ETCDCTL_API=3 etcdctl --endpoints $ENDPOINTS --write-out=table --cacert $CACERT --cert $SERVER_CERT --key $SERVER_KEY endpoint --cluster status

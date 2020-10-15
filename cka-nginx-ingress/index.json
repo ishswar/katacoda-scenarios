@@ -1,0 +1,48 @@
+{
+  "title": "Creating Highly Available clusters with kubeadm",
+  "description": "In this scenario we will install NGINX based (TLS pass-through) load balancer, and two Kubernetes master (control-plane) nodes to two separate machines thus forming High availability cluster ",
+  "difficulty": "advanced",
+  "time": "20 minutes",
+  "details": {
+    "steps": [{
+      "title": "Step 1 - Setup NGINX",
+      "text": "step1.md",
+      "courseData": "env-init.sh",
+      "code": "foreground.sh"
+    },{
+      "title": "Step 2 - Create first master node in control plane",
+      "text": "step2.md"
+    },{
+      "title": "Step 3 - Create second master",
+      "text": "step3.md"
+    },{
+      "title": "Step 4 - Use kubectl tool to test configuration",
+      "text": "step4.md"
+    },{
+      "title": "Step 5 - Inspect HA Setup",
+      "text": "step5.md"
+    },{
+      "title": "Step 6 - Do Failover test",
+      "text": "step6.md"
+    }],
+    "intro": {
+      "text": "intro.md",
+      "credits": ""
+    },
+    "finish": {
+      "text": "finish.md"
+    },
+    "assets": {
+            "host01": [
+                {"file": "wait.sh", "target": "/usr/local/bin/", "chmod": "+x"}
+            ]
+        }
+  },
+  "environment": {
+    "uilayout": "terminal",
+    "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\r\nFollow steps from left - Good luck!!!\u001b[m\r\n"
+  },
+  "backend": {
+    "imageid": "kubernetes-cluster:1.18"
+  }
+}

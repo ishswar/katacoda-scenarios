@@ -1,0 +1,74 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubeadm.kubernetes.io/etcd.advertise-client-urls: https://NODE01_IP:2376
+  creationTimestamp: null
+  labels:
+    component: etcd
+    tier: control-plane
+  name: etcd2
+  namespace: kube-system
+spec:
+  containers:
+  - command:
+    - etcd
+    - --advertise-client-urls=https://NODE01_IP:2376
+    - --cert-file=/etc/kubernetes/pki/etcd/server.crt
+    - --client-cert-auth=true
+    - --data-dir=/var/lib/etcd-2
+    - --initial-advertise-peer-urls=https://NODE01_IP:2390
+    - --initial-cluster=controlplane=https://CONTROL_PLANE_IP:2380,node01=https://NODE01_IP:2380,node02=https://NODE01_IP:2390
+    - --initial-cluster-state=existing
+    - --key-file=/etc/kubernetes/pki/etcd/server.key
+    - --listen-client-urls=https://127.0.0.1:2376,https://NODE01_IP:2376
+    - --listen-metrics-urls=http://127.0.0.1:2385
+    - --listen-peer-urls=https://NODE01_IP:2390
+    - --name=node02
+    - --peer-cert-file=/etc/kubernetes/pki/etcd/peer.crt
+    - --peer-client-cert-auth=true
+    - --peer-key-file=/etc/kubernetes/pki/etcd/peer.key
+    - --peer-trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt
+    - --snapshot-count=10000
+    - --trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt
+    image: k8s.gcr.io/etcd:3.4.9-1
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      failureThreshold: 8
+      httpGet:
+        host: 127.0.0.1
+        path: /health
+        port: 2385
+        scheme: HTTP
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      timeoutSeconds: 15
+    name: etcd
+    resources: {}
+    startupProbe:
+      failureThreshold: 24
+      httpGet:
+        host: 127.0.0.1
+        path: /health
+        port: 2385
+        scheme: HTTP
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      timeoutSeconds: 15
+    volumeMounts:
+    - mountPath: /var/lib/etcd-2
+      name: etcd-data
+    - mountPath: /etc/kubernetes/pki/etcd
+      name: etcd-certs
+  hostNetwork: true
+  priorityClassName: system-node-critical
+  volumes:
+  - hostPath:
+      path: /etc/kubernetes/pki/etcd
+      type: DirectoryOrCreate
+    name: etcd-certs
+  - hostPath:
+      path: /var/lib/etcd-2
+      type: DirectoryOrCreate
+    name: etcd-data
+status: {}
