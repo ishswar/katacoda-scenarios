@@ -2,7 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   creationTimestamp: null
-  labels:    app: test-ingress
+  labels:
+     app: test-ingress
   name: test-ingress
   namespace: test-ing
 spec:
