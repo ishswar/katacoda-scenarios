@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:    app: test-ingress
+  name: test-ingress
+  namespace: test-ing
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-ingress
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: test-ingress
+    spec:
+      volumes:
+        - name: my-vol
+          emptyDir: {}
+      initContainers:
+      - name: make-index
+        image: busybox
+        command: ["sh","-c","echo 'Hello world' > /usr/share/nginx/html/index.html"]
+        volumeMounts:
+           - name: my-vol
+             mountPath: /usr/share/nginx/html
+      containers:
+      - image: nginx
+        name: nginx
+        volumeMounts:
+           - name: my-vol
+             mountPath: /usr/share/nginx/html
+        resources: {}
+status: {}
