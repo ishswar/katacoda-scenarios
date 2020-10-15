@@ -1,55 +1,25 @@
 Create first master node in cluster 
 
-## Create cluster using kubeadm
+## Create sample application
 
-We will create first master/node in cluster using kubeadm (version:
-1.19)
+`cat ns.yaml`{{execute}}
+`kubectl apply -f ns.yaml`{{execute}} 
 
-We will pass **Load balancer** IP and port as input to flag `control-plane-endpoint`
 
-`kubeadm init --control-plane-endpoint "$LB_IP:$LB_PORT" --upload-certs --pod-network-cidr=10.244.0.0/16 || { echo "kubeadm init failed ... need to investigate";}`{{execute}}
+`cat deploy.yaml`{{execute}}
+`kubectl apply -f deploy.yaml`{{execute}} 
 
-Once above command succeeds we got ourselves first master node in cluster 
 
-Lets setup kubeconfig so we can run kubectl and interact with cluster 
-`
-mkdir -p $HOME/.kube
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
-`{{execute}}
+`cat service.yaml`{{execute}}
+`kubectl apply -f service.yaml`{{execute}} 
 
-## Install network 
+## Deploy first ingress resource
 
-As of now cluster is not ready (1st master node) - because it is waiting network to be add to cluster
-Lets installed [Canal](https://docs.projectcalico.org/getting-started/kubernetes/flannel/flannel) network to cluster 
+`cat minimal-ingress.yaml`{{execute}}
+`kubectl apply -f minimal-ingress.yaml`{{execute}} 
 
-`
-curl https://docs.projectcalico.org/manifests/canal.yaml -O
-kubectl apply -f canal.yaml
-`{{execute}}
+## Update Ingress controller's Node port 
 
-### Wait for CANAL network to be installed 
 
-`
-EXPECTED_PODS=9
-while true;
-  do CHECK=$(kubectl get pods -n kube-system --field-selector status.phase=Running --no-headers | wc -l);
-   if [ $CHECK -eq $EXPECTED_PODS ];
-     then 
-          echo -e "${GREEN}ALL PODs are up${NC}";
-          kubectl get pods -n kube-system --field-selector status.phase=Running
-          break;
-     else 
-          echo "All PODs are not up; waiting";
-          echo -e "${YELLOW}Expected $EXPECTED_PODS Pods in kube-system namespace to be running found [$CHECK] running${NC}";
-   fi;
-   sleep 5;
-done`{{execute}}
+`kubectl patch service ng-ingress-release-ingress-nginx-controller -p '{"spec":{"ports":[{"port":80,"nodePort":32702}]}}'`{{execute}}
 
-## Check kube config 
-
-Lets quickly test out kube config to see we are able to connect via LB to AIP server 
-
-`kubectl patch service my-release-ingress-nginx-controller -p '{"spec":{"ports":[{"port":80,"nodePort":32702}]}}'`{{execute}}
-
-You should see kubectl is using load balalncer's URL to connect to API server
