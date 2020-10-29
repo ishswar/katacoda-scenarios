@@ -32,7 +32,9 @@
     "assets": {
             "host01": [
                 {"file": "wait.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-                {"file": "install_kind.sh", "target": "/root", "chmod": "+x"}
+                {"file": "install_kind.sh", "target": "/root", "chmod": "+x"},
+                {"file": "deploy.yaml", "target": "/root"},
+                {"file": "service.yaml", "target": "/root"}
             ]
         }
   },
