@@ -14,7 +14,7 @@ We will use below kind config
 
 ## Create a cluster 
 
-This will create one control plane (Master) Node and 3 worker Nodes
+This will create 1 control plane (Master) Node and 3 worker Nodes
 
 `kind create cluster --config kind-cluster.yaml`{{execute}}
 
