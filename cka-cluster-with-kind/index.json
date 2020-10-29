@@ -1,6 +1,6 @@
 {
-  "title": "Install 3 master 2 Nodes cluster using Kind",
-  "description": "In this scenario we will learn how easy to create a test grade 3 Masters and 2 Nodes kubernetes cluster using Kind",
+  "title": "Install 1 master 3 Nodes cluster using Kind",
+  "description": "In this scenario we will learn how easy to create a test grade 1 Master and 3 Nodes kubernetes cluster using Kind",
   "difficulty": "intermediate",
   "time": "30 minutes",
   "details": {
