@@ -10,16 +10,23 @@ We will create a single master/node kubernetes cluster using kubeadm (version: 1
 
 `
 cat << KINDCONFIG > kind-cluster.conf
-# a cluster with 3 control-plane nodes and 3 workers
+# three node (two workers) cluster config
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 nodes:
 - role: control-plane
-- role: control-plane
-- role: control-plane
 - role: worker
+  extraPortMappings:
+  - containerPort: 32070
+    hostPort: 32071
 - role: worker
+  extraPortMappings:
+  - containerPort: 32070
+    hostPort: 32072
 - role: worker
+  extraPortMappings:
+  - containerPort: 32070
+    hostPort: 32073
 KINDCONFIG
 `{{execute}}
 
