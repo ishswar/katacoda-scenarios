@@ -1,0 +1,18 @@
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: test
+  name: test
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+    nodePort: 32070
+  externalTrafficPolicy: Local
+  selector:
+    app: test
+  type: NodePort
+status:
+  loadBalancer: {}
