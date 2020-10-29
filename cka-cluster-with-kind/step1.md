@@ -10,13 +10,13 @@ First lets install latest version of Kind - so we can use it to create kubernete
 
 We will use below kind config 
 
-`bat kind-cluster.conf`{{execute}}
+`bat kind-cluster.yaml`{{execute}}
 
 ## Create a cluster 
 
 This will create one control plane (Master) Node and 3 worker Nodes
 
-`kind create cluster --config kind-cluster.conf`{{execute}}
+`kind create cluster --config kind-cluster.yaml`{{execute}}
 
 ## Wait for cluster to be ready 
 
