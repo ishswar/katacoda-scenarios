@@ -10,7 +10,6 @@ We will create a single master/node kubernetes cluster using kubeadm (version: 1
 
 `
 cat << KINDCONFIG > kind-cluster.conf
-# three node (two workers) cluster config
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 nodes:
@@ -33,3 +32,12 @@ KINDCONFIG
 ## Create a cluster 
 
 `kind create cluster --config kind-cluster.conf`{{execute}}
+
+## Wait for cluster to be ready 
+
+`
+while [ $(kubectl get nodes -o json | grep -i kubeletReady | wc -l) -lt 4 ];  do
+  echo "Found $(kubectl get nodes -o json | grep -i kubeletReady | wc -l) in Ready state - expecting 4 to be Ready";
+  sleep 5;
+done
+`{{}}
