@@ -16,7 +16,29 @@ spec:
       labels:
         app: test
     spec:
+      volumes:
+        - name: share-vol
+          emptyDir: {}
+      initContainers:
+      - image: busybox
+        name: setup
+        env:
+        - name: MY_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: MY_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        command: ["sh","-c",'echo  "Reply from POD: [${MY_POD_NAME}] running on Node: [${MY_NODE_NAME}"] > /usr/share/nginx/html/index.htm']
+        volumeMounts:
+          - name: share-vol
+            mountPath: /usr/share/nginx/html
       containers:
       - image: nginx
         imagePullPolicy: Always
         name: nginx
+        volumeMounts:
+          - name: share-vol
+            mountPath: /usr/share/nginx/html
