@@ -8,26 +8,9 @@ First lets install latest version of Kind - so we can use it to create kubernete
 
 ## Create a kind config
 
-`
-cat << KINDCONFIG > kind-cluster.conf
-kind: Cluster
-apiVersion: kind.x-k8s.io/v1alpha4
-nodes:
-- role: control-plane
-- role: worker
-  extraPortMappings:
-  - containerPort: 32070
-    hostPort: 32071
-- role: worker
-  extraPortMappings:
-  - containerPort: 32070
-    hostPort: 32072
-- role: worker
-  extraPortMappings:
-  - containerPort: 32070
-    hostPort: 32073
-KINDCONFIG
-`{{execute}}
+We will use below kind config 
+
+`bat kind-cluster.conf`{{execute}}
 
 ## Create a cluster 
 
