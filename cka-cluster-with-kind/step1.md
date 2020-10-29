@@ -2,7 +2,7 @@ Create cluster
 
 ## Install kind (latest release)
 
-We will create a single master/node kubernetes cluster using kubeadm (version: 1.19)
+First lets install latest version of Kind - so we can use it to create kubernetes cluster
 
 `./install_kind.sh`{{execute}}
 

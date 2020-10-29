@@ -4,7 +4,7 @@ Populate the cluster
 
 `kubectl apply -f deploy.yaml -f service.yaml`{{execute}} 
 
-## Hit each service on it's Host Port 
+## Hit each service on it's HostPort 
 
 `wget -O- http://0.0.0.0:32071`{{execute}}
 
