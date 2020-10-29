@@ -1,21 +1,13 @@
 Populate the cluster
 
-## Remove taint 
+## Create simple NGINX deployment and service
 
-As this is single node cluster we need to remove taint from master node 
-if we don't do this than no pods can be schedule on master (We are just doing this for demo purpose) 
+`kubectl apply -f deploy.yaml -f service.yaml`{{execute}} 
 
-`kubectl taint node $(hostname) node-role.kubernetes.io/master:NoSchedule-`{{execute}}
+## Hit each service on it's Host Port 
 
-## Create pod 
+`wget -O- http://0.0.0.0:32071`{{execute}}
 
-As of now our kubernetes cluster is empty - lets quickly create a simple `nginx` pod 
+`wget -O- http://0.0.0.0:32072`{{execute}}
 
-`kubectl run tester --image=nginx`{{execute}} 
-
-Idea here is we need to back up this data and whenever we restore this backup we need to make sure above pod
-`tester` is always there.
-
-Kubernetes disaster recovery plan is usually consist of backing up etcd cluster and having infrastructure as a code to provision new set of servers in the cloud.  
-
-
+`wget -O- http://0.0.0.0:32073`{{execute}}
