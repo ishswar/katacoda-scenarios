@@ -35,7 +35,7 @@
                 {"file": "install_kind.sh", "target": "/root", "chmod": "+x"},
                 {"file": "deploy.yaml", "target": "/root"},
                 {"file": "kind-cluster.conf", "target": "/root"},
-                {"file": "service.yaml", "target": "/root"},
+                {"file": "service.yaml", "target": "/root"}
             ]
         }
   },
