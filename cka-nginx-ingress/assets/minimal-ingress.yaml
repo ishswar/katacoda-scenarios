@@ -16,3 +16,5 @@ spec:
             name: test
             port:
               number: 80
+
+#https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#default-backend
