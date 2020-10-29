@@ -34,7 +34,7 @@
                 {"file": "wait.sh", "target": "/usr/local/bin/", "chmod": "+x"},
                 {"file": "install_kind.sh", "target": "/root", "chmod": "+x"},
                 {"file": "deploy.yaml", "target": "/root"},
-                {"file": "kind-cluster.conf", "target": "/root"},
+                {"file": "kind-cluster.yaml", "target": "/root"},
                 {"file": "service.yaml", "target": "/root"}
             ]
         }
