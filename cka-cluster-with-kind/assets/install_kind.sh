@@ -24,6 +24,8 @@ mv ./kind-linux-amd64 ./kind
 chmod +x ./kind
 mv ./kind /root/go/bin/kind
 
+source <(kind completion bash)
+
 echo "Kind version is : $(kind version)"
 }
 else
