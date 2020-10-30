@@ -18,6 +18,28 @@ This will create 1 control plane (Master) Node and 3 worker Nodes
 
 `kind create cluster --config kind-cluster.yaml`{{execute}} *(this should take 4~5 minutes)*
 
+<details>
+  <summary>Sample output: </summary>
+  
+```
+master $ kind create cluster --config kind-cluster.yaml
+Creating cluster "kind" ...
+ ✓ Ensuring node image (kindest/node:v1.19.1) 🖼
+ ✓ Preparing nodes 📦 📦 📦 📦
+ ✓ Writing configuration 📜
+ ✓ Starting control-plane 🕹️
+ ✓ Installing CNI 🔌
+ ✓ Installing StorageClass 💾
+ ✓ Joining worker nodes 🚜
+Set kubectl context to "kind-kind"
+You can now use your cluster with:
+
+kubectl cluster-info --context kind-kind
+
+Have a question, bug, or feature request? Let us know! https://kind.sigs.k8s.io/#community 🙂
+```       
+</details>
+
 ## Wait for cluster to be ready 
 
 Let's wait for all Nodes in cluster to post ***Ready*** status before we
