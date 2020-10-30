@@ -68,13 +68,23 @@ command to check that
 
 `curl --max-time 4 http://0.0.0.0:32072`{{execute}}
 
+Sample output: 
+
+```BASH
+controlplane $ curl http://0.0.0.0:32072
+Reply from POD: [test-6d9c9d5b86-lwzwx] running on Node: [kind-worker2]
+```
+
 Same goes for `kind-worker3` 
  
 `curl --max-time 4 http://0.0.0.0:32073`{{execute}}
 
 Sample output : 
 
-
+```BASH
+controlplane $ curl http://0.0.0.0:32073
+Reply from POD: [test-6d9c9d5b86-nk28k] running on Node: [kind-worker3]
+```
  
  ** **NOTE** ** : Now you might think why are we not hitting on Nodes
 IP/Host name and on port 32070 ? This is because we are using Kind and
