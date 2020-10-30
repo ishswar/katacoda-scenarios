@@ -38,10 +38,12 @@ Now we apply below two YAMLs that will create deployment and service
 
 ### (Optional) View YAML for Deployment and Service
 
+We just created one Deployment (with 2 replicas) and one NodePort service - let check how their *manifest* looks like
+
 #### Deployment [test]:  
 
 If you see closely this deployment uses **sidecar** container to populate
-NGINX's default *index.html* with text that has Pod's Name and Node's name
+NGINX's default *index.html* with text that has *Pod's Name* and *Node's name*
 so when we hit any of these NGINX server we know which Pod we hit and
 it's running on what Node . 
 
@@ -122,5 +124,5 @@ curl: (28) Operation timed out after 4000 milliseconds with 0 bytes received
 ```
 
 So, now we know what is impact of setting `externalTrafficPolicy: Local` on NodePort service. It is very important to
-understand things works before we start using it . On next page we dig little deeper and see what exactly happens when 
+understand how things works before we start using it . On next page we dig little deeper and see what exactly happens when 
 we set *externalTrafficPolicy: Local*
