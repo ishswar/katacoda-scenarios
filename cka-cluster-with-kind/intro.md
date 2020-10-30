@@ -3,8 +3,8 @@ kind was primarily designed for testing Kubernetes itself, but may be used for l
 
 In this scenario we will perform these steps 
 
-1. Install kind
-2. Using kind configuration file create a cluster ( 1 master node and 3
+1. Install **kind**
+2. Using *kind configuration* file create a cluster ( 1 master node and 3
    worker nodes )
 3. Check-out the cluster - see how cluster looks like 
 
