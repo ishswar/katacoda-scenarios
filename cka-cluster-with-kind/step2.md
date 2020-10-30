@@ -19,7 +19,7 @@ deployment using ***NodeType*** service. Service will use *externalTrafficPolicy
 Now due to nature of NodeType port - you can hit on port **32070** on any of
 the pods and you should get reply . This is one of the promises of
 NodeType service. But since we have added `externalTrafficPolicy` to
-`Local` NodePort service running on (IPTables) Node *kind-worker* will look for
+`Local` NodePort service (IPTables) on Node *kind-worker* will look for
 local pod to forward traffic/packets to - but it will not find it and
 we should get Error 
 
@@ -32,13 +32,13 @@ Just for simplicity we will make sure that pods get scheduled on node
 
 `kubectl taint node kind-worker no=testpod:NoSchedule`{{execute}}
 
-Now we apply below to YAMLs that will create deployment and service
+Now we apply below two YAMLs that will create deployment and service
 
 `kubectl apply -f deploy.yaml -f service.yaml`{{execute}} 
 
 ### (Optional) View YAML for Deployment and Service
 
-Deployment :  
+#### Deployment :  
 
 If you see closely this deployment uses **sidecar** container to populate
 NGINX's default *index.html* with text that has Pod's Name and Node's name
@@ -47,7 +47,7 @@ it's running on what Node .
 
 `bat --paging=never deploy.yaml`{{execute}}
 
-Service : 
+#### Service : 
 
 Pay close attention to `externalTrafficPolicy: Local` 
 
@@ -90,6 +90,7 @@ controlplane $ curl http://0.0.0.0:32073
 Reply from POD: [test-6d9c9d5b86-nk28k] running on Node: [kind-worker3]
 ```
  
+![](./assets/note.png)
  ** **NOTE** ** : Now you might think why are we not hitting on Nodes
 IP/Host name and on port 32070 ? This is because we are using Kind and
 the Nodes are running inside Docker container. So , we can't hit Node's
