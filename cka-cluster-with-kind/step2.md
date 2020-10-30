@@ -57,9 +57,9 @@ Service :
 
 Make sure above output shows 2 Pods are available
 
-## Hit each service on it's HostPort 
+## Invoke each service on it's HostPort 
 
-As node kind-worker` has taint on it - we are sure pods will be only
+As node `kind-worker` has taint on it - we are sure pods will be only
 running/scheduled on `kind-worker2` and `kind-worker3` and let's hit
 their NodePort and we should get reply
 

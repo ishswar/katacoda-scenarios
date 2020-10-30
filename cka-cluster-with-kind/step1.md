@@ -20,9 +20,20 @@ This will create 1 control plane (Master) Node and 3 worker Nodes
 
 ## Wait for cluster to be ready 
 
+Let's wait for all Nodes in cluster to post ***Ready*** status before we
+continue
+
 `
-while [ $(kubectl get nodes -o json | grep -i kubeletReady | wc -l) -lt 4 ];  do
+while true; do
+  READY_COUNT=$(kubectl get nodes -o json | grep -i kubeletReady | wc -l)  if [ $READY_COUNT -eq 4 ]; then
+   {
+     echo "All nodes are posting ready"
+     kubectl get nodes -o wide
+     break;
+   }
+  else {
   echo "Found $(kubectl get nodes -o json | grep -i kubeletReady | wc -l) in Ready state - expecting 4 to be Ready";
   sleep 5;
-done
-`{{execute}}
+   }
+  fi
+  done `{{execute}}
