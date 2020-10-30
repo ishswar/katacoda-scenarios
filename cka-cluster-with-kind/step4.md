@@ -26,3 +26,9 @@ came from POD running on `kind-worker3`
 master $ curl --max-time 4 http://0.0.0.0:32071
 Reply from POD: [test-6d9c9d5b86-xddmw] running on Node: [kind-worker3]
 `
+
+## Updated Service routs
+
+Now the routing for NodePort looks like this :
+
+![](./assets/KIND-3.png)
