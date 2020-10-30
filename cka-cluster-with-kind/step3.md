@@ -1,65 +1,33 @@
 Create a backup
 
-## Install etcdctl tool 
-
-`etcdctl` is command line tool to manage etcd server and it’s date.
-We will use this tool to back and restore etcd data
+## Check IP-Tables on kind-worker node 
 
 
-`
-ETCD_CTCL_VERSION=3.4.3
-wget -q https://github.com/etcd-io/etcd/releases/download/v${ETCD_CTCL_VERSION}/etcd-v${ETCD_CTCL_VERSION}-linux-amd64.tar.gz
-tar -zxf etcd-v${ETCD_CTCL_VERSION}-linux-amd64.tar.gz
-cd etcd-v${ETCD_CTCL_VERSION}-linux-amd64
-sudo cp etcdctl /usr/local/bin
+
+`KUBEPROXY_POD_ON_WORKER_NODE=$(kubectl get pods -n kube-system
+--field-selector=spec.nodeName=kind-worker -l k8s-app=kube-proxy -o name
+--no-headers)`{{execute}}
+
+
+`echo "Getting iptables related to defalut/test-svc on kind-worker node"
+controlplane $ kubectl exec -it -n kube-system $KUBEPROXY_POD_ON_WORKER_NODE -- iptables-save | grep test-svc
 `{{execute}}
 
-## etcdctl connection parameters
+Sample output: 
 
-`etcdctl` is command line tool to manage etcd server and it’s date.
-Before we create a etcd backup we need to connect to running etcd server; as in case of kubernetes it is secured endpoint.
-We need to know it's connection parameters.
-
-** NOTE : this restore process is for a locally hosted etcd running in a static pod. **
-
-We can find that using etcd pod's static manifest 
-
-`cat /etc/kubernetes/manifests/etcd.yaml`{{execute}}
-
-From above file we need 4 things :
-
-1. etcd endpoint(s)
-1. CA Certs file 
-1. Server certificate 
-1. Server certificate key
-
-## Check connectivity 
-
-Verify we're connecting to the right cluster...define your endpoints and keys
-
-`
-CACERT=$(cat /etc/kubernetes/manifests/etcd.yaml | grep peer-trusted-ca-file | cut -d= -f2)
-SERVER_KEY=$(cat /etc/kubernetes/manifests/etcd.yaml | grep peer-key-file | cut -d= -f2)
-SERVER_CERT=$(cat /etc/kubernetes/manifests/etcd.yaml | grep peer-cert-file | cut -d= -f2)
-ENDPOINTS=$(cat /etc/kubernetes/manifests/etcd.yaml | grep advertise-client-urls= | cut -d= -f2)
-ETCDCTL_API=3 etcdctl --endpoints $ENDPOINTS --write-out=table --cacert $CACERT --cert $SERVER_CERT --key $SERVER_KEY \
-   member list
-`{{execute}}
-
-## Take a backup 
-
-Lets take a backup - we are saving backup named 'snapshot.db' in current directory 
-
-`
-CACERT=$(cat /etc/kubernetes/manifests/etcd.yaml | grep peer-trusted-ca-file | cut -d= -f2)
-SERVER_KEY=$(cat /etc/kubernetes/manifests/etcd.yaml | grep "\-\-key-file" | cut -d= -f2)
-SERVER_CERT=$(cat /etc/kubernetes/manifests/etcd.yaml | grep "\-\-cert-file" | cut -d= -f2)
-ENDPOINTS=$(cat /etc/kubernetes/manifests/etcd.yaml | grep advertise-client-urls= | cut -d= -f2)
-ETCDCTL_API=3 etcdctl --endpoints $ENDPOINTS snapshot save snapshot.db --cacert $CACERT --cert $SERVER_CERT --key $SERVER_KEY
-`{{execute}}
-
-## Check a backup (We need to make sure backup is good)
-
-Read the metadata from the backup/snapshot to print out the snapshot's status 
-
-`ETCDCTL_API=3 etcdctl --write-out=table snapshot status snapshot.db`{{execute}}
+```
+controlplane $ kubectl exec -it -n kube-system kube-proxy-z8w5v -- iptables-save | grep test-svc
+-A KUBE-NODEPORTS -s 127.0.0.0/8 -p tcp -m comment --comment "default/test-svc" -m tcp --dport 32070 -j KUBE-MARK-MASQ
+-A KUBE-NODEPORTS -p tcp -m comment --comment "default/test-svc" -m tcp --dport 32070 -j KUBE-XLB-QKNQQNIN727HO3XU
+-A KUBE-SEP-SQEBHSRBMT4ZUBXZ -s 10.244.1.3/32 -m comment --comment "default/test-svc" -j KUBE-MARK-MASQ
+-A KUBE-SEP-SQEBHSRBMT4ZUBXZ -p tcp -m comment --comment "default/test-svc" -m tcp -j DNAT --to-destination 10.244.1.3:80
+-A KUBE-SEP-SUSDB4Q4CAFDFR7F -s 10.244.2.3/32 -m comment --comment "default/test-svc" -j KUBE-MARK-MASQ
+-A KUBE-SEP-SUSDB4Q4CAFDFR7F -p tcp -m comment --comment "default/test-svc" -m tcp -j DNAT --to-destination 10.244.2.3:80
+-A KUBE-SERVICES ! -s 10.244.0.0/16 -d 10.96.115.88/32 -p tcp -m comment --comment "default/test-svc cluster IP" -m tcp --dport 80 -j KUBE-MARK-MASQ
+-A KUBE-SERVICES -d 10.96.115.88/32 -p tcp -m comment --comment "default/test-svc cluster IP" -m tcp --dport 80 -j KUBE-SVC-QKNQQNIN727HO3XU
+-A KUBE-SVC-QKNQQNIN727HO3XU -m comment --comment "default/test-svc" -m statistic --mode random --probability 0.50000000000 -j KUBE-SEP-SQEBHSRBMT4ZUBXZ
+-A KUBE-SVC-QKNQQNIN727HO3XU -m comment --comment "default/test-svc" -j KUBE-SEP-SUSDB4Q4CAFDFR7F
+-A KUBE-XLB-QKNQQNIN727HO3XU -m comment --comment "masquerade LOCAL traffic for default/test-svc LB IP" -m addrtype --src-type LOCAL -j KUBE-MARK-MASQ
+-A KUBE-XLB-QKNQQNIN727HO3XU -m comment --comment "route LOCAL traffic for default/test-svc LB IP to service chain" -m addrtype --src-type LOCAL -j KUBE-SVC-QKNQQNIN727HO3XU
+-A KUBE-XLB-QKNQQNIN727HO3XU -m comment --comment "default/test-svc has no local endpoints" -j KUBE-MARK-DROP
+```
