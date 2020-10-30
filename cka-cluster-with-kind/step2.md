@@ -51,7 +51,7 @@ Service :
 
 `bat service.yaml`{{execute}}
 
-### Wait for all pods to be up 
+### Check if all pods are running 
 
 `kubectl get deployments.apps test`{{execute}}
 
