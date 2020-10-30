@@ -38,7 +38,7 @@ Now we apply below two YAMLs that will create deployment and service
 
 ### (Optional) View YAML for Deployment and Service
 
-#### Deployment [[test]]:  
+#### Deployment [test]:  
 
 If you see closely this deployment uses **sidecar** container to populate
 NGINX's default *index.html* with text that has Pod's Name and Node's name
@@ -47,7 +47,7 @@ it's running on what Node .
 
 `bat --paging=never deploy.yaml`{{execute}}
 
-#### Service [[test-vc]]: 
+#### Service [test-vc]: 
 
 `bat service.yaml`{{execute}}
 

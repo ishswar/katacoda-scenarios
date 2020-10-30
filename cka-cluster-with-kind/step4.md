@@ -27,8 +27,10 @@ master $ curl --max-time 4 http://0.0.0.0:32071
 Reply from POD: [test-6d9c9d5b86-xddmw] running on Node: [kind-worker3]
 `
 
-## Updated Service routs
+## Updated NodePort service routs
 
 Now the routing for NodePort looks like this :
+
+You can hit any Node in cluster for `test-svc` service and it will rout you to one of the two available PODs.
 
 ![](./assets/KIND-3.png)
