@@ -16,10 +16,10 @@
       "title": "Step 3 - Check IPTables",
       "text": "step3.md"
     },{
-      "title": "Step 4 - Create one more pod",
+      "title": "Step 4 - Update service",
       "text": "step4.md"
     },{
-      "title": "Step 5 - Restore etcd",
+      "title": "Step 5 - Empty",
       "text": "step5.md"
     }],
     "intro": {
