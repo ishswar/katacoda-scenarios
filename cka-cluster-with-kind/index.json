@@ -10,7 +10,7 @@
       "courseData": "env-init.sh",
       "code": "foreground.sh"
     },{
-      "title": "Step 2 - Create simple pod",
+      "title": "Step 2 - Populate the cluster",
       "text": "step2.md"
     },{
       "title": "Step 3 - Backup etcd",
