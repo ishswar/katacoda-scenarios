@@ -27,8 +27,8 @@ we should get Error
 
 Let's create a simple NGINX base deployment with 2 replicas and expose deployment with service running on port *32070*
 
-Just for simply city we will make sure that pods get scheduled on node ``
-and `` - so lets taint node `` 
+Just for simply city we will make sure that pods get scheduled on node
+`kind-worker2` and `kind-worker3` - so lets taint node `kind-worker`
 
 `kubectl taint node kind-worker no:testpod:NoSchedule`{{execute}}
 
@@ -60,13 +60,31 @@ Make sure above output shows 2 Pods are available
 ## Hit each service on it's HostPort 
 
 As node kind-worker` has taint on it - we are sure pods will be only
-running/scheduled on `` and `` and let's hit their NodePort and we should
-get reply 
+running/scheduled on `kind-worker2` and `kind-worker3` and let's hit
+their NodePort and we should get reply
+
+If we hit end-point on `kind-worker2` we should get reply - use below
+command to check that 
 
 `curl --max-time 4 http://0.0.0.0:32072`{{execute}}
 
+Same goes for `kind-worker3` 
+ 
 `curl --max-time 4 http://0.0.0.0:32073`{{execute}}
 
-** **NOTE** ** : Now you might think why are we not hitting on 
+Sample output : 
+
+
+ 
+ ** **NOTE** ** : Now you might think why are we not hitting on Nodes
+IP/Host name and on port 32070 ? This is because we are using Kind and
+the Nodes are running inside Docker container. So , we can't hit Node's
+port 32070 - inited we have to map that port to local server and we can
+only hit those ports.
+
+You can see below we have asked kind to do this port mapping for us
+before hand so we don't have to anything now.
+
+![ETCD Leader](./assets/KIND-2.png)
 
 `curl --max-time 4 http://0.0.0.0:32071`{{execute}}
