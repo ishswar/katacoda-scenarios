@@ -3,8 +3,8 @@ kind was primarily designed for testing Kubernetes itself, but may be used for l
 
 In this scenario we will perform these steps 
 
-1. Install **kind**
-2. Using *kind configuration* file create a cluster ( 1 master node and 3
+1. Install ** [kind](https://kind.sigs.k8s.io/) **
+2. Using * [kind configuration](https://kind.sigs.k8s.io/docs/user/configuration/) * file create a cluster ( 1 master node and 3
    worker nodes )
 3. Check-out the cluster - see how cluster looks like 
 
@@ -24,7 +24,6 @@ We will play with few of kubernetes topics :
   impact/effect `externalTrafficPolicy: Local` has on IPTables.
 1. Will also how we can patch existing objects in Kubernetes
 1. How we can select pod based on Node and and label selector 
-
 
 # Cluster overview
 
