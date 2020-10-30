@@ -45,7 +45,7 @@ NGINX's default *index.html* with text that has Pod's Name and Node's name
 so when we hit any of these NGINX server we know which Pod we hit and
 it's running on what Node . 
 
-`bat deploy.yaml`{{execute}}
+`bat --paging=never deploy.yaml`{{execute}}
 
 Service : 
 
