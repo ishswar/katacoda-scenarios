@@ -16,7 +16,7 @@ We will use below kind config
 
 This will create 1 control plane (Master) Node and 3 worker Nodes
 
-`kind create cluster --config kind-cluster.yaml`{{execute}}
+`kind create cluster --config kind-cluster.yaml`{{execute}} *(this should take 4~5 minutes)*
 
 ## Wait for cluster to be ready 
 

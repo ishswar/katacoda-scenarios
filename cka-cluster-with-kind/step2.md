@@ -36,7 +36,7 @@ Now we apply below to YAMLs that will create deployment and service
 
 `kubectl apply -f deploy.yaml -f service.yaml`{{execute}} 
 
-### (Optional) If you want to see the YAML for Deployment and Service use below command to see view them 
+### (Optional) View YAML for Deployment and Service
 
 Deployment :  
 
@@ -48,6 +48,10 @@ it's running on what Node .
 `bat --paging=never deploy.yaml`{{execute}}
 
 Service : 
+
+Pay close attention to `externalTrafficPolicy: Local` 
+
+![](./assets/svc-local.png)
 
 `bat service.yaml`{{execute}}
 
