@@ -12,10 +12,10 @@ In this scenario we will perform these steps
 
 We will play with few of kubernetes topics :
 
-1. Deployment with sidecar container (Main : NGINX , SideCar : Builds
+1. Deployment with *sidecar* container (Main : NGINX , SideCar : Builds
    index.html file)
-2. Expose deployment over NodePort - but use `externalTrafficPolicy:
-   Local` to see it's impact on routing of request pod
+2. Expose deployment over *NodePort* - but use `externalTrafficPolicy:
+   Local` to see it's impact on routing of request to pod in cluster
 3. Will check IPTables entries in *kube-proxy* pod on to see what
    impact/effect `externalTrafficPolicy: Local` has on IPTables.
 4. Will also how we can patch existing objects in Kubernetes
