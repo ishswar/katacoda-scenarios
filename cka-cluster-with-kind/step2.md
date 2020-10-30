@@ -38,7 +38,7 @@ Now we apply below two YAMLs that will create deployment and service
 
 ### (Optional) View YAML for Deployment and Service
 
-#### Deployment :  
+#### Deployment [[test]]:  
 
 If you see closely this deployment uses **sidecar** container to populate
 NGINX's default *index.html* with text that has Pod's Name and Node's name
@@ -47,13 +47,14 @@ it's running on what Node .
 
 `bat --paging=never deploy.yaml`{{execute}}
 
-#### Service : 
+#### Service [[test-vc]]: 
 
+`bat service.yaml`{{execute}}
+
+![](./assets/note.png)
 Pay close attention to `externalTrafficPolicy: Local` 
 
 ![](./assets/svc-local.png)
-
-`bat service.yaml`{{execute}}
 
 ### Check if all pods are running 
 
@@ -91,22 +92,22 @@ Reply from POD: [test-6d9c9d5b86-nk28k] running on Node: [kind-worker3]
 ```
  
 ![](./assets/note.png)
- ** **NOTE** ** : Now you might think why are we not hitting on Nodes
-IP/Host name and on port 32070 ? This is because we are using Kind and
+** **NOTE** ** : Now you might think why are we not hitting on Nodes
+IP/Host name and on port 32070 ? This is because we are using **Kind** and
 the Nodes are running inside Docker container. So , we can't hit Node's
-port 32070 - inited we have to map that port to local server and we can
+port 32070 - instead we have to map that port to local server and we can
 only hit those ports.
 
 You can see below we have asked kind to do this port mapping for us
-before hand so we don't have to anything now.
+*before* hand so we don't have to anything now.
 
 ![ETCD Leader](./assets/KIND-2-small.png)
 
-### Invoke same end-point on kind-worker node
+### Invoke same end-point on `kind-worker` node
 
-We expect below curl command to fail as - there is no `test` pod running
-on kind-worker node and as test-svc service is suppose to look for LOCAL
-end-point (becuse of *externalTrafficPolicy: Local*) it will fail
+We expect below curl command to **fail** as - there is no local `test` pod running
+on *kind-worker* node and as test-svc service is suppose to look for LOCAL
+end-point (because of *externalTrafficPolicy: Local*) it will fail
 
 Lets call with timeout if end-point is not working it will ***fail*** in 4
 seconds 
@@ -119,3 +120,7 @@ Sample output:
 master $ curl --max-time 4 http://0.0.0.0:32071
 curl: (28) Operation timed out after 4000 milliseconds with 0 bytes received
 ```
+
+So, now we know what is impact of setting `externalTrafficPolicy: Local` on NodePort service. It is very important to
+understand things works before we start using it . On next page we dig little deeper and see what exactly happens when 
+we set *externalTrafficPolicy: Local*
