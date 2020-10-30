@@ -105,7 +105,7 @@ before hand so we don't have to anything now.
 
 We expect below curl command to fail as - there is no `test` pod running
 on kind-worker node and as test-svc service is suppose to look for LOCAL
-end-point it will fail
+end-point (becuse of *externalTrafficPolicy: Local*) it will fail
 
 Lets call with timeout if end-point is not working it will ***fail*** in 4
 seconds 
