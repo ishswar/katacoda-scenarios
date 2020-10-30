@@ -62,4 +62,4 @@ Now we have cluster running as shown below
    talk/interact with this cluster
 
 
-![ETCD Leader](./assets/KIND-1.png)
+![](./assets/KIND-1.png)
