@@ -27,11 +27,23 @@ we should get Error
 
 Let's create a simple NGINX base deployment with 2 replicas and expose deployment with service running on port *32070*
 
+Just for simply city we will make sure that pods get scheduled on node ``
+and `` - so lets taint node `` 
+
+`kubectl taint node kind-worker no:testpod:NoSchedule`{{execute}}
+
+Now we apply below to YAMLs that will create deployment and service
+
 `kubectl apply -f deploy.yaml -f service.yaml`{{execute}} 
 
-### If you want to see the YAML for Deployment and Service use below command to see view them 
+### (Optional) If you want to see the YAML for Deployment and Service use below command to see view them 
 
 Deployment :  
+
+If you see closely this deployment uses **sidecar** container to populate
+NGINX's default *index.html* with text that has Pod's Name and Node's name
+so when we hit any of these NGINX server we know which Pod we hit and
+it's running on what Node . 
 
 `bat deploy.yaml`{{execute}}
 
@@ -47,8 +59,14 @@ Make sure above output shows 2 Pods are available
 
 ## Hit each service on it's HostPort 
 
+As node kind-worker` has taint on it - we are sure pods will be only
+running/scheduled on `` and `` and let's hit their NodePort and we should
+get reply 
+
 `curl --max-time 4 http://0.0.0.0:32072`{{execute}}
 
 `curl --max-time 4 http://0.0.0.0:32073`{{execute}}
+
+** **NOTE** ** : Now you might think why are we not hitting on 
 
 `curl --max-time 4 http://0.0.0.0:32071`{{execute}}
