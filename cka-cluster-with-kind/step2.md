@@ -30,7 +30,7 @@ Let's create a simple NGINX base deployment with 2 replicas and expose deploymen
 Just for simply city we will make sure that pods get scheduled on node
 `kind-worker2` and `kind-worker3` - so lets taint node `kind-worker`
 
-`kubectl taint node kind-worker no:testpod:NoSchedule`{{execute}}
+`kubectl taint node kind-worker no=testpod:NoSchedule`{{execute}}
 
 Now we apply below to YAMLs that will create deployment and service
 
