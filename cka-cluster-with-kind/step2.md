@@ -103,7 +103,14 @@ We expect below curl command to fail as - there is no `test` pod running
 on kind-worker node and as test-svc service is suppose to look for LOCAL
 end-point it will fail
 
-Lets call with timeout if end-point is not working it will fail in 4
+Lets call with timeout if end-point is not working it will ***fail*** in 4
 seconds 
 
 `curl --max-time 4 http://0.0.0.0:32071`{{execute}}
+
+Sample output: 
+
+```
+master $ curl --max-time 4 http://0.0.0.0:32071
+curl: (28) Operation timed out after 4000 milliseconds with 0 bytes received
+```
