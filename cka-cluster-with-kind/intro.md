@@ -12,21 +12,21 @@ In this scenario we will perform these steps
 
 We will play with few of kubernetes topics :
 
-1. Deployment with *sidecar* container (Main : NGINX , SideCar : Builds
+1. Deployment with ***sidecar*** container (Main : NGINX , SideCar : Builds
    index.html file)
-1. How using downward API we can pass some of the information to POD such as POD's IP 
+1. How using ***downward*** API we can pass some of the information to POD such as POD's IP 
    and name of Node this pod is running on     
 2. Add ***taint*** to one of the nodes so all deployments get scheduled to
    other two nodes.
 1. Expose deployment over *NodePort* - but use `externalTrafficPolicy:
   Local` to see it's impact on routing of request to pod in cluster
-1. Will check IPTables entries in *kube-proxy* pod on to see what
+1. Will check IPTables entries (using ***exec***) in *kube-proxy* pod on to see what
   impact/effect `externalTrafficPolicy: Local` has on IPTables.
-1. Will also how we can patch existing objects in Kubernetes
-1. How we can select pod based on Node and and label selector 
+1. How we can select pod based on Node (***field-selector***) and and ***label selector*** 
+1. How we can ***patch*** existing kubernetes resources using kubectl.
 
 # Cluster overview
 
 At the end we will have cluster like this 
 
-![ETCD Leader](./assets/KIND-1-small.png)
+![](./assets/KIND-1-small.png)

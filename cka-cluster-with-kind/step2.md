@@ -101,7 +101,7 @@ only hit those ports.
 You can see below we have asked kind to do this port mapping for us
 *before* hand so we don't have to anything now.
 
-![ETCD Leader](./assets/KIND-2-small.png)
+![](./assets/KIND-2-small.png)
 
 ### Invoke same end-point on `kind-worker` node
 
