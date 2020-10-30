@@ -23,17 +23,21 @@ This will create 1 control plane (Master) Node and 3 worker Nodes
 Let's wait for all Nodes in cluster to post ***Ready*** status before we
 continue
 
-`
-while true; do
-  READY_COUNT=$(kubectl get nodes -o json | grep -i kubeletReady | wc -l)  if [ $READY_COUNT -eq 4 ]; then
-   {
-     echo "All nodes are posting ready"
-     kubectl get nodes -o wide
-     break;
-   }
-  else {
-  echo "Found $(kubectl get nodes -o json | grep -i kubeletReady | wc -l) in Ready state - expecting 4 to be Ready";
-  sleep 5;
-   }
-  fi
-  done `{{execute}}
+`./isClusterReady.sh `{{execute}}
+
+## Cluster
+
+Now we have cluster running as shown below 
+
+1. We have 4 docker containers running each running one of kubernetes
+   nodes - Kubernetes version should be latest (1.19.x as of now)
+2. One of the docker container is running master/control plane
+   components 
+3. Other 3 running worker nodes 
+4. If you `exec` in one of the docker container you will see they are
+   configured using `kubead` and CRI for PODs is `container-d` 
+5. Kind has also set up `kubeconfig` so we can use kubectl to
+   talk/interact with this cluster
+
+
+![ETCD Leader](./assets/KIND-1.png)

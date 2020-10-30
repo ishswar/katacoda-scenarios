@@ -14,10 +14,16 @@ We will play with few of kubernetes topics :
 
 1. Deployment with *sidecar* container (Main : NGINX , SideCar : Builds
    index.html file)
-2. Expose deployment over *NodePort* - but use `externalTrafficPolicy:
-   Local` to see it's impact on routing of request to pod in cluster
-3. Will check IPTables entries in *kube-proxy* pod on to see what
-   impact/effect `externalTrafficPolicy: Local` has on IPTables.
-4. Will also how we can patch existing objects in Kubernetes
+2. Add ***taint*** to one of the nodes so all deployments get scheduled to
+   other two nodes.
+1. Expose deployment over *NodePort* - but use `externalTrafficPolicy:
+  Local` to see it's impact on routing of request to pod in cluster
+1. Will check IPTables entries in *kube-proxy* pod on to see what
+  impact/effect `externalTrafficPolicy: Local` has on IPTables.
+1. Will also how we can patch existing objects in Kubernetes
 
-![ETCD Leader](./assets/KIND-1.png)
+# Cluster overview
+
+At the end we will have cluster like this 
+
+![ETCD Leader](./assets/KIND-1-small.png)
