@@ -23,6 +23,29 @@ NodeType service. But since we have added `externalTrafficPolicy` to
 local pod to forward traffic/packets to - but it will not find it and
 we should get Error 
 
+<details>
+  <summary>kubectl explain service.spec.externalTrafficPolicy</summary>
+  
+
+`kubectl explain service.spec.externalTrafficPolicy`{{execute}}
+
+```
+controlplane $ kubectl explain service.spec.externalTrafficPolicy
+KIND:     Service
+VERSION:  v1
+
+FIELD:    externalTrafficPolicy <string>
+
+DESCRIPTION:
+     externalTrafficPolicy denotes if this Service desires to route external
+     traffic to node-local or cluster-wide endpoints. "Local" preserves the
+     client source IP and avoids a second hop for LoadBalancer and Nodeport type
+     services, but risks potentially imbalanced traffic spreading. "Cluster"
+     obscures the client source IP and may cause a second hop to another node,
+     but should have good overall load-spreading.
+```       
+</details>
+
 ## Create simple NGINX deployment and service
 
 Let's create a simple NGINX base deployment with 2 replicas and expose deployment with service running on port *32070*
