@@ -13,7 +13,7 @@
       "title": "Step 2 - Populate the cluster",
       "text": "step2.md"
     },{
-      "title": "Step 3 - Backup etcd",
+      "title": "Step 3 - Check IPTables",
       "text": "step3.md"
     },{
       "title": "Step 4 - Create one more pod",

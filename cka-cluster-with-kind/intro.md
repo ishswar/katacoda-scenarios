@@ -14,6 +14,8 @@ We will play with few of kubernetes topics :
 
 1. Deployment with *sidecar* container (Main : NGINX , SideCar : Builds
    index.html file)
+1. How using downward API we can pass some of the information to POD such as POD's IP 
+   and name of Node this pod is running on     
 2. Add ***taint*** to one of the nodes so all deployments get scheduled to
    other two nodes.
 1. Expose deployment over *NodePort* - but use `externalTrafficPolicy:
@@ -21,6 +23,8 @@ We will play with few of kubernetes topics :
 1. Will check IPTables entries in *kube-proxy* pod on to see what
   impact/effect `externalTrafficPolicy: Local` has on IPTables.
 1. Will also how we can patch existing objects in Kubernetes
+1. How we can select pod based on Node and and label selector 
+
 
 # Cluster overview
 

@@ -2,32 +2,32 @@ Populate the cluster
 
 Now that we have cluster ready let's play around.
 
-# Test externalTrafficPolicy: Local
+# Test `externalTrafficPolicy: Local`
 
-Let's test out how externalTrafficPolicy: Local affects NodePort service
-and how it forces to use local end-points 
+Let's test out how *externalTrafficPolicy: Local* affects NodePort service
+and how it forces it to use local end-points 
 
 We will deploy one simple NGINX Deployment that when invoked will reply
 with information about what Pod and what Node (name) its running on .
 
-We will taint Node 1 with taint that our deployment/pods don't tolerate
-thus - no pods will be scheduled on Node 1 .
+We will `taint` Node ***kind-worker*** with taint that our deployment/pods don't tolerate
+thus - no pods will be scheduled on Node *kind-worker* .
 
 Then we will deploy 2 replicas of this deployment and expose this
-deployment using NodeType service. 
+deployment using ***NodeType*** service. Service will use *externalTrafficPolicy: Local*
 
-Now due to nature of NodeType port - you can hit on port 32070 on any of
+Now due to nature of NodeType port - you can hit on port **32070** on any of
 the pods and you should get reply . This is one of the promises of
 NodeType service. But since we have added `externalTrafficPolicy` to
-`Local` NodePort service running on (IPTables) Node 1 will look for
-local pod to forward traffic/packets to - but will will not find it and
+`Local` NodePort service running on (IPTables) Node *kind-worker* will look for
+local pod to forward traffic/packets to - but it will not find it and
 we should get Error 
 
 ## Create simple NGINX deployment and service
 
 Let's create a simple NGINX base deployment with 2 replicas and expose deployment with service running on port *32070*
 
-Just for simply city we will make sure that pods get scheduled on node
+Just for simplicity we will make sure that pods get scheduled on node
 `kind-worker2` and `kind-worker3` - so lets taint node `kind-worker`
 
 `kubectl taint node kind-worker no=testpod:NoSchedule`{{execute}}
