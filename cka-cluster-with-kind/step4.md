@@ -2,7 +2,7 @@ Update service
 
 ## Remove `externalTrafficPolicy` from service `test-svc`
 
-We can update `test-svc` in-place using *kubectl* **path** command 
+We can update `test-svc` in-place using *kubectl* **patch** command 
 
 `kubectl patch svc test-svc --type json -p='[{"op":"remove","path":"/spec/externalTrafficPolicy"}]'`{{execute}}
 
