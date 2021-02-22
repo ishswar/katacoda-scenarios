@@ -17,8 +17,8 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 ## Install network 
 
-As of now cluster is not ready (master node) - because it is waiting network to be add to cluster
-Lets installed [Canal](https://docs.projectcalico.org/getting-started/kubernetes/flannel/flannel) network to cluster 
+As of now cluster is not ready (master node) - because it is waiting network (CNI) to be add to cluster
+Lets installed [Canal](https://docs.projectcalico.org/getting-started/kubernetes/flannel/flannel) CNI to cluster 
 
 `
 curl https://docs.projectcalico.org/manifests/canal.yaml -O

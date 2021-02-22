@@ -24,7 +24,7 @@ We need to know it's connection parameters.
 
 We can find that using etcd pod's static manifest 
 
-`cat /etc/kubernetes/manifests/etcd.yaml`{{execute}}
+`bat /etc/kubernetes/manifests/etcd.yaml`{{execute}}
 
 From above file we need 4 things :
 
