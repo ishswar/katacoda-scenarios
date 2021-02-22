@@ -5,19 +5,19 @@
   "courses":
   [
     {
-      "course_id": "uilayout-terminal",
-      "title": "Scenario with Terminal UI",
-      "description": "Katacoda Scenario Example"
+      "course_id": "gRPC-with-maven",
+      "title": "Scenario with gRPC and Maven integration",
+      "description": "In this scenario we will see how we can run simple Hello world gRPC example in Java and how to setup workspace/dependency using Maven"
     },
     {
-      "title": "Scenario with Terminal and VS Code UI",
-      "pathway_id": "scenario-examples",
-      "course_id": "uilayout-terminal-with-vscode"
+      "course_id": "k8s-operator",
+      "title": "kubernetes operator with goLang",
+      "description": "Kubernetes operator written in goLang - how to write CRD , implement reconciliation loop and deploy the operator"
     },
     {
-      "course_id": "uilayout-editor-terminal",
-      "title": "Scenario with Editor Terminal UI",
-      "description": "Katacoda Scenario Example"
+      "course_id": "docker-deep-dive",
+      "title": "Scenario we go deep in docker images and runtime commands",
+      "description": "Katacoda Scenario that helps you understand docker images building, caches etc"
     }
   ]
 }
