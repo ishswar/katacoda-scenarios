@@ -1,6 +1,6 @@
 {
-  "title": "Katacoda UI Layouts Example",
-  "description": "Example of different Katacoda UI Layouts. Also, an example of creating a Katacoda Course!",
+  "title": "Miscellaneous learning",
+  "description": "Quick overview of in gRPC,Kafka,misroservices,Angular js,Ansible,Kubernetes operators,docker images etc",
   "icon": "fa-katacoda",
   "courses":
   [
