@@ -19,7 +19,7 @@ INFO: Server started, listening on 50051
 
 `cd gRPC-maven-helloworld/`{{execute}}
 
-`java -cp target/grpctest-1.0-SNAPSHOT-jar-with-dependencies.jar org.jpdna.grpchello.HelloWorldClient`{{execute}}
+`java -cp target/grpctest-1.0-SNAPSHOT-jar-with-dependencies.jar org.jpdna.grpchello.HelloWorldClient TIBCO`{{execute}}
 
 Output should look like this if server responded
 
