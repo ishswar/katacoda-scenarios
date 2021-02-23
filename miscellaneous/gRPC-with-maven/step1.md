@@ -1,9 +1,9 @@
-# Step 1
+
 ## Install JAVA JDK or JRE
 
-`sudo apt-get update`{{execute}}
+   `sudo apt-get update`{{execute}}
 
-`sudo apt-get install openjdk-8-jdk tree -y`{{execute}}
+   `sudo apt-get install openjdk-8-jdk tree -y`{{execute}}
 
 ## Get MAVEN
 * Download Maven Archive
@@ -36,6 +36,16 @@ eof`{{execute}}
 * Verify Maven Installation
 
    `mvn --version`{{execute}}
+
+  ### expected output : 
+  
+```bash
+Apache Maven 3.6.0
+Maven home: /usr/share/maven
+Java version: 1.8.0_282, vendor: Private Build, runtime: /usr/lib/jvm/java-8-openjdk-amd64/jre
+Default locale: en_US, platform encoding: UTF-8
+OS name: "linux", version: "4.15.0-122-generic", arch: "amd64", family: "unix"
+```
 
 https://katacoda.com/nitikorn/scenarios/setup-java-and-maven
 https://github.com/jpdna/gRPC-maven-helloworld
