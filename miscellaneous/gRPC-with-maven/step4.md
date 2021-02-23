@@ -1,41 +1,31 @@
-# Step 1
-## Install JAVA JDK or JRE
 
-`sudo apt-get update`{{execute}}
+## Runt the code 
 
-`sudo apt-get install openjdk-8-jdk -y`{{execute}}
+In this step we will start gRPC server that will be listening on TCP port 50051; in other terminal we will start 
+gRPC Client that will send request on port 50051 to server and server should respond back with 'Hello'
 
-## Get MAVEN
-* Download Maven Archive
+### Run Server
+ 
+`java -cp target/grpctest-1.0-SNAPSHOT-jar-with-dependencies.jar org.jpdna.grpchello.HelloWorldServer`{{execute}}
 
-   `wget https://downloads.apache.org/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz`{{execute}}
+Output should look like this 
 
-* Extract the Maven Archive
+```bash
+Feb 23, 2021 6:50:48 AM org.jpdna.grpchello.HelloWorldServer start
+INFO: Server started, listening on 50051
+```
 
-   To uncompress `tar xvzf apache-maven-3.6.3-bin.tar.gz`{{execute}}
+### Run client 
 
-* Set Maven Environment Variables
-   Add M2_HOME, M2, MAVEN_OPTS to environment variables.
+`cd gRPC-maven-helloworld/`{{execute}}
 
-   `sudo mv apache-maven-3.6.3 /usr/local`{{execute}}
+`java -cp target/grpctest-1.0-SNAPSHOT-jar-with-dependencies.jar org.jpdna.grpchello.HelloWorldClient`{{execute}}
 
-* Add Maven bin Directory Location to System Path
-   
-`cat << 'eof' >> ~/.bashrc
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-export PATH=$PATH:$JAVA_HOME/bin/
-export M2_HOME=/usr/local/apache-maven-3.6.3
-export M2=$M2_HOME/bin
-export PATH=$PATH:$M2_HOME/bin
-eof`{{execute}}
+Output should look like this if server responded
 
-* Source the .bashrc file
-
-   `source ~/.bashrc`{{execute}}
-
-* Verify Maven Installation
-
-   `mvn --version`{{execute}}
-
-https://katacoda.com/nitikorn/scenarios/setup-java-and-maven
-https://github.com/jpdna/gRPC-maven-helloworld
+```bash
+Feb 23, 2021 6:53:12 AM org.jpdna.grpchello.HelloWorldClient greet
+INFO: Will try to greet world ...
+Feb 23, 2021 6:53:13 AM org.jpdna.grpchello.HelloWorldClient greet
+INFO: Greeting: Hello world
+```

@@ -37,7 +37,7 @@ eof`{{execute}}
 
    `mvn --version`{{execute}}
 
-  ### expected output : 
+### Expected output : 
   
 ```bash
 Apache Maven 3.6.0

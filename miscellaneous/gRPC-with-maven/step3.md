@@ -1,41 +1,27 @@
-# Step 1
-## Install JAVA JDK or JRE
 
-`sudo apt-get update`{{execute}}
+## Install all dependency for gRPC and compile (build) code 
 
-`sudo apt-get install openjdk-8-jdk -y`{{execute}}
+`cd gRPC-maven-helloworld/`{{execute}}
 
-## Get MAVEN
-* Download Maven Archive
+`mvn clean package`{{execute}}
 
-   `wget https://downloads.apache.org/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz`{{execute}}
+Above command should take around 4~5 min as it collects all the gRPC dependency downlands it and than compiles the code 
+at the end you should see success message like this :
 
-* Extract the Maven Archive
+```bash
+[INFO] Building jar: /root/gRPC-maven-helloworld/target/grpctest-1.0-SNAPSHOT-jar-with-dependencies.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  38.154 s
+[INFO] Finished at: 2021-02-23T06:38:26Z
+[INFO] ------------------------------------------------------------------------
+```
 
-   To uncompress `tar xvzf apache-maven-3.6.3-bin.tar.gz`{{execute}}
+## Output jar file 
 
-* Set Maven Environment Variables
-   Add M2_HOME, M2, MAVEN_OPTS to environment variables.
+You should see in `target` folder now there is jar file that is output of compilation 
 
-   `sudo mv apache-maven-3.6.3 /usr/local`{{execute}}
+`tree target/ -L 1`
 
-* Add Maven bin Directory Location to System Path
-   
-`cat << 'eof' >> ~/.bashrc
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-export PATH=$PATH:$JAVA_HOME/bin/
-export M2_HOME=/usr/local/apache-maven-3.6.3
-export M2=$M2_HOME/bin
-export PATH=$PATH:$M2_HOME/bin
-eof`{{execute}}
-
-* Source the .bashrc file
-
-   `source ~/.bashrc`{{execute}}
-
-* Verify Maven Installation
-
-   `mvn --version`{{execute}}
-
-https://katacoda.com/nitikorn/scenarios/setup-java-and-maven
-https://github.com/jpdna/gRPC-maven-helloworld
+In next step we will use `grpctest-1.0-SNAPSHOT-jar-with-dependencies.jar` to run gRPC `Server` and `Client` 
