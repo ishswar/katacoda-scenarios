@@ -22,6 +22,6 @@ at the end you should see success message like this :
 
 You should see in `target` folder now there is jar file that is output of compilation 
 
-`tree target/ -L 1`
+`tree target/ -L 1`{{execute}}
 
 In next step we will use `grpctest-1.0-SNAPSHOT-jar-with-dependencies.jar` to run gRPC `Server` and `Client` 
