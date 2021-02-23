@@ -3,24 +3,24 @@
 
 `sudo apt-get update`{{execute}}
 
-`sudo apt-get install openjdk-8-jdk -y`{{execute}}
+`sudo apt-get install openjdk-8-jdk tree -y`{{execute}}
 
 ## Get MAVEN
-1. Download Maven Archive
+* Download Maven Archive
 
-`wget https://downloads.apache.org/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz`{{execute}}
+   `wget https://downloads.apache.org/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz`{{execute}}
 
-2. Extract the Maven Archive
+* Extract the Maven Archive
 
-To uncompress `tar xvzf apache-maven-3.6.3-bin.tar.gz`{{execute}}
+   To uncompress `tar xvzf apache-maven-3.6.3-bin.tar.gz`{{execute}}
 
-3. Set Maven Environment Variables
-Add M2_HOME, M2, MAVEN_OPTS to environment variables.
+* Set Maven Environment Variables
+   Add M2_HOME, M2, MAVEN_OPTS to environment variables.
 
-`sudo mv apache-maven-3.6.3 /usr/local`{{execute}}
+   `sudo mv apache-maven-3.6.3 /usr/local`{{execute}}
 
-4. Add Maven bin Directory Location to System Path
-
+* Add Maven bin Directory Location to System Path
+   
 `cat << 'eof' >> ~/.bashrc
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export PATH=$PATH:$JAVA_HOME/bin/
@@ -29,13 +29,13 @@ export M2=$M2_HOME/bin
 export PATH=$PATH:$M2_HOME/bin
 eof`{{execute}}
 
-5. Source the .bashrc file
+* Source the .bashrc file
 
-`source ~/.bashrc`{{execute}}
+   `source ~/.bashrc`{{execute}}
 
-7. Verify Maven Installation
+* Verify Maven Installation
 
-`mvn --version`{{execute}}
+   `mvn --version`{{execute}}
 
 https://katacoda.com/nitikorn/scenarios/setup-java-and-maven
 https://github.com/jpdna/gRPC-maven-helloworld
