@@ -12,9 +12,10 @@ In this scenario we will perform these steps to learn about gRPC
 1. Run gRPC Hello build - RouteGuide server and RouteGuide client 
 
 More info about this example refer to this link : https://www.grpc.io/docs/languages/java/basics/
-
 By walking through above example you’ll learn how to:
 
-Define a service in a .proto file.
-Generate server and client code using the protocol buffer compiler.
-Use the Java gRPC API to write a simple client and server for your service.
+1. Define a service in a .proto file.
+2. Generate server and client code using the protocol buffer compiler.
+3. Use the Java gRPC API to write a simple client and server for your service.
+
+![gRPC image](https://cdn-images-1.medium.com/max/2000/1*TatrFsqJoxF9Vr3r4UVayQ.png)
