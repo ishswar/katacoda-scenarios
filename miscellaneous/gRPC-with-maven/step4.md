@@ -24,16 +24,17 @@ INFO: Server started, listening on 8980
 Output should look like this if server responded
 
 ```bash
+
 Feb 27, 2021 7:33:03 PM io.grpc.examples.routeguide.RouteGuideClient info
-INFO: *** GetFeature: lat=409,146,138 lon=-746,188,906
+INFO:  GetFeature: lat=409,146,138 lon=-746,188,906
 Feb 27, 2021 7:33:03 PM io.grpc.examples.routeguide.RouteGuideClient info
 INFO: Found feature called "Berkshire Valley Management Area Trail, Jefferson, NJ, USA" at 40.915, -74.619
 Feb 27, 2021 7:33:03 PM io.grpc.examples.routeguide.RouteGuideClient info
-INFO: *** GetFeature: lat=0 lon=0
+INFO:   GetFeature: lat=0 lon=0
 Feb 27, 2021 7:33:03 PM io.grpc.examples.routeguide.RouteGuideClient info
 INFO: Found no feature at 0, 0
 Feb 27, 2021 7:33:03 PM io.grpc.examples.routeguide.RouteGuideClient info
-INFO: *** ListFeatures: lowLat=400,000,000 lowLon=-750,000,000 hiLat=420,000,000 hiLon=-730,000,000
+INFO:    ListFeatures: lowLat=400,000,000 lowLon=-750,000,000 hiLat=420,000,000 hiLon=-730,000,000
 Feb 27, 2021 7:33:03 PM io.grpc.examples.routeguide.RouteGuideClient info
 INFO: Result #1: name: "Patriots Path, Mendham, NJ 07945, USA"
 location {
