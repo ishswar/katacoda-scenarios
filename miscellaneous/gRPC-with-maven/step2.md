@@ -1,7 +1,7 @@
 # Step 2
 ## Clone git Repo
 
-`https://github.com/zhqu-tibco/routeguide.git`{{execute}}
+`git clone https://github.com/zhqu-tibco/routeguide.git`{{execute}}
 
 Output should look like this : 
 
