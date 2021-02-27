@@ -47,5 +47,3 @@ Default locale: en_US, platform encoding: UTF-8
 OS name: "linux", version: "4.15.0-122-generic", arch: "amd64", family: "unix"
 ```
 
-https://katacoda.com/nitikorn/scenarios/setup-java-and-maven
-https://github.com/jpdna/gRPC-maven-helloworld
