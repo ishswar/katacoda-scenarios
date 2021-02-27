@@ -1,39 +1,56 @@
 # Step 2
 ## Clone git Repo
 
-`git clone https://github.com/jpdna/gRPC-maven-helloworld.git`{{execute}}
+`https://github.com/zhqu-tibco/routeguide.git`{{execute}}
 
+Output should look like this : 
+
+```bash
+Cloning into 'routeguide'...
+remote: Enumerating objects: 72, done.
+remote: Counting objects: 100% (72/72), done.
+remote: Compressing objects: 100% (45/45), done.
+remote: Total 72 (delta 11), reused 63 (delta 9), pack-reused 0
+Unpacking objects: 100% (72/72), done.
+```
 ### See the directory structure of git repo 
 
-`tree gRPC-maven-helloworld/`{{execute}}
+`tree routeguide/`{{execute}}
 
 Sample output : 
 
 ```bash
->> tree gRPC-maven-helloworld/
-gRPC-maven-helloworld/
+>> tree routeguide/
+routeguide/
 ├── pom.xml
 ├── README.md
 └── src
     ├── main
     │   ├── java
-    │   │   └── org
-    │   │       └── jpdna
-    │   │           └── grpchello
-    │   │               ├── HelloWorldClient.java
-    │   │               ├── HelloWorldClient.java~
-    │   │               ├── HelloWorldServer.java
-    │   │               ├── HelloWorldServer.java~
-    │   │               └── old_App.java.old
-    │   └── proto
-    │       └── hello_world.proto
+    │   │   └── io
+    │   │       └── grpc
+    │   │           └── examples
+    │   │               └── routeguide
+    │   │                   ├── RouteGuideClient.java
+    │   │                   ├── RouteGuideServer.java
+    │   │                   └── RouteGuideUtil.java
+    │   ├── proto
+    │   │   └── route_guide.proto
+    │   └── resources
+    │       └── io
+    │           └── grpc
+    │               └── examples
+    │                   └── routeguide
+    │                       └── route_guide_db.json
     └── test
         └── java
-            └── org
-                └── jpdna
-                    └── grpchello
-                        └── AppTest.java
+            └── io
+                └── grpc
+                    └── examples
+                        └── routeguide
+                            ├── RouteGuideClientTest.java
+                            └── RouteGuideServerTest.java
 
-12 directories, 9 files
+19 directories, 9 files
 ```
 
