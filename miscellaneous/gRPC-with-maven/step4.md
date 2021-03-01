@@ -1,10 +1,13 @@
 
 ## Runt the code 
 
-In this step we will start gRPC server that will be listening on TCP port 8980; in other terminal we will start 
-gRPC Client that will send request on port 50051 to server and server should respond back with 'Hello'
+In this step we will start gRPC server that will be listening on TCP port 50051; in other terminal we will start 
+gRPC Client that will send request on port 50051 to server and server should respond back with information about features on their route,
+create a summary of their route, and exchange route information such as traffic updates with the server and other clients.
 
 ### Run Server
+
+To run gRPC server run below command 
  
 `java -jar target/RouteGuideServer.jar`{{execute}}
 
@@ -17,7 +20,7 @@ INFO: Server started, listening on 8980
 
 ### Run client 
 
-To run client we will need to open new tab; for that click "+" sign next to `Terminal` 
+To run client we will need to open ***new tab***; for that click "+" sign next to `Terminal` 
 
 ![new tab](assets/newtabl.png)
 
