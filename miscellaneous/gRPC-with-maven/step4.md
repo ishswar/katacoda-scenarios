@@ -17,7 +17,7 @@ INFO: Server started, listening on 8980
 
 ### Run client 
 
-To run client we will need to open new tab for that click "+" sign next to terminal 
+To run client we will need to open new tab; for that click "+" sign next to terminal 
 
 ![new tab](assets/newtabl.png)
 
