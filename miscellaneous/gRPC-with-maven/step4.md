@@ -21,7 +21,7 @@ To run client we will need to open new tab; for that click "+" sign next to `Ter
 
 ![new tab](assets/newtabl.png)
 
-one new tab open run below commands 
+once new tab open run below commands 
 
 `cd routeguide/`{{execute}}
 
