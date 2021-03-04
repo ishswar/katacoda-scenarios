@@ -88,7 +88,7 @@ Stop container
 
 ## CPU Test 
 
-First we run container without any CPU limits 
+First we run container ***without*** any CPU limits 
 
 `docker run --rm -d --name cputest ubuntu sleep 3600`{{execute}}
 
@@ -100,28 +100,31 @@ First we run container without any CPU limits
 
 Open new terminal 
 
-`top`{{execute}}
+Run command `top`{{execute}} - you will see that `stress` is hogging all **100% CPU** available to this host.
 
 ```
-top - 18:43:11 up 38 min,  2 users,  load average: 0.36, 0.47, 0.27
-Tasks: 106 total,   3 running,  58 sleeping,   0 stopped,   2 zombie
-%Cpu(s): 49.8 us,  0.0 sy,  0.0 ni, 49.7 id,  0.0 wa,  0.0 hi,  0.0 si,  0.5 st
-KiB Mem :  2040680 total,   520624 free,   220740 used,  1299316 buff/cache
-KiB Swap:        0 total,        0 free,        0 used.  1676628 avail Mem 
+top - 22:42:58 up  7:33,  2 users,  load average: 0.22, 0.60, 0.47
+Tasks: 103 total,   3 running,  57 sleeping,   0 stopped,   0 zombie
+%Cpu(s): 99.8 us,  0.0 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.2 st
+KiB Mem :  1524584 total,   919084 free,   180020 used,   425480 buff/cache
+KiB Swap:  1003516 total,  1003000 free,      516 used.  1205788 avail Mem 
 
   PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND                         
-12808 root      20   0    3860    100      0 R  50.3  0.0   0:02.78 stress                          
-12807 root      20   0    3860    100      0 R  49.7  0.0   0:02.75 stress                          
-    1 root      20   0  159904   9080   6680 S   0.0  0.4   0:03.41 systemd       
+14199 root      20   0    3860    100      0 R  99.7  0.0   0:07.67 stress                          
+14200 root      20   0    3860    100      0 R  99.7  0.0   0:07.66 stress     
 ```
 Back in main terminal - do cleanup 
 
-`exit`{{execute}}
+`exit`{{execute}}  
 `docker stop cputest -t 1`{{execute}}
 
 Now we run it with CPU limites 
 
+Flag `--cpus` allowes docker to put cpu limit on container - in this case it cannot use more than 1 cpu 
+
 `docker run --rm -d --cpus="1" --name cputest ubuntu sleep 3600`{{execute}}
+
+log-in to container and run stress test 
 
 `docker exec -it cputest /bin/bash`{{execute}}
 
@@ -131,7 +134,8 @@ Now we run it with CPU limites
 
 Open new terminal 
 
-`top`{{execute}}
+Now if you do `top`{{execute}} than you will see `stress` is not able to take more than 1 cpu , the host has 2 cpus 
+so 50% CPU used means 1 cpu is busy/in-use 
 
 ```
 top - 18:43:11 up 38 min,  2 users,  load average: 0.36, 0.47, 0.27
