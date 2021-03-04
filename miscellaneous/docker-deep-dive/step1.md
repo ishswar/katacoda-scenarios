@@ -157,3 +157,75 @@ Back in main terminal run command - if `cgroup` is working as expected than our 
 more than 50% of CPU   
 
 `cgexec -g cpu:mycputest stress --cpu 2 --timeout 60`{{execute}}
+
+We should see that `stress` tool is not taking more than one CPU 
+
+```
+top - 21:26:19 up 37 min,  2 users,  load average: 0.14, 0.16, 0.07
+Tasks: 102 total,   3 running,  55 sleeping,   0 stopped,   0 zombie
+%Cpu(s): 50.1 us,  0.0 sy,  0.0 ni, 49.9 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem :  1524584 total,   568064 free,   149576 used,   806944 buff/cache
+KiB Swap:  1003516 total,  1003516 free,        0 used.  1225516 avail Mem 
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND                         
+21977 root      20   0    8248     96      0 R  49.8  0.0   0:03.88 stress                          
+21978 root      20   0    8248     96      0 R  49.8  0.0   0:03.83 stress  
+```
+
+<details>
+  <summary>Click to read more about cfs_period_us & cfs_quota_us </summary>
+  
+  [Link](https://www.ibm.com/support/knowledgecenter/en/SSZUMP_7.1.2/management_sym/cgroup_subsystems.html)  
+  
+**cpu.cfs_period_us**
+Specifies a period of time, in mircoseconds, for how regularly a cgroup's access to the CPU resources should be reallocated. Valid values are 1 second to 1000 microseconds.
+
+**cpu.cfs_quota_us**
+Specifies the total amount of time, in microseconds, for which all tasks in a cgroup can run during one period (as defined by cpu.cfs_period_us). As soon as tasks in a cgroup use up all the time specified by the quota, they are throttled for the remainder of the time specified by the period and not allowed to run until the next period.
+
+Together, the **cpu.cfs_period_us** and **cpu.cfs_quota_us** store the value of the **cpuLimit** parameter, which is configured by the cpuLImit parameter either within the application profile, or during session creation by the client API. The cpuLimit parameter stores the number of cores on which an IBM Spectrum Symphony service is expected to run. Given a service takes up to m cores in its run, then the cpuLimit is defined as m cores per service. IBM Spectrum Symphony translates the cpuLimit value to cpu cgroup parameters using these formulas:
+cpu.cfs_period_us  =  100000 (0.1 second)
+cpu.cfs_quota_us = m  * cpu.cfs_period_usCopy code
+
+where m is greater than or equal to 1, so that the default is 1. Valid values for **cpuLImit** is between 1 and 262144. This can be dynamically changed as a multi-thread SI receives more incoming parallel tasks. The following table outlines how the cpuLImit value translates the cpu.cfs_period_us and cpu.cfs_quota_us cpu cgroup parameters:
+
+| cpuLimit	| cpu.cfs_quota_us |	cpu.cfs_period_us |
+| :------------- | :----------: | -----------: |
+| 1 |	100000 |	100000 |
+| 2	| 200000 |	100000 |
+| 3 |	300000 |	100000 |
+| m |	m*100000 |	100000 |
+
+</details>
+
+# Inspect `cgroup` created by docker 
+
+Now we know what happens when docker want's to control cpu for container - it creates `cgroup` for that container - let see that in action 
+
+Create a container with CPU limits 
+
+`docker run --rm -d --cpus="1" --name cgutest ubuntu sleep 3600`{{execute}}
+
+get PID of this `sleep` command inside container 
+
+`PID=$(docker inspect --format {{.State.Pid}} cgutest)`{{execute}}
+
+All the `cgroup` created by docker for this container can be founder in file `/proc/$PID/cgroup`
+
+`cat /proc/$PID/cgroup`{{execute}}
+
+We can get cgroup info that we need using below two helper bash commands 
+
+`one_of_cgroup=$(head -n 1 /proc/$PID/cgroup)`{{execute}}  
+`cgroup_subpath=$(cut -d\: -f3 <<< "$one_of_cgroup")`{{execute}}
+
+Now we have subpath that we can use to get cgroup file for `cpu` created by docker
+
+`tree /sys/fs/cgroup/cpu/$cgroup_subpath`{{execute}}
+
+Now we know if we set cpu limit to 1 than file `cpu.cfs_quota_us` and `cpu.cfs_quota_us` will have value of ? 
+
+`cat /sys/fs/cgroup/cpu/$cgroup_subpath/cpu.cfs_quota_us`{{execute}}  
+`cat /sys/fs/cgroup/cpu/$cgroup_subpath/cpu.cfs_quota_us`{{execute}}
+
+**Yes** it will be `100000` 
