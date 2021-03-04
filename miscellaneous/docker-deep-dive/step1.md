@@ -1,18 +1,43 @@
-The Katacoda `terminal` UI Layout provides a full Terminal experience. 
 
 # Namespace and cgroup - playing around 
 
-`docker run -d --name nstest ubuntu sleep 3600`{{execute}}
+First let's find out hostname of current machine 
 
+`hostname`{{execute}}
+`hostname -I`{{execute}}
+
+Make note of above two outputs
+
+Now create a simple `ubuntu` container that sleeps for 3600 seconds
+
+`docker run --rm -h nstest-host -d --name nstest ubuntu sleep 3600`{{execute}}
+
+Get PID of container (in turn PID of sleep command)
 `PID=$(docker inspect --format {{.State.Pid}} nstest)`{{execute}}
 
-This command demo how `docker exec` works 
+This command demonstrates how `docker exec` works 
 
 `nsenter --target $PID --mount --uts --ipc --net --pid`{{execute}}
 
-Above command will put you inside the container just as `docker exec` would have done
+**nsenter** == `nsenter - run program with namespaces of other processes`
 
-`exit`{{execute}}
+Above command will put you inside the container just as `docker exec` would have done
+Now let's check `hostname` and `IP Address` of this container 
+
+`hostname`{{execute}}
+`hostname -I`{{execute}}
+
+Sample output 
+```
+-bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+root@nstest-host:/# hostname
+nstest-host
+root@nstest-host:/# hostname -I
+172.18.0.2
+```
+let's do clean up 
+
+`exit`{{execute}}  
 `docker stop nstest -t 1`{{execute}}
 
 ## Memory test
@@ -42,7 +67,10 @@ This should work
 
 We are done clean up 
 
-`exit`
+Exit out of container 
+`exit`{{execute}}
+
+Stop container 
 `docker stop memtest -t 1`{{execute}}
 
 ## CPU Test 
@@ -160,6 +188,8 @@ more than 50% of CPU
 
 We should see that `stress` tool is not taking more than one CPU 
 
+Sample output 
+
 ```
 top - 21:26:19 up 37 min,  2 users,  load average: 0.14, 0.16, 0.07
 Tasks: 102 total,   3 running,  55 sleeping,   0 stopped,   0 zombie
@@ -174,8 +204,8 @@ KiB Swap:  1003516 total,  1003516 free,        0 used.  1225516 avail Mem
 
 <details>
   <summary>Click to read more about cfs_period_us & cfs_quota_us </summary>
-  
-  [Link](https://www.ibm.com/support/knowledgecenter/en/SSZUMP_7.1.2/management_sym/cgroup_subsystems.html)  
+
+[Link](https://www.ibm.com/support/knowledgecenter/en/SSZUMP_7.1.2/management_sym/cgroup_subsystems.html)  
   
 **cpu.cfs_period_us**
 Specifies a period of time, in mircoseconds, for how regularly a cgroup's access to the CPU resources should be reallocated. Valid values are 1 second to 1000 microseconds.
@@ -195,8 +225,8 @@ where m is greater than or equal to 1, so that the default is 1. Valid values fo
 | 2	| 200000 |	100000 |
 | 3 |	300000 |	100000 |
 | m |	m*100000 |	100000 |
-
 </details>
+
 
 # Inspect `cgroup` created by docker 
 
