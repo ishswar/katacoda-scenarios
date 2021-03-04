@@ -48,7 +48,10 @@ let's do clean up
 
 `free -mt`{{execute}}
 
-Open new terminal - or in new terminal run this command 
+Open new terminal and run this command 
+
+![new tab](assets/newtabl.png)
+
 `docker events`
 
 Back to main terminal run below command it will not run - it will get killed with OOM as it exceeds limits 
@@ -224,24 +227,8 @@ KiB Swap:  1003516 total,  1003516 free,        0 used.  1225516 avail Mem
 
 [Link](https://www.ibm.com/support/knowledgecenter/en/SSZUMP_7.1.2/management_sym/cgroup_subsystems.html)  
   
-**cpu.cfs_period_us**
-Specifies a period of time, in mircoseconds, for how regularly a cgroup's access to the CPU resources should be reallocated. Valid values are 1 second to 1000 microseconds.
+![new tab](assets/cpu_subgroup.png)
 
-**cpu.cfs_quota_us**
-Specifies the total amount of time, in microseconds, for which all tasks in a cgroup can run during one period (as defined by cpu.cfs_period_us). As soon as tasks in a cgroup use up all the time specified by the quota, they are throttled for the remainder of the time specified by the period and not allowed to run until the next period.
-
-Together, the **cpu.cfs_period_us** and **cpu.cfs_quota_us** store the value of the **cpuLimit** parameter, which is configured by the cpuLImit parameter either within the application profile, or during session creation by the client API. The cpuLimit parameter stores the number of cores on which an IBM Spectrum Symphony service is expected to run. Given a service takes up to m cores in its run, then the cpuLimit is defined as m cores per service. IBM Spectrum Symphony translates the cpuLimit value to cpu cgroup parameters using these formulas:
-cpu.cfs_period_us  =  100000 (0.1 second)
-cpu.cfs_quota_us = m  * cpu.cfs_period_usCopy code
-
-where m is greater than or equal to 1, so that the default is 1. Valid values for **cpuLImit** is between 1 and 262144. This can be dynamically changed as a multi-thread SI receives more incoming parallel tasks. The following table outlines how the cpuLImit value translates the cpu.cfs_period_us and cpu.cfs_quota_us cpu cgroup parameters:
-
-| cpuLimit	| cpu.cfs_quota_us |	cpu.cfs_period_us |
-| :------------- | :----------: | -----------: |
-| 1 |	100000 |	100000 |
-| 2	| 200000 |	100000 |
-| 3 |	300000 |	100000 |
-| m |	m*100000 |	100000 |
 </details>
 
 
