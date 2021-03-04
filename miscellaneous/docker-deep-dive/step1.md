@@ -3,7 +3,7 @@
 
 First let's find out hostname of current machine 
 
-`hostname`{{execute}}
+`hostname`{{execute}}  
 `hostname -I`{{execute}}
 
 Make note of above two outputs
@@ -24,7 +24,7 @@ This command demonstrates how `docker exec` works
 Above command will put you inside the container just as `docker exec` would have done
 Now let's check `hostname` and `IP Address` of this container 
 
-`hostname`{{execute}}
+`hostname`{{execute}}  
 `hostname -I`{{execute}}
 
 Sample output 
@@ -52,9 +52,14 @@ Open new terminal - or in new terminal run this command
 `docker events`
 
 Back to main terminal run below command it will not run - it will get killed with OOM as it exceeds limits 
-`cat <( </dev/zero head -c 650m) <(sleep 300) | tail`{{execute}}
+First we install `stress` tool  
 
-In our `docker events` terminal we will see `OOM` message
+`apt-get update && apt-get install -y stress`{{execute}}
+
+Now we put stress  
+`stress --cpu 2 --io 4 --vm 4 --vm-bytes 1024M --timeout 60s`{{execute}}
+
+In our `docker events` terminal we will see `OOM` message - as it tried to allocate more memory than it is allowed
 
 Sample output  
 ```BASH
@@ -63,7 +68,7 @@ controlplane $ docker events
 ```
 
 This should work 
-`cat <( </dev/zero head -c 350m) <(sleep 60) | tail`{{execute}}
+`stress --cpu 2 --io 4 --vm 4 --vm-bytes 104M --timeout 10s`{{execute}}
 
 We are done clean up 
 
