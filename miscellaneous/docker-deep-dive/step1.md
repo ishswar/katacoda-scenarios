@@ -59,6 +59,14 @@ First we install `stress` tool
 Now we put stress  
 `stress --cpu 2 --io 4 --vm 4 --vm-bytes 1024M --timeout 60s`{{execute}}
 
+You will see above command will get killed with message like this :  
+```
+stress: info: [415] dispatching hogs: 2 cpu, 4 io, 4 vm, 0 hdd
+stress: FAIL: [415] (415) <-- worker 425 got signal 9
+stress: WARN: [415] (417) now reaping child worker processes
+stress: FAIL: [415] (451) failed run completed in 5s
+```
+
 In our `docker events` terminal we will see `OOM` message - as it tried to allocate more memory than it is allowed
 
 Sample output  
