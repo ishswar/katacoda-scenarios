@@ -1,7 +1,7 @@
 {
     "noindex": true,
-    "title": "Scenario with Terminal UI",
-    "description": "Katacoda Scenario Example",
+    "title": "Docker deep dive",
+    "description": "In this senario we will learn about - Container vs VM, Docker components, Docker storage , Linux namespaces & cgroup and how they help Docker",
     "details": {
         "steps": [
             {
@@ -16,6 +16,6 @@
         "uilayout": "terminal"
     },
     "backend": {
-        "imageid": "nodejs:12"
+        "imageid": "ubuntu:1804"
     }
 }
