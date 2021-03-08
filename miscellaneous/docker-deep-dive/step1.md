@@ -1,5 +1,5 @@
 
-# Namespace and cgroup - playing around 
+# Use of Namespace and cgroup in Docker 
 
 First let's find out hostname of current machine 
 

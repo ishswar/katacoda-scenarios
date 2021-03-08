@@ -52,14 +52,7 @@ Once we are done we will have three config files
 Before we build pass through config file we need IP Address of two servers 
 
 `
-MASTER_IP=$(dig controlplane +short)
-if [ -n "$MASTER_IP" ];
- then
-    echo "";
- else
-    echo "Could not find MASTER_IP from hostname 'controlplane' trying using hostname command now";
-    MASTER_IP=$(hostname -I | cut -d " " -f 1)
-fi
+MASTER_IP=$(hostname -I | cut -d " " -f 1)
 MASTER_2_IP=$(dig node01 +short)
 `{{execute}}
 
@@ -138,7 +131,7 @@ fi
 `
 FIRST_MACHINE_NAME=controlplane
 LB_PORT=9443
-LB_IP=$(dig $FIRST_MACHINE_NAME +short)
+LB_IP=$(hostname -I | cut -d " " -f 1)
 if [ -n "$LB_IP" ];
  then
     echo "";
