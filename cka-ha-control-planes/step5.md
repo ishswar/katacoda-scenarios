@@ -88,11 +88,13 @@ echo "Dump ETCD keyvalue(s) to json file"
 ssh node01 ETCDCTL_API=3 etcdctl --endpoints $ENDPOINTS --write-out=table --cacert $CACERT --cert $SERVER_CERT --key $SERVER_KEY get "" --prefix=true -w json> etcd-dump-node01.json
 `{{execute}}
 
+Above command will execute etcdctl command on remote machine `node0` and capture output of that command in `etcd-dump-node01.json`
+
 `
 echo "Now Search for string hatest in JSON file from node01 etcd"
 for i in $(cat etcd-dump-node01.json | jq ".kvs[] | .key" -r); do echo $i | base64 -d;echo ""; done | grep -m 5 hatest
-
 `{{execute}}
+
 So this tells us that ETCD data is getting replicated on both ETCD members as expected.
 
 
