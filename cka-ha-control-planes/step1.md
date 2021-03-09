@@ -118,7 +118,7 @@ echo ""
 systemctl restart nginx
 echo "Checking NGINX Service status"
 echo ""
-if (systemctl status nginx) ;
+if (systemctl status nginx --no-pager) ;
   then
     echo -e "${GREEN}NGINX Service started successful${NC}"
   else
