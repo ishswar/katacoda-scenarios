@@ -85,7 +85,7 @@ same data duplicated
 
 `
 echo "Dump ETCD keyvalue(s) to json file"
-ssh node01 ETCDCTL_API=3 etcdctl --endpoints $ENDPOINTS --write-out=table --cacert $CACERT --cert $SERVER_CERT --key $SERVER_KEY get "" --prefix=true -w json> etcd-dump-node01.json
+ssh node01 ETCDCTL_API=3 etcdctl --endpoints $ENDPOINTS --write-out=table --cacert $CACERT --cert $SERVER_CERT --key $SERVER_KEY get \"\" --prefix=true -w json> etcd-dump-node01.json
 `{{execute}}
 
 Above command will execute etcdctl command on remote machine `node0` and capture output of that command in `etcd-dump-node01.json`
