@@ -16,18 +16,18 @@
     },
     {
       "course_id": "docker-deep-dive",
-      "title": "Scenario we go deep in docker images and runtime commands",
-      "description": "Katacoda Scenario that helps you understand docker images building, caches etc"
+      "title": "Use of Namespaces and cgroups in Docker",
+      "description": "Scenario we go deep in docker about how it uses Linux namespaces and cgroup to control containers resources"
     },
     {
       "course_id": "docker-copy-on-write",
-      "title": "Scenario we go deep in docker images and runtime commands",
-      "description": "Katacoda Scenario that helps you understand docker images building, caches etc"
+      "title": "Copy on Write",
+      "description": "Scenario we learn how docker uses Copy on write to make a writable layer on top of read-only image layers"
     },
     {
       "course_id": "docker-example-voting-app",
-      "title": "Scenario we go deep in docker images and runtime commands",
-      "description": "Katacoda Scenario that helps you understand docker images building, caches etc"
+      "title": "Voting app based on docker",
+      "description": "Voting app based on docker"
     }
   ]
 }
