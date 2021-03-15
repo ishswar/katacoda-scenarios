@@ -1,0 +1,42 @@
+{
+  "title": "Docker example voting app",
+  "description": "A simple distributed application running across multiple Docker containers. ",
+  "difficulty": "Beginner",
+  "time": "1 hours",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1 - Cloning from github and go into folder",
+        "text": "step1.md"
+      },
+      {
+        "title": "Step 2 - Build voting-app from Dockerfile",
+        "text": "step2.md"
+      },
+      {
+        "title": "Step 3 - Build worker-app from Dockerfile, run and link with redis,db",
+        "text": "step3.md"
+      },
+      {
+        "title": "Step 4 - Build resulting-app from Dockerfile, run and link with db",
+        "text": "step4.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md",
+      "courseData": "env-init.sh"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "environment": {
+    "uilayout": "editor-terminal",
+    "terminals": [{"name": "Terminal 1", "target": "host01"}, {"name": "Terminal 2", "target": "host02"}],
+    "dashboards": [{"name": "Vote", "href": "https://[[HOST_SUBDOMAIN]]-5000-[[KATACODA_HOST]].environments.katacoda.com"},
+        {"name": "Result", "href": "https://[[HOST_SUBDOMAIN]]-5001-[[KATACODA_HOST]].environments.katacoda.com"}]
+  },
+  "backend": {
+    "imageid": "ubuntu:2004"
+  }
+}
