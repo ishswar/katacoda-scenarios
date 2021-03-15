@@ -18,6 +18,16 @@
       "course_id": "docker-deep-dive",
       "title": "Scenario we go deep in docker images and runtime commands",
       "description": "Katacoda Scenario that helps you understand docker images building, caches etc"
+    },
+    {
+      "course_id": "docker-copy-on-write",
+      "title": "Scenario we go deep in docker images and runtime commands",
+      "description": "Katacoda Scenario that helps you understand docker images building, caches etc"
+    },
+    {
+      "course_id": "docker-example-voting-app",
+      "title": "Scenario we go deep in docker images and runtime commands",
+      "description": "Katacoda Scenario that helps you understand docker images building, caches etc"
     }
   ]
 }
