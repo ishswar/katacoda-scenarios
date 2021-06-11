@@ -30,18 +30,18 @@ Follow steps from [Docker.io](https://docs.docker.com/engine/install/ubuntu/)
    
 #### Install Docker Engine
    
-   `sudo apt-get update`{{execute}}
+   `sudo apt-get update`{{execute}}  
    `sudo apt-get install docker-ce docker-ce-cli containerd.io -y`{{execute}}
    
 #### Manage Docker as a non-root user   
    
-   `sudo groupadd docker`{{execute}}
-   `sudo usermod -aG docker $USER`{{execute}}
-   `newgrp docker`{{execute}}
+   `sudo groupadd docker`{{execute}}  
+   `sudo usermod -aG docker $USER`{{execute}}  
+   `newgrp docker`{{execute}}  
    
 #### Verify that Docker Engine is installed correctly by running the `hello-world` image.    
 
-   `docker run hello-world`{{execute}}
+   `docker run hello-world`{{execute}}  
 
 ## Make sure Docker daemon is running 
 
