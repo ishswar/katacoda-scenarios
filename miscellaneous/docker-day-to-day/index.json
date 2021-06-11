@@ -1,0 +1,21 @@
+{
+    "noindex": true,
+    "title": "Docker dya to day",
+    "description": "In this scenario we will learn about - how get started with docker and what you should know if you are going to use docker on daily bases",
+    "details": {
+        "steps": [
+            {
+                "title": "Install & Test Run",
+                "text": "step1.md"
+            }
+        ]
+    },
+    "environment": {
+        "hideintro": true,
+        "hidefinish": true,
+        "uilayout": "terminal"
+    },
+    "backend": {
+        "imageid": "ubuntu:1804"
+    }
+}
