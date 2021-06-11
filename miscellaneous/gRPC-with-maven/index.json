@@ -30,6 +30,6 @@
     "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\r\nFollow steps from left - Good luck!!!\u001b[m\r\n"
   },
   "backend": {
-    "imageid": "nodejs:12"
+    "imageid": "bash1804"
   }
 }
