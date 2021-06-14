@@ -9,14 +9,17 @@
       "courseData": "env-init.sh",
       "text": "step1.md"
     },{
-      "title": "Step 2 - Clone git repo",
+      "title": "Step 2 - Test drive",
       "text": "step2.md"
     },{
-      "title": "Step 3 - Maven build",
+      "title": "Step 3 - Containerization process",
       "text": "step3.md"
     },{
-      "title": "Step 4 - Run gRPC Hello world",
+      "title": "Step 4 - Troubleshooting",
       "text": "step4.md"
+    },{
+      "title": "Step 5 - Few advance topics",
+      "text": "step5.md"
     }],
     "intro": {
       "text": "intro.md",

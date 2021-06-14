@@ -17,11 +17,11 @@ First let's check if Container is running or not
 
 We can check this from command line using `curl` 
 
-`curl http://localhost:8787`{{execute}}
+`curl http://localhost:8787/visits-counter/`{{execute}}
 
 ### Check in browser 
 
-We can also check web application using this link  [Open in Browser](https://[[HOST_SUBDOMAIN]]-8787-[[KATACODA_HOST]].environments.katacoda.com)
+We can also check web application using this link  [Open in Browser](https://[[HOST_SUBDOMAIN]]-8787-[[KATACODA_HOST]].environments.katacoda.com/visits-counter/)
 
 # Time to cleanup 
 
