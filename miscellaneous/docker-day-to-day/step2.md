@@ -35,7 +35,7 @@ First we will stop running container
 `CONTAINER_ID=$(docker ps -q)`{{execute}}
 `echo "Stopping container with ID ($CONTAINER_ID)" && docker stop $CONTAINER_ID`{{execute}}
 
-## Removed stop container 
+## Removed stopped container 
 
 Is container really gone ? `docker ps -a`{{execute}} 
 Stopping the container does not remove container from file system - let's clean up container from file system.

@@ -43,7 +43,7 @@ You will also see one extra image `python:3.6` we will talk about it.
 
 In other words we have a image let's run that image - that creates a container 
 
-Command : `docker run -d -p 8787:8080 --rm --name my-py-flask my-py-flask:1.0.0`{{execute}}
+Command : `docker run -d -p 8787:8080 --name my-py-flask-app my-py-flask:1.0.0`{{execute}}
 
 Port `8787` is arbitrary you can pick any port; but port `8080` is fixed as this is defined by Image  
 
@@ -51,7 +51,6 @@ Let's talk about switches in above command
 
 1. `-d` or `--detach` 
 1. `-p` or `--publish` 
-1. `--rm` 
 1. `--name`
 
 ### Access the web app 
