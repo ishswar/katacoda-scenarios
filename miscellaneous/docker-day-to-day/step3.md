@@ -1,31 +1,39 @@
 
-## Install all dependency for gRPC and compile (build) code 
+# Containerize the application 
 
-`cd routeguide/`{{execute}}
+Let's get a source code for Python application
 
-`mvn clean package`{{execute}}
+`git clone https://github.com/pranay-tibco/py-flask.git`{{execute}}
 
-Above command should take around 4~5 min as it collects all the gRPC dependency downlands it and than compiles the code 
-at the end you should see success message like this :
 
-```bash
-[WARNING] Configuration options: 'appendAssemblyId' is set to false, and 'classifier' is missing.
-Instead of attaching the assembly file: /root/routeguide/target/RouteGuideClient.jar, it will become the file for main project artifact.
-NOTE: If multiple descriptors or descriptor-formats are provided for this project, the value of this file will be non-deterministic!
-[WARNING] Replacing pre-existing project main-artifact file: /root/routeguide/target/RouteGuideServer.jar
-with assembly file: /root/routeguide/target/RouteGuideClient.jar
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  32.779 s
-[INFO] Finished at: 2021-02-27T19:27:09Z
-[INFO] ------------------------------------------------------------------------
-```
+## Understanding the Application 
 
-## Output jar file 
+Few key things about web app 
 
-You should see in `target` folder now there is jar file that is output of compilation 
+1. It has few end-points `/visits-counter` & `/delete-visits/`
+1. It take an system level environment variable `HTTP_PORT` to set HTTP Port to start on 
+1. Once it start the app it print line `Starting server on Port:` with HTTP Port that it's starting on 
 
-`tree target/ -L 1`{{execute}}
+## Understanding Docker file 
 
-In next step we will use `RouteGuideServer.jar` to run gRPC `Server` and `RouteGuideClient.jar` to run as `Client` 
+It has Docker **directive**(s) 
+
+1. `FROM`
+1. `RUN`
+1. `COPY`
+1. `EXPOSE`
+1. `WORKDIR`
+1. `ENV`
+1. `ENTRYPOINT`
+
+## Build image 
+
+Check what images are already there on machine `docker images`{{execute}}
+
+Now make sure you are in directory `py-flask`
+Run command `docker build -t my-py-flask:1.0.0 .`
+
+If above command finishes successfully you just containerized your first application 
+
+Re-run `docker images` and you should see now new image added `my-py-flask:1.0.0` to docker images on your machine.  
+You will also see one extra image `python:3.6` we will talk about it.
