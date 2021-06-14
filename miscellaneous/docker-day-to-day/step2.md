@@ -1,59 +1,30 @@
-# Step 2
+# Run python application 
 
-Our example is a simple route mapping application that lets clients get information about features on their route, create a summary of their route, and exchange route information such as traffic updates with the server and other clients.
+`docker run --detach --publish 8787:8080 ishswar/webpyapp:1.0.1`{{execute}}
 
-## Clone git Repo
+## Is it running ? 
 
-`git clone https://github.com/zhqu-tibco/routeguide.git`{{execute}}
+`docker ps`{{execute}}
 
-Output should look like this : 
+### How about web app ? 
 
-```bash
-Cloning into 'routeguide'...
-remote: Enumerating objects: 72, done.
-remote: Counting objects: 100% (72/72), done.
-remote: Compressing objects: 100% (45/45), done.
-remote: Total 72 (delta 11), reused 63 (delta 9), pack-reused 0
-Unpacking objects: 100% (72/72), done.
-```
-### See the directory structure of git repo 
+`curl http://localhost:8787`{{execute}}
 
-`tree routeguide/`{{execute}}
+### Check in browser 
 
-Sample output : 
+[Open in Browser](https://[[HOST_SUBDOMAIN]]-8787-[[KATACODA_HOST]].environments.katacoda.com)
 
-```bash
->> tree routeguide/
-routeguide/
-├── pom.xml
-├── README.md
-└── src
-    ├── main
-    │   ├── java
-    │   │   └── io
-    │   │       └── grpc
-    │   │           └── examples
-    │   │               └── routeguide
-    │   │                   ├── RouteGuideClient.java
-    │   │                   ├── RouteGuideServer.java
-    │   │                   └── RouteGuideUtil.java
-    │   ├── proto
-    │   │   └── route_guide.proto
-    │   └── resources
-    │       └── io
-    │           └── grpc
-    │               └── examples
-    │                   └── routeguide
-    │                       └── route_guide_db.json
-    └── test
-        └── java
-            └── io
-                └── grpc
-                    └── examples
-                        └── routeguide
-                            ├── RouteGuideClientTest.java
-                            └── RouteGuideServerTest.java
+# Time to cleanup 
 
-19 directories, 9 files
-```
+## Stop running container 
 
+`CONTAINER_ID=$(docker ps -q)`{{execute}}
+`echo "Stopping container with ID ($CONTAINER_ID)" && docker stop $CONTAINER_ID`{{execute}}
+
+## Removed stop container 
+
+`docker rm $CONTAINER_ID`{{execute}}
+
+Check ***nothing*** is running 
+
+`docker ps -a`{{execute}}
