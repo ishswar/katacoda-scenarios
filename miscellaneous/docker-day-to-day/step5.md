@@ -103,7 +103,7 @@ We can see that python app in container is at location `/opt/app.py`
 
 How about we want to mount our local file `/root/py-flask/app.py` in place of that ? 
 
-Let's first edit `/root/py-flask/app.py` and change replay to have `TIBCO` (in capital) 
+Let's first edit `/root/py-flask/app.py` and change server replay to have `TIBCO` (in capital) 
 
 now you can run new docker `RUN` command like this 
 
