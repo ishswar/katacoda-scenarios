@@ -9,7 +9,9 @@ Follow steps from [Docker.io](https://docs.docker.com/engine/install/ubuntu/)
 
    `sudo apt-get remove docker docker-engine docker.io containerd runc`{{execute}}
    
-### Install using the repository
+### Install using the repository  
+
+We will install docker using Ubuntu repository. This usually means using `apt-get` command.
 
 #### Set up the repository
    

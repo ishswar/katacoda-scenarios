@@ -53,7 +53,7 @@ Add word `tibco` anywhere in file
 
 exit out of the container `exit`{{execute}}
 
-### Sop and Start container 
+### Stop and Start container 
 
 First stop the container 
 

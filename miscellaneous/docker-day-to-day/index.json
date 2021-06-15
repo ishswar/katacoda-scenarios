@@ -20,6 +20,9 @@
     },{
       "title": "Step 5 - Few advance topics",
       "text": "step5.md"
+    },{
+      "title": "Step 6 - Ship it",
+      "text": "step6.md"
     }],
     "intro": {
       "text": "intro.md",
