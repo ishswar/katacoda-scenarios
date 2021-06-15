@@ -1,1 +1,1 @@
-***We are done*** - in this  scenario we saw how gRPC works and howe we can use Maven 
+***We are done*** - now you should know your way around Container image and dealing with Container runtime
