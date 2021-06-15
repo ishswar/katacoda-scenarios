@@ -17,11 +17,13 @@ Use our IP to tag our image
 
 `docker tag my-py-flask:1.0.0 amxkonex/day-do-day:$MY_IP`{{execute}}
 
+We can check `docker images`{{execute}} to see new entry in list 
+
 ## Push image 
 
 Time to push image to docker hub - use below command to push to Docker hub
 
-`docker push my-py-flask:1.0.0 amxkonex/day-do-day:$MY_IP`{{execute}}
+`docker push amxkonex/day-do-day:$MY_IP`{{execute}}
 
 ## Check Docker hub 
 
