@@ -33,10 +33,10 @@ Or log-in to container
 
 look around inside the container 
 
-`hostname`{{execute}}
-`ps -ef`{{execute}}
-`free -mt`{{execute}}
-`df -h`{{execute}}
+`hostname`{{execute}}  
+`ps -ef`{{execute}}  
+`free -mt`{{execute}}  
+`df -h`{{execute}}  
 
 ### Manipulate image 
 
@@ -51,11 +51,13 @@ Now edit the file
 
 Add word `tibco` anywhere in file 
 
+exit out of the container `exit`{{execute}}
+
 ### Sop and Start container 
 
 First stop the container 
 
-`docker stop my-py-flask-app`{{execute}}
+`docker stop my-py-flask-app`{{execute}} - This will take 10 seconds 
 
 Let's inspect the container (yes you can use same command `inspect` to see container metadata)
 
