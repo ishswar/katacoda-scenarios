@@ -10,13 +10,13 @@ Let's get a source code for Python application
 
 Few key things about web app 
 
-1. It has few end-points `/visits-counter` & `/delete-visits/`
-1. It take an system level environment variable `HTTP_PORT` to set HTTP Port to start on 
-1. Once it start the app it print line `Starting server on Port:` with HTTP Port that it's starting on 
+1. It has few end-points `/visits-counter`, `/delete-visits/` , `/healthz` & `/shutdown`
+1. It uses a system level environment variable `HTTP_PORT` to set HTTP Port to start on 
+1. Once it start the app prints line `Starting server on Port:` with HTTP Port that it's starting on 
 
 ## Understanding Docker file 
 
-It has Docker **directive**(s) 
+It has Docker **Directives**(s) 
 
 1. `FROM`
 1. `RUN`
@@ -31,7 +31,7 @@ It has Docker **directive**(s)
 
 Check what images are already there on machine `docker images`{{execute}}
 
-Now make sure you are in directory `cd py-flask`{{execute}}
+Now make sure you are in directory `cd py-flask`{{execute}}  
 Run command `docker build -t my-py-flask:1.0.0 .`{{execute}}
 
 If above command finishes successfully you just containerized your first application 

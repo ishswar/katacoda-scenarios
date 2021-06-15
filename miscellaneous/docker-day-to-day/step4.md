@@ -36,7 +36,8 @@ look around inside the container
 `hostname`{{execute}}  
 `ps -ef`{{execute}}  
 `free -mt`{{execute}}  
-`df -h`{{execute}}  
+`df -h`{{execute}}
+`env`{{execute}}    
 
 ### Manipulate image 
 
