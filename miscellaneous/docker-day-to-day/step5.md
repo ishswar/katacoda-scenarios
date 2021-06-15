@@ -91,10 +91,6 @@ You can tail the log like this
 
 Stop tailing the log `clear`{{execute interrupt}}
 
-### Stop container 
-
-`docker stop my-py-flask-app`{{execute}}
-
 ## Mount volume 
 
 We can see that python app in container is at location `/opt/app.py`
@@ -103,13 +99,17 @@ We can see that python app in container is at location `/opt/app.py`
 
 How about we want to mount our local file `/root/py-flask/app.py` in place of that ? 
 
-Let's first edit `/root/py-flask/app.py` and change server replay to have `TIBCO` (in capital) 
+### Stop container 
 
-now you can run new docker `RUN` command like this 
+`docker stop my-py-flask-app`{{execute}}
+
+Now let's first edit `/root/py-flask/app.py` and change server reply to have `TIBCO` (in capital) 
+
+Now you can run new docker `RUN` command like this 
 
 `docker run -d -p 8787:8989 --rm --env HTTP_PORT=8989 -v /root/py-flask:/opt --name my-py-flask-app my-py-flask:1.0.0`{{execute}}
 
-Switch `-v /root/py-flask:/opt` did the trick - it mounts local directory `/root/py-flask` inside the container `/opt` 
+Switch `-v /root/py-flask:/opt` did the trick - it mounts local directory `/root/py-flask` inside the container at location `/opt` 
 
 If you hit the service again : `curl http://localhost:8787/visits-counter/`{{execute}}
 
