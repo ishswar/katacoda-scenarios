@@ -43,8 +43,8 @@ look around inside the container
 
 Let's edit the python code 
 
-First we need to install nano text editor 
-`apt-get update`{{execute}}
+First we need to install `nano` text editor 
+`apt-get update`{{execute}}  
 `apt-get install nano -y`{{execute}}
 
 Now edit the file 
