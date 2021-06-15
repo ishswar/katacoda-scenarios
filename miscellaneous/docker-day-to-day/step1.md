@@ -46,6 +46,8 @@ We will install docker using Ubuntu repository. This usually means using `apt-ge
 #### Verify that Docker Engine is installed correctly by running the `hello-world` image.    
 
    `docker run hello-world`{{execute}}  
+   
+   ![Docker-flow](assets/docker-flow.png)
 
 ## Make sure Docker daemon is running 
 
