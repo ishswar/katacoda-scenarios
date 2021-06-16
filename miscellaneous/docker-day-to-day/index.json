@@ -10,18 +10,23 @@
       "text": "step1.md"
     },{
       "title": "Step 2 - Test drive",
+      "code": "foreground.sh",
       "text": "step2.md"
     },{
       "title": "Step 3 - Containerization process",
+      "code": "foreground.sh",
       "text": "step3.md"
     },{
       "title": "Step 4 - Troubleshooting",
+      "code": "foreground.sh",
       "text": "step4.md"
     },{
       "title": "Step 5 - Few advance topics",
+      "code": "foreground.sh",
       "text": "step5.md"
     },{
       "title": "Step 6 - Ship it",
+      "code": "foreground.sh",
       "text": "step6.md"
     }],
     "intro": {
