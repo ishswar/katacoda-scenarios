@@ -11,9 +11,11 @@
       "code": "foreground.sh"
     },{
       "title": "Step 2 - Kube config & basics of kubectl",
+      "code": "nextstep.sh",
       "text": "step2.md"
     },{
       "title": "Step 3 - Kubernetes components",
+      "code": "nextstep.sh",
       "text": "step3.md"
     }],
     "intro": {
