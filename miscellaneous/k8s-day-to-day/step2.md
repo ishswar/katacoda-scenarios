@@ -1,21 +1,28 @@
-Populate the cluster
+## Kube config 
 
-## Remove taint 
+The kubeconfig file is in a specific format. Let’s take a look at that. The config file has 3 sections.
 
-As this is single node cluster we need to remove taint from master node 
-if we don't do this than no pods can be schedule on master (We are just doing this for demo purpose - in reality don't run workload on master) 
+1. Clusters
+1. Users
+1. Contexts
 
-`kubectl taint node $(hostname) node-role.kubernetes.io/master:NoSchedule-`{{execute}}
+Clusters
+Clusters are the various Kubernetes clusters that you need access to. Say you have multiple clusters for development environment or   
+testing environment or prod or for different organizations or on different cloud providers etc. All those go their.
 
-## Create pod 
+Users
+Users are the user accounts with which you have access to these clusters. For example the admin user, a dev user, a prod user etc. These   
+users may have different privileges on different clusters.
 
-As of now our kubernetes cluster is empty - lets quickly create a simple `nginx` pod 
+Contexts
+Finally contexts marry these together context define which user account will be used to access which cluster.
 
-`kubectl run tester --image=nginx`{{execute}} 
+![](./assets/KubeConfig-1.png)
 
-Idea here is we need to back up this data and whenever we restore from this backup we need to make sure above pod
-`tester` is always there.
+## View Config 
 
-Kubernetes disaster recovery plan is usually consist of backing up etcd cluster and having infrastructure as a code to provision new set of servers in the cloud.  
+You can view your config file using command 
 
+`cat ~/.kube/config`{{execute}}
 
+![](./assets/config.png)

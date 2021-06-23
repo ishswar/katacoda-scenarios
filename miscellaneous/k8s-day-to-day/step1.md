@@ -1,6 +1,6 @@
-Create cluster 
-
 ## Create cluster using kubeadm
+
+[kubeadm](https://kubernetes.io/docs/reference/setup-tools/kubeadm/) - Documentation 
 
 We will create a single master/node kubernetes cluster using kubeadm (version: 1.19)
 
@@ -42,3 +42,7 @@ while true;
    fi;
    sleep 5;
 done`{{execute}}
+
+## Over view 
+
+![](./assets/Minikube-and-Kubeadm-Google.png)
