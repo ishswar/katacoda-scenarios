@@ -3,7 +3,7 @@
 
 `systemctl --no-pager | grep kubelet`{{execute}}
 
-`systemctl status kubelet`{{execute}}
+`systemctl status kubelet --no-pager`{{execute}}
 
 ## Create cluster using kubeadm
 

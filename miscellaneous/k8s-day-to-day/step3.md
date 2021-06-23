@@ -3,10 +3,8 @@
 
 ![](./assets/kubectl-commands.png)
 
-## Install etcdctl tool 
+## Deploy our Python web App
 
-`etcdctl` is command line tool to manage etcd server and it’s date.
-We will use this tool to back and restore etcd data
 
 
 `kubectl create deployment my-py-ap --image=ishswar/webpyapp:1.0.1 --port=8080`{{execute}}

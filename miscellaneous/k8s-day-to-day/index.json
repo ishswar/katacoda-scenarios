@@ -15,12 +15,6 @@
     },{
       "title": "Step 3 - Kubernetes components",
       "text": "step3.md"
-    },{
-      "title": "Step 4 - Deploy Python web App",
-      "text": "step4.md"
-    },{
-      "title": "Step 5 - Restore etcd",
-      "text": "step5.md"
     }],
     "intro": {
       "text": "intro.md",
