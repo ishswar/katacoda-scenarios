@@ -1,0 +1,41 @@
+{
+  "title": "Kubernetes day to day",
+  "description": "In this scenario we will start with creating kubernetes cluster, understand what is cluster made of and learn few basic commands of kubectl",
+  "difficulty": "intermediate",
+  "time": "30 minutes",
+  "details": {
+    "steps": [{
+      "title": "Step 1 - Create cluster",
+      "text": "step1.md",
+      "courseData": "env-init.sh",
+      "code": "foreground.sh"
+    },{
+      "title": "Step 2 - Kube config & basics of kubectl",
+      "code": "nextstep.sh",
+      "text": "step2.md"
+    },{
+      "title": "Step 3 - Kubernetes components",
+      "code": "nextstep.sh",
+      "text": "step3.md"
+    }],
+    "intro": {
+      "text": "intro.md",
+      "credits": ""
+    },
+    "finish": {
+      "text": "finish.md"
+    },
+    "assets": {
+            "host01": [
+                {"file": "wait.sh", "target": "/usr/local/bin/", "chmod": "+x"}
+            ]
+        }
+  },
+  "environment": {
+    "uilayout": "terminal",
+    "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\r\nFollow steps from left - Good luck!!!\u001b[m\r\n"
+  },
+  "backend": {
+    "imageid": "kubernetes-cluster:1.18"
+  }
+}
