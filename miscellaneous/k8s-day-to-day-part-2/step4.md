@@ -33,6 +33,14 @@ Check if PVC is created
 
 `kubectl get pvc`{{execute}}
 
+Sample output 
+
+```bash
+controlplane $ kubectl get pvc
+NAME             STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+pyapp-pv-claim   Pending                                      local-path     2s
+```
+
 ### Create a JOB
 
 Create a JOB who's single task is to download `app.py` from Git hub and copy it to volume 
@@ -71,6 +79,14 @@ Check status of job
 
 `kubectl get jobs`{{execute}}
 
+List pods 
+
+![](./assets/job-pod.png)
+
 ### Check log of pod 
 
 We will see live how to do this 
+
+Sample output 
+
+![](./assets/job-log.png)

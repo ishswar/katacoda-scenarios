@@ -10,17 +10,21 @@
       "courseData": "env-init.sh",
       "code": "foreground.sh"
     },{
-      "title": "Step 2 - Kube config & basics of kubectl",
+      "title": "Step 2 - Pod & Deployment",
       "code": "nextstep.sh",
       "text": "step2.md"
     },{
-      "title": "Step 3 - Kubernetes components",
+      "title": "Step 3 - Services",
       "code": "nextstep.sh",
       "text": "step3.md"
     },{
-      "title": "Step 4 - Update deployment to use volume",
+      "title": "Step 4 - Volume and Job",
       "code": "nextstep.sh",
       "text": "step4.md"
+    },{
+      "title": "Step 4 - Update deployment to use volume",
+      "code": "nextstep.sh",
+      "text": "step5.md"
     }],
     "intro": {
       "text": "intro.md",

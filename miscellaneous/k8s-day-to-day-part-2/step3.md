@@ -57,6 +57,6 @@ Hello from Server [my-py-ap-77c79c4cfd-wdgtn] Total visitors on this server : 1c
 
 ## Random load balance in action 
 
-If you run `curl` repeteadely you will see reply is comming back from diffrent pods/machines 
+If you run `curl` repeatedly you will see reply is coming back from different pods/machines 
 
 ![](./assets/random-load-balance.gif)
