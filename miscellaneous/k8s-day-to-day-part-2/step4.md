@@ -1,8 +1,6 @@
 
 ## Update our py-app to mount that shared volume 
 
-
-
 ```
 cat << EOF > deploy-2.yaml
  apiVersion: apps/v1

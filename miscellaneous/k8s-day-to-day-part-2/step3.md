@@ -11,7 +11,7 @@ Install rancher's local storage - storageClass
 Create a PVC that will use above Storage class to dynamically provision storage 
 
 ```
-cat > hc.yaml <<EOF
+cat > py-app-pvc.yaml <<EOF
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -25,6 +25,13 @@ spec:
       storage: 10Gi
 EOF
 ```
+Create PVC 
+
+`kubectl apply -f py-app-pvc.yaml`{{execute}}
+
+Check if PVC is created 
+
+`kubectl get pvc`{{execute}}
 
 ### Create a JOB
 
@@ -55,6 +62,14 @@ spec:
   backoffLimit: 4
 EOF
 ``` 
+
+Create a JOB 
+
+`kubectl apply -f py-app-update-job.yaml`{{execute}}
+
+Check status of job 
+
+`kubectl get jobs`{{execute}}
 
 ### Check log of pod 
 
