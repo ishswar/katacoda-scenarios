@@ -34,7 +34,7 @@ EOF
 
 ---
 
-    ```
+```
     cat > hc.yaml <<EOF
     apiVersion: v1
     kind: PersistentVolumeClaim
@@ -48,7 +48,7 @@ EOF
         requests:
           storage: 10Gi
     EOF
-    ```
+```
 
 ---
 
@@ -66,6 +66,8 @@ EOF
         requests:
           storage: 10Gi
     EOF
+```
+
 ```
     cat << EOF > py-app-pvc.yaml
     apiVersion: batch/v1
