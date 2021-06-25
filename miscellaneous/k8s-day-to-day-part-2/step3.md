@@ -12,23 +12,17 @@ Create a PVC that will use above Storage class to dynamically provision storage
 
 `
 cat << EOF > /etc/nginx/passthrough.conf
-stream {
-    upstream controlplane {
-        server $MASTER_IP:6443 max_fails=3 fail_timeout=10s;
-        server $MASTER_2_IP:6443 max_fails=3 fail_timeout=10s;
-    }
-log_format basic '$remote_addr [$time_local] '
-                 '$protocol $status $bytes_sent $bytes_received '
-                 '$session_time "$upstream_addr" '
-                 '"$upstream_bytes_sent" "$upstream_bytes_received" "$upstream_connect_time"';
-    access_log /var/log/nginx/control.plane.master_access.log basic;
-    error_log /var/log/nginx/control.plane.master_error.log;
-    server {
-        listen 9443;
-        proxy_pass controlplane;
-        proxy_next_upstream on;
-    }
-}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pyapp-pv-claim
+spec:
+  storageClassName: local-path
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
 EOF
 `{{execute}}
 
