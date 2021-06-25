@@ -1,10 +1,3 @@
-
-## kubelet ? 
-
-`systemctl --no-pager | grep kubelet`{{execute}}
-
-`systemctl status kubelet --no-pager`{{execute}}
-
 ## Create cluster using kubeadm
 
 [kubeadm](https://kubernetes.io/docs/reference/setup-tools/kubeadm/) - Documentation 
@@ -50,12 +43,3 @@ while true;
    sleep 5;
 done`{{execute}}
 
-### Kubelet ? 
-
-`systemctl status kubelet`{{execute}}
-
-## Over view 
-
-What are main use of kubeadm ?
-
-![](./assets/Minikube-and-Kubeadm-Google.png)
