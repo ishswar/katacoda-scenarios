@@ -15,7 +15,7 @@ cat > hc.yaml <<EOF
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mysql-pv-claim
+  name: pyapp-pv-claim
 spec:
   storageClassName: local-path
   accessModes:

@@ -17,6 +17,10 @@
       "title": "Step 3 - Kubernetes components",
       "code": "nextstep.sh",
       "text": "step3.md"
+    },{
+      "title": "Step 4 - Update deployment to use volume",
+      "code": "nextstep.sh",
+      "text": "step4.md"
     }],
     "intro": {
       "text": "intro.md",
