@@ -59,4 +59,6 @@ We can test it using our Cluster IP end-point
 
 `kubectl run tester --rm=true --image=curlimages/curl --restart=Never -it -- curl http://my-py-ap-service:8080/visits-counter/`{{execute}}
 
+Sample output 
 
+![](./assets/changed-output.png)
