@@ -3,7 +3,8 @@
 
 
 
-`cat << EOF > deploy-2.yaml
+`
+cat << EOF > deploy-2.yaml
  apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -36,7 +37,8 @@ spec:
       - name: app-persistent-storage
         persistentVolumeClaim:
           claimName: pyapp-pv-claim  
-EOF`{{execute}} 
+EOF
+`{{execute}} 
 
 `kubectl run tester --rm=true --image=bash --restart=Never -it -- curl http://10.109.214.164:8080/visits-counter/`
 

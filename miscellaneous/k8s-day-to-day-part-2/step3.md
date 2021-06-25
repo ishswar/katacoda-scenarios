@@ -54,4 +54,3 @@ EOF
 ### Check log of pod 
 
 We will see live how to do this 
-
