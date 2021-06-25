@@ -8,6 +8,8 @@ Install rancher's local storage - storageClass
 
 ### Create PVC 
 
+Create a PVC that will use above Storage class to dynamically provision storage 
+
 `
 cat << EOF > py-app-pvc.yaml
 apiVersion: v1
