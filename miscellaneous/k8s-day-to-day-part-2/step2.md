@@ -48,6 +48,10 @@ We want to add one more pod so we can use this imperative command
 
 `kubectl scale deployment my-py-ap --replicas=2`{{execute}}
 
+Check the pods again 
+
+`kubectl get pods`{{execute}}
+
 Sample output should look like this 
 
 ```
