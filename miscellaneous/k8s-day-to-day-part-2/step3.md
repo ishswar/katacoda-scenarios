@@ -8,7 +8,8 @@ Install rancher's local storage - storageClass
 
 ### Create PVC 
 
-`cat << EOF > py-app-pvc.yaml
+`
+cat << EOF > py-app-pvc.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -20,11 +21,13 @@ spec:
   resources:
     requests:
       storage: 10Gi
-EOF`{{execute}} 
+EOF
+`{{execute}} 
 
 ### Create a JOB
 
-`cat << EOF > py-app-update-job.yaml
+`
+cat << EOF > py-app-update-job.yaml
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -45,7 +48,8 @@ spec:
           claimName: pyapp-pv-claim
       restartPolicy: Never
   backoffLimit: 4
-EOF`{{execute}} 
+EOF
+`{{execute}} 
 
 ### Check log of pod 
 
