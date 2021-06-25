@@ -8,3 +8,6 @@ In this scenario we will perform these steps to learn k8s
 1. Learn about Volume & Storage Classes - also create a simple Job that will use this Volume
 1. Update Deployment that we created in step 2 two - we will update it to use Volume that was created and populated in above step 
 
+# Demo scenario
+
+![](./assets/demo.gif) 
