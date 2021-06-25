@@ -81,6 +81,10 @@ Check status of job
 
 List pods 
 
+`kubectl get pods`{{execute}}
+
+Sample output 
+
 ![](./assets/job-pod.png)
 
 ### Check log of pod 
