@@ -34,44 +34,62 @@ EOF
 
 ---
 
-    ```console
+    ```
     cat > hc.yaml <<EOF
     apiVersion: v1
-    kind: Pod
+    kind: PersistentVolumeClaim
     metadata:
-      name: hc
+    name: pyapp-pv-claim
     spec:
-      containers:
-      - name: simpleservice
-        image: mhausenblas/simpleservice:0.5.0
-        ports:
-        - containerPort: 9876
-        livenessProbe:
-          initialDelaySeconds: 2
-          periodSeconds: 5
-          httpGet:
-            path: /health
-            port: 9876
+      storageClassName: local-path
+    accessModes:
+        - ReadWriteOnce
+    resources:
+        requests:
+          storage: 10Gi
     EOF
     ```
 
 ---
 
-`
-cat << EOF > py-app-pvc.yaml
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: pyapp-pv-claim
-spec:
-  storageClassName: local-path
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 10Gi
-EOF
-`{{execute}} 
+ ```
+    cat > hc.yaml <<EOF
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+    name: pyapp-pv-claim
+    spec:
+      storageClassName: local-path
+    accessModes:
+        - ReadWriteOnce
+    resources:
+        requests:
+          storage: 10Gi
+    EOF
+```
+    cat << EOF > py-app-pvc.yaml
+    apiVersion: batch/v1
+    kind: Job
+    metadata:
+    name: update-app-job
+    spec:
+    template:
+        spec:
+          containers:
+          - name: update-app
+            image: bash
+            command: ["sh",  "-c", "wget https://raw.githubusercontent.com/pranay-tibco/py-flask/demo-k8s-day-to-day/app.py -O /opt/app.py"]
+            volumeMounts:
+            - name: mysql-persistent-storage
+              mountPath: /opt
+          volumes:
+          - name: mysql-persistent-storage
+            persistentVolumeClaim:
+              claimName: pyapp-pv-claim
+          restartPolicy: Never
+    backoffLimit: 4
+    EOF
+``` 
 
 ### Create a JOB
 
