@@ -1,76 +1,29 @@
-## Create a volume 
 
-### Storage class 
+## Expose Deployment endpoint over ClusterIP 
 
-Install rancher's local storage - storageClass 
+Below command will expose deployment `my-py-ap` (port 8080) as Cluster Service on Fixed (Cluster allocated IP) IP and port 8080
 
-`kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml`{{execute}} 
+`kubectl expose deployment my-py-ap --name=my-py-ap-service --target-port=8080 --port=8080`{{execute}}
 
-### Create PVC 
+List service 
 
-Create a PVC that will use above Storage class to dynamically provision storage 
+`kubectl get svc`
 
-```
-cat > py-app-pvc.yaml <<EOF
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: pyapp-pv-claim
-spec:
-  storageClassName: local-path
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 10Gi
-EOF
-```
-Create PVC 
+We can access above service only within cluster - let's create one temporory pod and try running `curl` there to see if we can access end-point  
+from there , no need to access it via IP - we can use service ane `my-py-ap-service` 
 
-`kubectl apply -f py-app-pvc.yaml`{{execute}}
+`kubectl run tester --rm=true --image=curlimages/curl --restart=Never -it -- curl http://my-py-ap-service:8080/visits-counter/`
 
-Check if PVC is created 
+## Expose it over Node Port 
 
-`kubectl get pvc`{{execute}}
+With below command we expose deployment's port 8080 now outside cluster - kubernetes will allocated TCP port in between range (30000-32767) .
 
-### Create a JOB
+`kubectl expose deployment my-py-ap --name=my-py-ap-np-service --target-port=8080 --port=8080  --type=NodePort`{{execute}}
 
-Create a JOB who's single task is to download `app.py` from Git hub and copy it to volume 
-Once that is done JOB's job is done 
+List service 
 
-```
-cat << EOF > py-app-update-job.yaml
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: update-app-job
-spec:
-  template:
-    spec:
-      containers:
-      - name: update-app
-        image: bash
-        command: ["sh",  "-c", "wget https://raw.githubusercontent.com/pranay-tibco/py-flask/demo-k8s-day-to-day/app.py -O /opt/app.py"]
-        volumeMounts:
-        - name: mysql-persistent-storage
-          mountPath: /opt
-      volumes:
-      - name: mysql-persistent-storage
-        persistentVolumeClaim:
-          claimName: pyapp-pv-claim
-      restartPolicy: Never
-  backoffLimit: 4
-EOF
-``` 
+`kubectl get svc` 
 
-Create a JOB 
+Now using TCP port e.g `3XXXXX` we can access end-point directly from our host machine 
 
-`kubectl apply -f py-app-update-job.yaml`{{execute}}
-
-Check status of job 
-
-`kubectl get jobs`{{execute}}
-
-### Check log of pod 
-
-We will see live how to do this 
+`curl http://localhost:3XXXXX/visits-counter/`{{execute}}
