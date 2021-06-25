@@ -35,19 +35,19 @@ EOF
 ---
 
 ```
-    cat > hc.yaml <<EOF
-    apiVersion: v1
-    kind: PersistentVolumeClaim
-    metadata:
-    name: pyapp-pv-claim
-    spec:
-      storageClassName: local-path
-    accessModes:
-        - ReadWriteOnce
-    resources:
-        requests:
-          storage: 10Gi
-    EOF
+cat > hc.yaml <<EOF
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pv-claim
+spec:
+  storageClassName: local-path
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+EOF
 ```
 
 ---
